@@ -46,18 +46,18 @@
     End Sub
     Sub Main()
         Randomize()
-        Dim Numbers(100) As Integer
-        For i = 0 To 100
-            Numbers(i) = Int(5 + Rnd() * 100)
-        Next
+        Dim Numbers() As Integer = {96, 94, 60, 26, 98, 65, 36, 52, 88, 17, 39, 91, 47, 38, 10, 8, 36, 75, 11, 93, 43, 98, 39, 37, 49, 89, 57, 33, 31, 54, 52, 5, 76, 65, 14, 57, 25, 22, 51, 51, 52, 41, 17, 7, 50, 73, 69, 32, 56, 37, 54, 70, 96, 89, 12, 77, 53, 8, 14, 27, 65, 10, 14, 33, 46, 89, 38, 5, 27, 80, 85, 21, 30, 49, 68, 29, 63, 5, 63, 78, 38, 41, 99, 65, 18, 97, 61, 14, 90, 50, 26, 77, 54, 26, 19, 59, 48, 42, 96, 73, 94}
         Dim TimeTaken As Stopwatch = Stopwatch.StartNew()
         TimeTaken.Start()
         HeapSort(Numbers)
         TimeTaken.Stop()
-        'For i = 0 To Numbers.Length - 1
-        'Console.WriteLine(Numbers(i))
-        'Next
-        Console.WriteLine($"Sorted, it took {TimeTaken.ElapsedMilliseconds}ms")
+        Console.Write("{")
+        For i = 0 To Numbers.Length - 1
+            Console.Write($"{Numbers(i)}, ")
+
+        Next
+        Console.WriteLine("}")
+        Console.Write($"Sorted, it took {TimeTaken.ElapsedMilliseconds}ms")
         Console.ReadKey()
     End Sub
 
