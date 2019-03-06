@@ -20,6 +20,9 @@
                 Exit Sub
             End If
         End While
+        '' For i = 0 To Numbers.Length - 1
+        'Console.Write($"{Numbers(i)}, ")
+        'Next
     End Sub
     Sub HeapSort(ByRef Numbers() As Integer)
         Dim lb As Integer = LBound(Numbers)
@@ -42,11 +45,19 @@
 
     End Sub
     Sub Main()
-        Dim Numbers() As Integer = {1, 5, 32, 2, 17, 21, 67, 54, 32, 19, 3, 4, 7}
-        HeapSort(Numbers)
-        For i = 0 To Numbers.Length - 1
-            Console.WriteLine(Numbers(i))
+        Randomize()
+        Dim Numbers(100) As Integer
+        For i = 0 To 100
+            Numbers(i) = Int(5 + Rnd() * 100)
         Next
+        Dim TimeTaken As Stopwatch = Stopwatch.StartNew()
+        TimeTaken.Start()
+        HeapSort(Numbers)
+        TimeTaken.Stop()
+        'For i = 0 To Numbers.Length - 1
+        'Console.WriteLine(Numbers(i))
+        'Next
+        Console.WriteLine($"Sorted, it took {TimeTaken.ElapsedMilliseconds}ms")
         Console.ReadKey()
     End Sub
 
