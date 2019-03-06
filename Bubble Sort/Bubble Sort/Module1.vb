@@ -7,7 +7,7 @@
     End Sub
 
     Sub Main()
-        Dim Numbers() As Integer = {91, 5, 32, 2, 17, 21, 67, 54, 32, 19, 3, 4, 7}
+        Dim Numbers() As Integer = {1, 5, 32, 2, 17, 21, 67, 54, 32, 19, 3, 4, 7}
         For i = 0 To (Numbers.Count() - 2)
             Dim Swapped As Boolean = False
             For j = 0 To (Numbers.Count() - 2)
