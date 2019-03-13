@@ -1,7 +1,5 @@
 ﻿Module Module1
-    Dim BankAccount As New Account() With {.Name = "Jakub",
-        .Balance = 1000,
-        .OverDraftLimit = 500}
+    Dim BankAccount As New Account()
 
 
     Sub Main()
@@ -94,7 +92,7 @@
         Console.WriteLine($"Current balance in {BankAccount.Name}'s account is: £{BankAccount.ShowBalance()}")
     End Sub
 
-    Sub CHangeName()
+    Sub ChangeName()
         Console.WriteLine("What would you like to change the name to")
         Dim NewName As String = Console.ReadLine()
         BankAccount.ChangeName(NewName)

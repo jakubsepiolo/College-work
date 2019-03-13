@@ -1,6 +1,6 @@
 ﻿Public Class Account
     Public Name As String
-    Public Balance As Integer
+    Private Balance As Integer
     Public OverDraftLimit As Integer
 
     Public Sub MakeDeposit(ByVal Amount As Integer)
@@ -15,7 +15,7 @@
         Name = NewName
     End Sub
 
-    Public Function ShowBalance()
+    Public Function ShowBalance() As Integer
         Return Balance
     End Function
 
