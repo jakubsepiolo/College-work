@@ -40,5 +40,8 @@
     Public Function GetItemType() As String
         Return itemType
     End Function
+    '' add ability to update values on SQL database and re-sync
+    '' create new class, for player's inventory
+    '' create new class, for "enemies"
 
 End Class

@@ -1,4 +1,10 @@
 ﻿Module Module1
+
+    ''start writing actual game
+
+    ''reposition admin log in check to appropriate place (placeholder now to see if works)
+
+    ''tidy up code
     Dim conn As New System.Data.Odbc.OdbcConnection("DRIVER={MySQL ODBC 5.3 ANSI Driver};SERVER=localhost;PORT=3306;DATABASE=itemstuff;USER=root;PASSWORD=password;OPTION=3;")
 
     Structure LogInDetails

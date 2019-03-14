@@ -1,6 +1,10 @@
 ﻿
 
 Module Items
+
+    ''tidy code
+    ''repeat similar code for other classes (especially player data)
+    ''add validation check if player has item that no longer exists in database
     Dim conn As New System.Data.Odbc.OdbcConnection("DRIVER={MySQL ODBC 5.3 ANSI Driver};SERVER=localhost;PORT=3306;DATABASE=itemstuff;USER=root;PASSWORD=password;OPTION=3;")
     Public ItemList As List(Of Item_base) = New List(Of Item_base)()
 
