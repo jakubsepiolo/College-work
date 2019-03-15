@@ -3,11 +3,12 @@
     Private Width As Double
     Private Length As Double
 
-    Public Sub New(Height, Width, Length)
+    Public Sub New(ByVal Height As Double, ByVal Width As Double, ByVal Length As Double)
         Me.Height = Height
         Me.Width = Width
         Me.Length = Length
     End Sub
+
     Public Function GetHeight() As Double
         Return Height
     End Function
