@@ -13,15 +13,12 @@
     Public Shared Operator +(ByVal Vector1 As _3DVECTOR, ByVal Vector2 As _3DVECTOR) As _3DVECTOR
         Return New _3DVECTOR(Vector1.X + Vector2.X, Vector1.Y + Vector2.Y, Vector1.Z + Vector2.Z)
     End Operator
-
     Public Shared Operator *(ByVal Vector1 As _3DVECTOR, ByVal Vector2 As _3DVECTOR) As Integer
         Return (Vector1.X * Vector2.X + Vector1.Y + Vector2.Y + Vector1.Z * Vector2.Z)
     End Operator
-
     Public Shared Operator -(ByVal Vector1 As _3DVECTOR, ByVal Vector2 As _3DVECTOR) As _3DVECTOR
         Return New _3DVECTOR(Vector1.X - Vector2.X, Vector1.Y - Vector2.Y, Vector1.Z - Vector2.Z)
     End Operator
-
     Public Shared Operator <(ByVal Vector1 As _3DVECTOR, ByVal Vector2 As _3DVECTOR) As Boolean
         If Vector1.GetMagnitude() < Vector2.GetMagnitude Then
             Return True
@@ -29,7 +26,6 @@
             Return False
         End If
     End Operator
-
     Public Shared Operator >(ByVal Vector1 As _3DVECTOR, ByVal Vector2 As _3DVECTOR) As Boolean
         If Vector1.GetMagnitude() > Vector2.GetMagnitude Then
             Return True
@@ -37,7 +33,6 @@
             Return False
         End If
     End Operator
-
     Public Shared Operator =(ByVal Vector1 As _3DVECTOR, ByVal Vector2 As _3DVECTOR) As Boolean
         If Vector1.X = Vector2.X Then
             If Vector1.Y = Vector2.Y Then
@@ -53,7 +48,6 @@
             Return False
         End If
     End Operator
-
     Public Shared Operator <>(ByVal Vector1 As _3DVECTOR, ByVal Vector2 As _3DVECTOR) As Boolean
         If Vector1.X = Vector2.X Then
             If Vector1.Y = Vector2.Y Then
@@ -69,11 +63,9 @@
             Return True
         End If
     End Operator
-
     Public Function GetMagnitude() As Double
         Return Math.Round(Math.Sqrt(X ^ 2 + Y ^ 2 + X ^ 2), 2)
     End Function
-
     Public Function GetX() As String
         Return X
     End Function
@@ -83,7 +75,6 @@
     Public Function GetZ() As String
         Return X
     End Function
-
     Public Function GetVector() As String
         Return X & Y & Z
     End Function
