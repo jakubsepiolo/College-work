@@ -85,6 +85,7 @@
         Threading.Thread.Sleep(3000)
         conn.Close()
         Items.Main()
+        Players.Main()
 
         For i = 0 To ItemList.Count() - 1
             Console.WriteLine($"ID: {ItemList(i).GetID()}
@@ -93,6 +94,15 @@ Description: {ItemList(i).GetDescription()}
 Cost: {ItemList(i).GetCost()}g
 Max: {ItemList(i).GetMax()}
 Type: {ItemList(i).GetItemType()}")
+        Next
+
+
+        For i = 0 To PlayerList.Count() - 1
+            Console.WriteLine($"Player ID: {PlayerList(i).GetID()}
+Name: {PlayerList(i).GetName()}
+Level: {PlayerList(i).GetLevel()}
+Storage ID: {PlayerList(i).GetStorageID()}
+Rank: {PlayerList(i).GetRank()}")
         Next
         Console.ReadKey()
     End Sub
