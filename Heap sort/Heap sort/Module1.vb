@@ -46,8 +46,8 @@
     End Sub
     Sub Main()
         Randomize()
-        Dim Numbers(100) As Integer
-        For i = 0 To 100
+        Dim Numbers(5000) As Integer
+        For i = 0 To 5000
             Numbers(i) = Int(5 + Rnd() * 100)
         Next
         Dim TimeTaken As Stopwatch = Stopwatch.StartNew()
