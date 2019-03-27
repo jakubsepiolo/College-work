@@ -12,7 +12,7 @@
         shapes.Add(New Pyramid(2))
         shapes.Add(New HorizontalLine(2))
         shapes.Add(New HorizontalLine(7))
-        shapes.Add(New Circle(24))
+        shapes.Add(New Circle(96))
         For Each s In shapes
             s.Draw()
             Console.WriteLine()

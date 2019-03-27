@@ -5,30 +5,26 @@
         Me.Radius = Radius
     End Sub
     Public Overrides Sub Draw()
-        For i = 1 To Radius
-            For j = 1 To Radius
-                If j > 3 And 4 < j And i = Radius - 7 Then
-                    Console.Write("* ")
-                ElseIf j > 2 And 3 < j And i = Radius - 6 Then
-                    Console.Write("* ")
-                ElseIf j > 1 And 2 < j And i = Radius - 5 Then
-                    Console.Write("* ")
-                ElseIf j > 0 And 1 < j And i = Radius - 4 Then
-                    Console.Write("* ")
-                ElseIf j > 0 And 1 < j And i = Radius - 3 Then
-                    Console.Write("* ")
-                ElseIf j > 1 And 2 < j And i = Radius - 2 Then
-                    Console.Write("* ")
-                ElseIf j > 2 And 3 < j And i = Radius - 1 Then
-                    Console.Write("* ")
-                ElseIf j > 3 And 4 < j And i = Radius Then
-                    Console.Write("* ")
+        Dim test As Boolean = True
+        For i = -Radius To Radius Step 1
+            For j = -Radius To Radius Step 1
+                If test Then
+                    Console.ForegroundColor = ConsoleColor.Cyan
+                    test = Not test
+                Else
+                    Console.ForegroundColor = ConsoleColor.Blue
+                    test = Not test
+                End If
+                If (i) ^ 2 + (j) ^ 2 <= Radius ^ 2 Then
+                    Console.Write("*")
                 Else
                     Console.Write(" ")
 
                 End If
+
+
             Next
-            Console.WriteLine()
-        Next
+        Console.WriteLine()
+            Next
     End Sub
 End Class
