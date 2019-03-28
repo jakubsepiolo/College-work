@@ -71,6 +71,7 @@
   <ItemGroup>
     <Compile Include="Dice.vb" />
     <Compile Include="HealingWarrior.vb" />
+    <Compile Include="Mage.vb" />
     <Compile Include="Module1.vb" />
     <Compile Include="My Project\AssemblyInfo.vb" />
     <Compile Include="My Project\Application.Designer.vb">

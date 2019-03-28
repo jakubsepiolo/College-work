@@ -1,4 +1,4 @@
-﻿Public Class Warrior
+﻿Public MustInherit Class Warrior
     Protected Name As String
     Protected CurrentHealth As Integer
     Protected MaxHealth As UInteger
@@ -25,14 +25,18 @@
     Public Function IsAlive() As Boolean
         Return GetHealth() > 0
     End Function
-    Public Sub Attack(ByVal Enemy As Warrior, ByVal diceroll As UInteger)
-        If Enemy.CurrentHealth - diceroll * AttackDamage < 0 Then
+
+    Public Overridable Function GetDamage() As Integer
+        Return AttackDamage
+    End Function
+    Public Overridable Sub Attack(ByVal Enemy As Warrior, ByVal diceroll As UInteger, ByVal Damage As Integer)
+        If Enemy.CurrentHealth - diceroll * Damage < 0 Then
             Enemy.CurrentHealth = 0
         Else
-            Enemy.CurrentHealth -= diceroll * AttackDamage
+            Enemy.CurrentHealth -= diceroll * Damage
         End If
         Console.ForegroundColor = ConsoleColor.Red
-        Console.WriteLine($"{GetName()} hit {Enemy.GetName} for {diceroll * AttackDamage}")
+        Console.WriteLine($"{GetName()} hit {Enemy.GetName} for {diceroll * Damage}")
         Console.ForegroundColor = ConsoleColor.Gray
     End Sub
 End Class
