@@ -88,6 +88,7 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <Compile Include="ShieldWarrior.vb" />
     <Compile Include="Warrior.vb" />
   </ItemGroup>
   <ItemGroup>

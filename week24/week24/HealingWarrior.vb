@@ -3,6 +3,7 @@
 Public Class HealingWarrior
     Inherits Warrior
     Private haveHealed As Boolean
+
     Public Sub New(ByVal Name As String)
         MyBase.New(Name, 150)
     End Sub
@@ -27,4 +28,7 @@ Public Class HealingWarrior
         MyBase.Attack(Enemy, diceroll, AttackDamage)
 
     End Sub
+    Public Overrides Function IsHealingWarrior() As Boolean
+        Return True
+    End Function
 End Class

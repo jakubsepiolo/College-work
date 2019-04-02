@@ -6,7 +6,7 @@ Public Class Mage
     Private MaxMana As Integer
     Private MagicDamage As Integer
     Public Sub New(ByVal Name As String, ByVal MaxMana As Integer, ByVal MagicDamage As Integer)
-        MyBase.New(Name, 80)
+        MyBase.New(Name, 800)
         AttackDamage = 5
         Me.MaxMana = MaxMana
         Me.MagicDamage = MagicDamage
