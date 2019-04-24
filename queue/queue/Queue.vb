@@ -6,12 +6,13 @@ Public Class Queue(Of T)
     Private QueueArray() As T
     Private MaxSize As Integer
     Private CurrentSize As Integer
-    Public Sub New()
-        MaxSize = 10
+    Public Sub New(size As Integer)
+        MaxSize = size
         CurrentSize = 0
         Rear = 0
-        ReDim QueueArray(10)
+        ReDim QueueArray(size)
     End Sub
+
     Private Sub Shuffle() Implements IQueue(Of T).Shuffle
         For i = 1 To CurrentSize
             QueueArray(i - 1) = QueueArray(i)
