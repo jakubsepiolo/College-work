@@ -3,6 +3,7 @@
     Protected CurrentHealth As Integer
     Protected MaxHealth As UInteger
     Protected AttackDamage As UInteger
+    Protected Inventory As List(Of CItem)
 
     Public Sub New(ByVal Name As String)
         Me.Name = Name

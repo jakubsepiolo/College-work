@@ -69,6 +69,9 @@
     <Import Include="System.Threading.Tasks" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CItem.vb" />
+    <Compile Include="CPotion.vb" />
+    <Compile Include="CWeapon.vb" />
     <Compile Include="Dice.vb" />
     <Compile Include="HealingWarrior.vb" />
     <Compile Include="Mage.vb" />

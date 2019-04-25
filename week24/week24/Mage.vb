@@ -11,6 +11,7 @@ Public Class Mage
         Me.MaxMana = MaxMana
         Me.MagicDamage = MagicDamage
         Mana = Me.MaxMana
+        Inventory.Add(New CPotion("mana"))
     End Sub
     Public Function GetMana() As Integer
         Return Mana
@@ -20,17 +21,23 @@ Public Class Mage
         Return MagicDamage
     End Function
     Public Overrides Sub Attack(Enemy As Warrior, diceroll As UInteger, ByVal Damage As Integer)
+        For i = 0 To Inventory.Count - 1
+            Console.WriteLine(Inventory(i).GetType)
+        Next
+
+
+
         If GetMana() < MaxMana Then
-            Console.ForegroundColor = ConsoleColor.Cyan
-            Console.Write($"Changed {GetName()}'s mana from {GetMana()} to ")
-            If Mana + 10 > MaxMana Then
-                Mana = MaxMana
+                Console.ForegroundColor = ConsoleColor.Cyan
+                Console.Write($"Changed {GetName()}'s mana from {GetMana()} to ")
+                If Mana + 10 > MaxMana Then
+                    Mana = MaxMana
+                Else
+                    Mana += 10
+                End If
+                Console.WriteLine($"{GetMana()}")
             Else
-                Mana += 10
-            End If
-            Console.WriteLine($"{GetMana()}")
-        Else
-            Console.ForegroundColor = ConsoleColor.Red
+                Console.ForegroundColor = ConsoleColor.Red
             Console.WriteLine($"{GetName()} Casted a spell!")
             MyBase.Attack(Enemy, diceroll, Damage)
             Console.ForegroundColor = ConsoleColor.Cyan
