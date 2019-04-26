@@ -24,11 +24,15 @@
     End Sub
 
     Sub Main()
-        Dim Numbers() As Integer = {1, 5, 32, 2, 17, 21, 67, 54, 32, 19, 3, 4, 7}
-        ShellSort(Numbers)
-        For i = 0 To Numbers.Length - 1
-            Console.WriteLine(Numbers(i))
+        Dim Numbers(1000002) As Integer
+        For i = 0 To 1000002
+            Numbers(i) = Int(Rnd() * 1000002)
         Next
+        Dim TimeTaken As Stopwatch = Stopwatch.StartNew()
+        TimeTaken.Start()
+        ShellSort(Numbers)
+        TimeTaken.Stop()
+        Console.WriteLine($"Sorted, it took {TimeTaken.ElapsedMilliseconds}ms")
         Console.ReadLine()
     End Sub
 

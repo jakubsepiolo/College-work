@@ -13,6 +13,7 @@
             End If
             If Numbers(lb + root) < Numbers(lb + child) Then
                 Temp = Numbers(lb + root)
+                Console.WriteLine($"{Temp}, {Numbers(lb + child)}")
                 Numbers(lb + root) = Numbers(lb + child)
                 Numbers(lb + child) = Temp
                 root = child
@@ -46,9 +47,9 @@
     End Sub
     Sub Main()
         Randomize()
-        Dim Numbers(5000) As Integer
-        For i = 0 To 5000
-            Numbers(i) = Int(5 + Rnd() * 100)
+        Dim Numbers(400) As Integer
+        For i = 0 To 400
+            Numbers(i) = Int(0 + Rnd() * 10)
         Next
         Dim TimeTaken As Stopwatch = Stopwatch.StartNew()
         TimeTaken.Start()

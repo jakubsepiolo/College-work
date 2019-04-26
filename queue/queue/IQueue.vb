@@ -1,5 +1,5 @@
 ﻿Public Interface IQueue(Of T)
-    Sub Shuffle()
+    Sub Shuffle(start As Integer)
     Sub Enqueue(NewItem As T)
     Function DeQueue() As T
     Function Peek() As T
