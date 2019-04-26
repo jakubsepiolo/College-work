@@ -40,10 +40,11 @@ Public Class Queue(Of T)
         Randomize()
         Dim ThisEntry As New QueueItems
         ThisEntry.Data = NewItem
-        ThisEntry.Priority = Int(Rnd() * 5)
+        ThisEntry.Priority = Int(Rnd() * 6)
         If isFull() Then
             Console.WriteLine("Queue is full")
         Else
+            Console.WriteLine($"Added {ThisEntry.Data} with priority: {ThisEntry.Priority}")
             QueueArray(Rear) = ThisEntry
             Rear += 1
             CurrentSize += 1
@@ -58,11 +59,13 @@ Public Class Queue(Of T)
             Rear -= 1
             CurrentSize -= 1
             Shuffle(FindElement())
+            Console.Write(QueueArray(FindElement()).Priority)
             Return item
         End If
     End Function
 
     Public Function Peek() As T Implements IQueue(Of T).Peek
+        Console.Write(QueueArray(FindElement()).Priority)
         Return QueueArray(FindElement()).Data
     End Function
 
