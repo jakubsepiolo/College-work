@@ -11,6 +11,9 @@
     End Sub
     Public Overridable Sub UseItem()
     End Sub
+    Public Function GetName() As String
+        Return Name
+    End Function
     Public Function IsReusable() As Boolean
         Return Reusable
     End Function

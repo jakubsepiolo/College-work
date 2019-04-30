@@ -1,5 +1,5 @@
 ﻿Module Module1
-    Dim MyWarrior As New ShieldWarrior("Jakub", 100)
+    Dim MyWarrior As New HealingWarrior("Jakub")
     Dim EnemyWarrior As New Mage("Enemy", 200, 20)
 
     Function Clamp(ByRef myNum As Integer, min As Integer, max As Integer) As Integer

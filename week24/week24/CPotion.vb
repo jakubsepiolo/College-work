@@ -9,6 +9,7 @@
         If IsReusable() Or Count <> 0 Then
             If PotionType.ToLower() = "mana" Then
                 Count = 0
+
             ElseIf PotionType.ToLower() = "health" Then
                 Count = 0
             End If
