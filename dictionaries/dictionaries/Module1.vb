@@ -6,6 +6,9 @@
         UserInput = Console.ReadLine()
         Dim SplitInput() As String = UserInput.Split(" ")
         For Each k As String In SplitInput
+            If k.Contains(",") Or k.Contains(".") Or k.Contains("!") Or k.Contains("?") Then
+                k = k.Substring(0, k.Length - 1)
+            End If
             If myDictionary.ContainsKey(k) Then
                 myDictionary(k) += 1
             Else
@@ -13,7 +16,7 @@
             End If
         Next
         For Each item In myDictionary.Keys
-            Console.WriteLine($"{item} | {myDictionary(item)}")
+            Console.WriteLine($"{LSet(item, 20)} | {myDictionary(item)}")
         Next
         Console.ReadKey()
     End Sub
