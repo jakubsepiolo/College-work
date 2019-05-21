@@ -329,6 +329,48 @@ Module Module1
         Console.WriteLine()
     End Sub
 
+    Sub BestWord(PlayerTiles As String)
+        Dim FileReader As New System.IO.StreamReader("C:\Users\18JS3026\Source\Repos\College-work\words with aqa\aqawords.txt")
+        Dim CurrentWord As String
+        Dim ReadWord As String
+        Dim MatchedLetters As Integer
+        Dim Occurances As New Dictionary(Of Char, Integer)
+        Dim TileOccurance As New Dictionary(Of Char, Integer)
+        For Each letter In PlayerTiles
+            If TileOccurance.ContainsKey(letter) Then
+                TileOccurance(letter) += 1
+            Else
+                TileOccurance.Add(letter, 1)
+            End If
+        Next
+        While FileReader.EndOfStream <> True
+            MatchedLetters = 0
+            ReadWord = FileReader.ReadLine().Trim().ToUpper()
+            For Each letter In ReadWord
+                If Occurances.ContainsKey(letter) Then
+                    Occurances(letter) += 1
+                Else
+                    Occurances.Add(letter, 1)
+                End If
+                If Not PlayerTiles.Contains(letter) Then
+                    Exit For
+                Else
+                    MatchedLetters += 1
+                    If TileOccurance(letter) = Occurances(letter) Then
+                        If MatchedLetters = Len(ReadWord) Then
+                            If GetScoreForWord(ReadWord, CreateTileDictionary()) > GetScoreForWord(CurrentWord, CreateTileDictionary()) Then
+                                CurrentWord = ReadWord
+                            End If
+                        End If
+                    End If
+
+                End If
+            Next
+        End While
+        FileReader.Close()
+        Console.Write(CurrentWord)
+    End Sub
+
     Sub PlayGame(ByRef AllowedWords As List(Of String), ByVal TileDictionary As Dictionary(Of Char, Integer), ByVal RandomStart As Boolean, ByVal StartHandSize As Integer, ByVal MaxHandSize As Integer, ByVal MaxTilesPlayed As Integer, ByVal NoOfEndOfTurnTiles As Integer)
         Dim PlayerOneScore As Integer
         Dim PlayerTwoScore As Integer
@@ -349,11 +391,13 @@ Module Module1
             PlayerTwoTiles = "CELZXIOTNESMUAA"
         End If
         While PlayerOneTilesPlayed <= MaxTilesPlayed And PlayerTwoTilesPlayed <= MaxTilesPlayed And Len(PlayerOneTiles) < MaxHandSize And Len(PlayerTwoTiles) < MaxHandSize
+            BestWord(PlayerOneTiles)
             HaveTurn("Player One", PlayerOneTiles, PlayerOneTilesPlayed, PlayerOneScore, TileDictionary, TileQueue, AllowedWords, MaxHandSize, NoOfEndOfTurnTiles)
             Console.WriteLine()
             Console.Write("Press Enter to continue")
             Console.ReadLine()
             Console.WriteLine()
+            BestWord(PlayerTwoTiles)
             HaveTurn("Player Two", PlayerTwoTiles, PlayerTwoTilesPlayed, PlayerTwoScore, TileDictionary, TileQueue, AllowedWords, MaxHandSize, NoOfEndOfTurnTiles)
         End While
         UpdateScoreWithPenalty(PlayerOneScore, PlayerOneTiles, TileDictionary)
