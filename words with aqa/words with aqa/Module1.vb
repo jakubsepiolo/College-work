@@ -87,7 +87,18 @@ Module Module1
         While Choice <> "9"
             DisplayMenu()
             Console.Write("Enter your choice: ")
-            Choice = Console.ReadLine()
+            While Not IsValidInput(Choice, "Menu")
+                Choice = Console.ReadLine()
+                Console.WriteLine()
+                If IsNumeric(Choice) Then
+                    If Choice < 10 And Choice > 0 Then
+                        Exit While
+                    Else
+                        Choice = " "
+                        Continue While
+                    End If
+                End If
+            End While
             If Choice = "1" Then
                 PlayGame(AllowedWords, TileDictionary, True, StartHandSize, MaxHandSize, MaxTilesPlayed, NoOfEndOfTurnTiles)
             ElseIf Choice = "2" Then
@@ -95,6 +106,22 @@ Module Module1
             End If
         End While
     End Sub
+
+    Function IsValidInput(ByVal Text As String, ByVal Point As String) As Boolean
+        If Point = "Menu" Then
+            Return IsNumeric(Text)
+        Else
+            Dim DisallowedChars() As Char = {",", ".", "!", "?", "-", "&", "'", ")", "(", "%", "`", ";", "#", "*", ":", "/", "’", "‘"}
+            For Each k As Char In Text
+                For Each character In DisallowedChars
+                    If k = character Then
+                        Return False
+                    End If
+                Next
+            Next
+        End If
+        Return True
+    End Function
 
     Function CreateTileDictionary() As Dictionary(Of Char, Integer)
         Dim TileDictionary As New Dictionary(Of Char, Integer)()
@@ -224,7 +251,7 @@ Module Module1
     End Sub
 
     Function GetChoice()
-        Dim Choice As String
+        Dim Choice As String = ""
         Console.WriteLine()
         Console.WriteLine("Either:")
         Console.WriteLine("     enter the word you would like to play OR")
@@ -233,9 +260,12 @@ Module Module1
         Console.WriteLine("     press 7 to view your tiles again OR")
         Console.WriteLine("     press 0 to fill hand and stop the game.")
         Console.Write("> ")
-        Choice = Console.ReadLine()
-        Console.WriteLine()
-        Choice = Choice.ToUpper()
+        While (Not IsValidInput(Choice, "Menu")) And IsNumeric(Choice) Or Choice = ""
+            Choice = Console.ReadLine()
+            Console.WriteLine()
+            Choice = Choice.ToUpper()
+        End While
+
         Return Choice
     End Function
 
@@ -249,7 +279,19 @@ Module Module1
             Console.WriteLine("     replace the tiles you used and get three extra tiles (3) OR")
             Console.WriteLine("     get no new tiles (4)?")
             Console.Write("> ")
-            NewTileChoice = Console.ReadLine()
+            Console.Write("> ")
+            While Not IsValidInput(NewTileChoice, "Menu")
+                NewTileChoice = Console.ReadLine()
+                Console.WriteLine()
+                If IsNumeric(NewTileChoice) Then
+                    If NewTileChoice < 5 And NewTileChoice > 0 Then
+                        Exit While
+                    Else
+                        NewTileChoice = " "
+                        Continue While
+                    End If
+                End If
+            End While
         End While
         Return NewTileChoice
     End Function
@@ -333,39 +375,11 @@ Module Module1
         Dim FileReader As New System.IO.StreamReader("C:\Users\18JS3026\Source\Repos\College-work\words with aqa\aqawords.txt")
         Dim CurrentWord As String
         Dim ReadWord As String
-        Dim MatchedLetters As Integer
-        Dim Occurances As New Dictionary(Of Char, Integer)
-        Dim TileOccurance As New Dictionary(Of Char, Integer)
-        For Each letter In PlayerTiles
-            If TileOccurance.ContainsKey(letter) Then
-                TileOccurance(letter) += 1
-            Else
-                TileOccurance.Add(letter, 1)
-            End If
-        Next
-        While FileReader.EndOfStream <> True
-            MatchedLetters = 0
+        While Not FileReader.EndOfStream
             ReadWord = FileReader.ReadLine().Trim().ToUpper()
-            For Each letter In ReadWord
-                If Occurances.ContainsKey(letter) Then
-                    Occurances(letter) += 1
-                Else
-                    Occurances.Add(letter, 1)
-                End If
-                If Not PlayerTiles.Contains(letter) Then
-                    Exit For
-                Else
-                    MatchedLetters += 1
-                    If TileOccurance(letter) = Occurances(letter) Then
-                        If MatchedLetters = Len(ReadWord) Then
-                            If GetScoreForWord(ReadWord, CreateTileDictionary()) > GetScoreForWord(CurrentWord, CreateTileDictionary()) Then
-                                CurrentWord = ReadWord
-                            End If
-                        End If
-                    End If
-
-                End If
-            Next
+            If CheckWordIsInTiles(ReadWord, PlayerTiles) And GetScoreForWord(ReadWord, CreateTileDictionary()) > GetScoreForWord(CurrentWord, CreateTileDictionary()) Then
+                CurrentWord = ReadWord
+            End If
         End While
         FileReader.Close()
         Console.Write(CurrentWord)
