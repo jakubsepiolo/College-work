@@ -1,6 +1,7 @@
 ﻿
 Public Class Form1
     'todo: make input of "3+i" detect complex part as 1 (no need for 3+1i to be input)
+    '      stuff to do with matricies
     Public Function StringToComplexNumber(ByVal Text As String) As ComplexNumber
         Dim IsNegativeComplex As Boolean = False
         Dim IsNegativeReal As Boolean = False

@@ -59,7 +59,7 @@ Partial Class Form1
         'TextBox3
         '
         Me.TextBox3.BackColor = System.Drawing.SystemColors.ButtonFace
-        Me.TextBox3.Location = New System.Drawing.Point(458, 98)
+        Me.TextBox3.Location = New System.Drawing.Point(458, 101)
         Me.TextBox3.Name = "TextBox3"
         Me.TextBox3.Size = New System.Drawing.Size(258, 20)
         Me.TextBox3.TabIndex = 3
@@ -103,10 +103,11 @@ Partial Class Form1
         'Label2
         '
         Me.Label2.AutoSize = True
-        Me.Label2.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label2.Location = New System.Drawing.Point(394, 100)
+        Me.Label2.BackColor = System.Drawing.Color.Transparent
+        Me.Label2.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label2.Location = New System.Drawing.Point(400, 105)
         Me.Label2.Name = "Label2"
-        Me.Label2.Size = New System.Drawing.Size(58, 18)
+        Me.Label2.Size = New System.Drawing.Size(52, 16)
         Me.Label2.TabIndex = 9
         Me.Label2.Text = "Result: "
         '
