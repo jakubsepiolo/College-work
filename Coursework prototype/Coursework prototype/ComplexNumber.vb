@@ -1,4 +1,5 @@
 ﻿Public Class ComplexNumber
+    'Complex number class containing functions and operators
     Public Real As Single
     Public Complex As Single
     Public Sub New(ByVal RealPart As Single, ByVal ComplexPart As Single)

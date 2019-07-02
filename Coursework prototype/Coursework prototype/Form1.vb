@@ -2,7 +2,7 @@
 Public Class Form1
     'todo: make input of "3+i" detect complex part as 1 (no need for 3+1i to be input)
     '      stuff to do with matricies
-    Public Function StringToComplexNumber(ByVal Text As String) As ComplexNumber
+    Public Function StringToComplexNumber(ByVal Text As String) As ComplexNumber 'function that searches through input string and breaks number into real and complex parts
         Dim IsNegativeComplex As Boolean = False
         Dim IsNegativeReal As Boolean = False
         Dim ComplexOne As String
@@ -61,7 +61,7 @@ Public Class Form1
         Next
         Try
             Dim FinalNumber As New ComplexNumber(Convert.ToSingle(RealOne), Convert.ToSingle(ComplexOne))
-            If IsNegativeComplex Then
+            If IsNegativeComplex Then 'at the end we invert the real or complex parts if they should've been negative
                 FinalNumber.Complex = -FinalNumber.Complex
             End If
             If IsNegativeReal Then
@@ -95,13 +95,6 @@ Public Class Form1
 
     End Sub
 
-
-    Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-
-    End Sub
-
-    Private Sub Button2_Click(sender As Object, e As EventArgs)
-    End Sub
 
     Private Sub Subtract_Button(sender As Object, e As EventArgs) Handles Button3.Click
         Dim FirstInput As String = TextBox1.Text
