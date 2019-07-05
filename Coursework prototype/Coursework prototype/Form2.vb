@@ -37,26 +37,109 @@
     End Sub
 
 
+    Public Function Invert2xMatrix(Matrix(,) As Single) As Single(,)
+        Dim InverseMatrix(1, 1) As Single
+        InverseMatrix(0, 0) = Matrix(1, 1)
+        InverseMatrix(0, 1) = -Matrix(0, 1)
+        InverseMatrix(1, 0) = -Matrix(1, 0)
+        InverseMatrix(1, 1) = Matrix(0, 0)
+        Dim Multiplier As Single
+        Multiplier = 1 / (Matrix(0, 0) * Matrix(1, 1) - Matrix(1, 0) * Matrix(0, 1))
+        For x = 0 To 1
+            For y = 0 To 1
+                InverseMatrix(x, y) = InverseMatrix(x, y) * Multiplier
+            Next
+        Next
+        Return InverseMatrix
+    End Function
+
+    Public Function CreateTempMatrix(Matrix(,) As Single, ByVal x1 As Integer, ByVal x2 As Integer) As Single(,)
+        Dim ReturnMatrix(x2, x2) As Single
+        If x1 = 0 Then
+            ReturnMatrix(0, 0) = Matrix(1, 1)
+            ReturnMatrix(0, 1) = Matrix(1, 2)
+            ReturnMatrix(1, 0) = Matrix(2, 1)
+            ReturnMatrix(1, 1) = Matrix(2, 2)
+
+        ElseIf x1 = 1 Then
+            ReturnMatrix(0, 0) = Matrix(0, 1)
+            ReturnMatrix(0, 1) = Matrix(0, 2)
+            ReturnMatrix(1, 0) = Matrix(2, 1)
+            ReturnMatrix(1, 1) = Matrix(2, 2)
+        ElseIf x1 = 2 Then
+            ReturnMatrix(0, 0) = Matrix(0, 1)
+            ReturnMatrix(0, 1) = Matrix(0, 2)
+            ReturnMatrix(1, 0) = Matrix(1, 1)
+            ReturnMatrix(1, 1) = Matrix(1, 2)
+        End If
+        Return ReturnMatrix
+    End Function
+
+    Public Function Invert3xMatrix(Matrix(,) As Single) As Single(,)
+        Dim Determinant As Single
+        Dim InverseMatrix(2, 2) As Single
+        For x = 0 To 2
+            Dim TempMatrix(,) As Single = CreateTempMatrix(Matrix, x, 1)
+            If x = 0 Then
+                Determinant += Matrix(0, 0) * (TempMatrix(0, 0) * TempMatrix(1, 1) - TempMatrix(1, 0) * TempMatrix(0, 1))
+            ElseIf x = 1 Then
+                Determinant += -Matrix(1, 0) * (TempMatrix(0, 0) * TempMatrix(1, 1) - TempMatrix(1, 0) * TempMatrix(0, 1))
+            ElseIf x = 2 Then
+                Determinant += Matrix(2, 0) * (TempMatrix(0, 0) * TempMatrix(1, 1) - TempMatrix(1, 0) * TempMatrix(0, 1))
+            End If
+        Next
+
+        'swap corners or something ???????
+        InverseMatrix(0, 0) = Matrix(1, 1) * Matrix(2, 2) - Matrix(2, 1) * Matrix(1, 2) ' correct
+
+        InverseMatrix(1, 0) = -(Matrix(0, 1) * Matrix(2, 2) - Matrix(0, 2) * Matrix(2, 1)) 'correct
+
+        InverseMatrix(2, 0) = Matrix(0, 1) * Matrix(1, 2) - Matrix(0, 2) * Matrix(1, 1) ' correct
+
+        InverseMatrix(0, 1) = -(Matrix(1, 0) * Matrix(2, 2) - Matrix(1, 2) * Matrix(2, 0)) ' correct
+
+        InverseMatrix(1, 1) = Matrix(0, 0) * Matrix(2, 2) - Matrix(2, 0) * Matrix(0, 2) ' correct 
+
+        InverseMatrix(2, 1) = -(Matrix(0, 0) * Matrix(1, 2) - Matrix(0, 2) * Matrix(1, 0)) ' correct
+
+        InverseMatrix(0, 2) = Matrix(1, 0) * Matrix(2, 1) - Matrix(1, 1) * Matrix(2, 0) ' wrong 
+
+        InverseMatrix(1, 2) = -(Matrix(0, 0) * Matrix(2, 1) - Matrix(0, 1) * Matrix(2, 0)) ' correct 
+
+        InverseMatrix(2, 2) = Matrix(0, 0) * Matrix(1, 1) - Matrix(1, 0) * Matrix(0, 1) ' correct
+        For x = 0 To 2
+            For y = 0 To 2
+                InverseMatrix(x, y) = (1 / Determinant) * InverseMatrix(x, y)
+            Next
+        Next
+
+        Return InverseMatrix
+    End Function
+
+
     Private Sub Button4_Click(sender As Object, e As EventArgs) Handles Button4.Click
         Dim TheMatrix(,) As Single = GridToMatrix()
-        If DataGridView1.DisplayedColumnCount(True) = DataGridView1.DisplayedRowCount(True) And DataGridView1.DisplayedColumnCount(True) = 2 Then
-            Dim InverseMatrix(DataGridView1.DisplayedColumnCount(True) - 1, DataGridView1.DisplayedRowCount(True) - 1) As Single
-            Label1.Text = Nothing
-            InverseMatrix(0, 0) = TheMatrix(1, 1)
-            InverseMatrix(0, 1) = -TheMatrix(0, 1)
-            InverseMatrix(1, 0) = -TheMatrix(1, 0)
-            InverseMatrix(1, 1) = TheMatrix(0, 0)
-            Dim Determinant As Single
-            Determinant = 1 / (TheMatrix(0, 0) * TheMatrix(1, 1) - TheMatrix(1, 0) * TheMatrix(0, 1))
-            For x = 0 To 1
-                For y = 0 To 1
-                    InverseMatrix(x, y) = InverseMatrix(x, y) * Determinant
-                    Label1.Text = Label1.Text & " " & InverseMatrix(x, y)
+        If DataGridView1.DisplayedColumnCount(True) = DataGridView1.DisplayedRowCount(True) Then
+            If DataGridView1.DisplayedColumnCount(True) = 2 Then
+                Label1.Text = Nothing
+                Dim InverseMatrix(,) As Single = Invert2xMatrix(TheMatrix)
+                For x = 0 To 1
+                    For y = 0 To 1
+                        Label1.Text = Label1.Text & " " & InverseMatrix(x, y)
+                    Next
+                    Label1.Text = Label1.Text & vbCrLf
                 Next
-                Label1.Text = Label1.Text & vbCrLf
-            Next
+            ElseIf DataGridView1.DisplayedColumnCount(True) = 3 Then
+                Label1.Text = Nothing
+                Dim InverseMatrix(,) As Single = Invert3xMatrix(TheMatrix)
+                For x = 0 To 2
+                    For y = 0 To 2
+                        Label1.Text = Label1.Text & " " & InverseMatrix(x, y)
+                    Next
+                    Label1.Text = Label1.Text & vbCrLf
+                Next
+            End If
         End If
-
     End Sub
 
     Private Sub Button3_Click(sender As Object, e As EventArgs) Handles Button3.Click
