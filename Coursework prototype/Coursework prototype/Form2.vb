@@ -1,4 +1,11 @@
 ﻿Public Class Form2
+
+    Public MatrixSlot1(,) As Single
+    Public MatrixSlot2(,) As Single
+    Public MatrixSlot3(,) As Single
+    Public MatrixSlot4(,) As Single
+    Public MatrixSlot5(,) As Single
+
     Public Function GridToMatrix() As Single(,)
         Dim TheMatrix(DataGridView1.DisplayedColumnCount(True) - 1, DataGridView1.DisplayedRowCount(True) - 1) As Single
         For i = 0 To DataGridView1.DisplayedColumnCount(True) - 1
@@ -88,25 +95,30 @@
                 Determinant += Matrix(2, 0) * (TempMatrix(0, 0) * TempMatrix(1, 1) - TempMatrix(1, 0) * TempMatrix(0, 1))
             End If
         Next
+        For x = 0 To 2
+            For y = 0 To 2
+                InverseMatrix(y, x) = Matrix(x, y)
+            Next
+        Next
 
-        'swap corners or something ???????
-        InverseMatrix(0, 0) = Matrix(1, 1) * Matrix(2, 2) - Matrix(2, 1) * Matrix(1, 2) ' correct
+        InverseMatrix(0, 0) = Matrix(1, 1) * Matrix(2, 2) - Matrix(2, 1) * Matrix(1, 2)
 
-        InverseMatrix(1, 0) = -(Matrix(0, 1) * Matrix(2, 2) - Matrix(0, 2) * Matrix(2, 1)) 'correct
+        InverseMatrix(1, 0) = -(Matrix(0, 1) * Matrix(2, 2) - Matrix(0, 2) * Matrix(2, 1))
 
-        InverseMatrix(2, 0) = Matrix(0, 1) * Matrix(1, 2) - Matrix(0, 2) * Matrix(1, 1) ' correct
+        InverseMatrix(2, 0) = Matrix(0, 1) * Matrix(1, 2) - Matrix(0, 2) * Matrix(1, 1)
 
-        InverseMatrix(0, 1) = -(Matrix(1, 0) * Matrix(2, 2) - Matrix(1, 2) * Matrix(2, 0)) ' correct
+        InverseMatrix(0, 1) = -(Matrix(1, 0) * Matrix(2, 2) - Matrix(1, 2) * Matrix(2, 0))
 
-        InverseMatrix(1, 1) = Matrix(0, 0) * Matrix(2, 2) - Matrix(2, 0) * Matrix(0, 2) ' correct 
+        InverseMatrix(1, 1) = Matrix(0, 0) * Matrix(2, 2) - Matrix(2, 0) * Matrix(0, 2)
 
-        InverseMatrix(2, 1) = -(Matrix(0, 0) * Matrix(1, 2) - Matrix(0, 2) * Matrix(1, 0)) ' correct
+        InverseMatrix(2, 1) = -(Matrix(0, 0) * Matrix(1, 2) - Matrix(0, 2) * Matrix(1, 0))
 
-        InverseMatrix(0, 2) = Matrix(1, 0) * Matrix(2, 1) - Matrix(1, 1) * Matrix(2, 0) ' wrong 
+        InverseMatrix(0, 2) = Matrix(1, 0) * Matrix(2, 1) - Matrix(1, 1) * Matrix(2, 0)
 
-        InverseMatrix(1, 2) = -(Matrix(0, 0) * Matrix(2, 1) - Matrix(0, 1) * Matrix(2, 0)) ' correct 
+        InverseMatrix(1, 2) = -(Matrix(0, 0) * Matrix(2, 1) - Matrix(0, 1) * Matrix(2, 0))
 
-        InverseMatrix(2, 2) = Matrix(0, 0) * Matrix(1, 1) - Matrix(1, 0) * Matrix(0, 1) ' correct
+        InverseMatrix(2, 2) = Matrix(0, 0) * Matrix(1, 1) - Matrix(1, 0) * Matrix(0, 1)
+
         For x = 0 To 2
             For y = 0 To 2
                 InverseMatrix(x, y) = (1 / Determinant) * InverseMatrix(x, y)
@@ -118,6 +130,7 @@
 
 
     Private Sub Button4_Click(sender As Object, e As EventArgs) Handles Button4.Click
+        Label1.Visible = False
         Dim TheMatrix(,) As Single = GridToMatrix()
         If DataGridView1.DisplayedColumnCount(True) = DataGridView1.DisplayedRowCount(True) Then
             If DataGridView1.DisplayedColumnCount(True) = 2 Then
@@ -134,12 +147,13 @@
                 Dim InverseMatrix(,) As Single = Invert3xMatrix(TheMatrix)
                 For x = 0 To 2
                     For y = 0 To 2
-                        Label1.Text = Label1.Text & " " & InverseMatrix(x, y)
+                        Label1.Text = Label1.Text & " " & LSet(InverseMatrix(x, y), 7)
                     Next
                     Label1.Text = Label1.Text & vbCrLf
                 Next
             End If
         End If
+        MsgBox(Label1.Text, vbInformation, "Matrix inverse returned:")
     End Sub
 
     Private Sub Button3_Click(sender As Object, e As EventArgs) Handles Button3.Click
@@ -158,5 +172,13 @@
             MsgBox("You cannot have 0 columns!")
         End If
 
+    End Sub
+
+    Private Sub Button6_Click(sender As Object, e As EventArgs) Handles Button6.Click
+        Form3.OpenThisForm(Button6, e)
+    End Sub
+
+    Private Sub Button7_Click(sender As Object, e As EventArgs) Handles Button7.Click
+        Form3.OpenThisForm(Button7, e)
     End Sub
 End Class
