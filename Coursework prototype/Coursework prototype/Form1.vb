@@ -77,80 +77,80 @@ Public Class Form1
         End Try
     End Function
 
-    Private Sub Add_Button(sender As Object, e As EventArgs) Handles Button1.Click
-        Dim FirstInput As String = TextBox1.Text
-        Dim SecondInput As String = TextBox2.Text
+    Private Sub Add_Button(sender As Object, e As EventArgs) Handles AddComplex.Click
+        Dim FirstInput As String = InputComplex1.Text
+        Dim SecondInput As String = InputComplex2.Text
         Dim NumberOne As ComplexNumber = StringToComplexNumber(FirstInput)
         Dim NumberTwo As ComplexNumber = StringToComplexNumber(SecondInput)
         Dim Total As ComplexNumber
         Total = NumberOne + NumberTwo
         If Total.Complex > 0 Then
-            TextBox3.Text = Total.Real & "+" & Total.Complex & "i"
+            OutputComplex.Text = Total.Real & "+" & Total.Complex & "i"
         ElseIf Total.Complex = 0 Then
-            TextBox3.Text = Total.Real
+            OutputComplex.Text = Total.Real
         Else
 
-            TextBox3.Text = Total.Real & Total.Complex & "i"
+            OutputComplex.Text = Total.Real & Total.Complex & "i"
         End If
 
     End Sub
 
 
-    Private Sub Subtract_Button(sender As Object, e As EventArgs) Handles Button3.Click
-        Dim FirstInput As String = TextBox1.Text
-        Dim SecondInput As String = TextBox2.Text
+    Private Sub Subtract_Button(sender As Object, e As EventArgs) Handles SubtractComplex.Click
+        Dim FirstInput As String = InputComplex1.Text
+        Dim SecondInput As String = InputComplex2.Text
         Dim NumberOne As ComplexNumber = StringToComplexNumber(FirstInput)
         Dim NumberTwo As ComplexNumber = StringToComplexNumber(SecondInput)
         Dim Total As ComplexNumber
         Total = NumberOne - NumberTwo
         If Total.Complex > 0 Then
-            TextBox3.Text = Total.Real & "+" & Total.Complex & "i"
+            OutputComplex.Text = Total.Real & "+" & Total.Complex & "i"
         ElseIf Total.Complex = 0 Then
-            TextBox3.Text = Total.Real
+            OutputComplex.Text = Total.Real
         Else
 
-            TextBox3.Text = Total.Real & Total.Complex & "i"
+            OutputComplex.Text = Total.Real & Total.Complex & "i"
         End If
 
     End Sub
 
-    Private Sub Multiply_Button(sender As Object, e As EventArgs) Handles Button4.Click
-        Dim FirstInput As String = TextBox1.Text
-        Dim SecondInput As String = TextBox2.Text
+    Private Sub Multiply_Button(sender As Object, e As EventArgs) Handles MultiplyComplex.Click
+        Dim FirstInput As String = InputComplex1.Text
+        Dim SecondInput As String = InputComplex2.Text
         Dim NumberOne As ComplexNumber = StringToComplexNumber(FirstInput)
         Dim NumberTwo As ComplexNumber = StringToComplexNumber(SecondInput)
         Dim Total As ComplexNumber
         Total = NumberOne * NumberTwo
         If Total.Complex > 0 Then
-            TextBox3.Text = Total.Real & "+" & Total.Complex & "i"
+            OutputComplex.Text = Total.Real & "+" & Total.Complex & "i"
         ElseIf Total.Complex = 0 Then
-            TextBox3.Text = Total.Real
+            OutputComplex.Text = Total.Real
         Else
 
-            TextBox3.Text = Total.Real & Total.Complex & "i"
+            OutputComplex.Text = Total.Real & Total.Complex & "i"
         End If
 
     End Sub
 
-    Private Sub Divide_Button(sender As Object, e As EventArgs) Handles Button5.Click
-        Dim FirstInput As String = TextBox1.Text
-        Dim SecondInput As String = TextBox2.Text
+    Private Sub Divide_Button(sender As Object, e As EventArgs) Handles DivideComplex.Click
+        Dim FirstInput As String = InputComplex1.Text
+        Dim SecondInput As String = InputComplex2.Text
         Dim NumberOne As ComplexNumber = StringToComplexNumber(FirstInput)
         Dim NumberTwo As ComplexNumber = StringToComplexNumber(SecondInput)
         Dim Total As ComplexNumber
         Total = NumberOne / NumberTwo
         If Total.Complex > 0 Then
-            TextBox3.Text = Total.Real & "+" & Total.Complex & "i"
+            OutputComplex.Text = Total.Real & "+" & Total.Complex & "i"
         ElseIf Total.Complex = 0 Then
-            TextBox3.Text = Total.Real
+            OutputComplex.Text = Total.Real
         Else
 
-            TextBox3.Text = Total.Real & Total.Complex & "i"
+            OutputComplex.Text = Total.Real & Total.Complex & "i"
         End If
 
     End Sub
 
-    Private Sub Button2_Click_1(sender As Object, e As EventArgs) Handles Button2.Click
+    Private Sub Button2_Click_1(sender As Object, e As EventArgs) Handles OpenMatrix.Click
         Form2.Show()
     End Sub
 End Class

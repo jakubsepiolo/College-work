@@ -22,52 +22,58 @@ Partial Class Form2
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Me.DataGridView1 = New System.Windows.Forms.DataGridView()
-        Me.Button1 = New System.Windows.Forms.Button()
-        Me.Button2 = New System.Windows.Forms.Button()
-        Me.Button4 = New System.Windows.Forms.Button()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(Form2))
+        Me.MatrixGrid = New System.Windows.Forms.DataGridView()
+        Me.AddRow = New System.Windows.Forms.Button()
+        Me.AddColumn = New System.Windows.Forms.Button()
+        Me.InvertMatrix = New System.Windows.Forms.Button()
         Me.Label1 = New System.Windows.Forms.Label()
-        Me.Button3 = New System.Windows.Forms.Button()
-        Me.Button5 = New System.Windows.Forms.Button()
-        Me.Button6 = New System.Windows.Forms.Button()
-        Me.Button7 = New System.Windows.Forms.Button()
-        CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.RemoveRow = New System.Windows.Forms.Button()
+        Me.RemoveColumn = New System.Windows.Forms.Button()
+        Me.SaveMatrix = New System.Windows.Forms.Button()
+        Me.LoadMatrix = New System.Windows.Forms.Button()
+        Me.SelectMatrix1 = New System.Windows.Forms.ComboBox()
+        Me.SelectMatrix2 = New System.Windows.Forms.ComboBox()
+        Me.AddMatrix = New System.Windows.Forms.Button()
+        Me.SubtractMatrix = New System.Windows.Forms.Button()
+        Me.MultiplyMatrix = New System.Windows.Forms.Button()
+        CType(Me.MatrixGrid, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
-        'DataGridView1
+        'MatrixGrid
         '
-        Me.DataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.DataGridView1.Location = New System.Drawing.Point(21, 12)
-        Me.DataGridView1.Name = "DataGridView1"
-        Me.DataGridView1.Size = New System.Drawing.Size(525, 353)
-        Me.DataGridView1.TabIndex = 0
+        Me.MatrixGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        Me.MatrixGrid.Location = New System.Drawing.Point(21, 12)
+        Me.MatrixGrid.Name = "MatrixGrid"
+        Me.MatrixGrid.Size = New System.Drawing.Size(525, 353)
+        Me.MatrixGrid.TabIndex = 0
         '
-        'Button1
+        'AddRow
         '
-        Me.Button1.Location = New System.Drawing.Point(577, 30)
-        Me.Button1.Name = "Button1"
-        Me.Button1.Size = New System.Drawing.Size(192, 23)
-        Me.Button1.TabIndex = 1
-        Me.Button1.Text = "Add row"
-        Me.Button1.UseVisualStyleBackColor = True
+        Me.AddRow.Location = New System.Drawing.Point(577, 30)
+        Me.AddRow.Name = "AddRow"
+        Me.AddRow.Size = New System.Drawing.Size(192, 23)
+        Me.AddRow.TabIndex = 1
+        Me.AddRow.Text = "Add row"
+        Me.AddRow.UseVisualStyleBackColor = True
         '
-        'Button2
+        'AddColumn
         '
-        Me.Button2.Location = New System.Drawing.Point(577, 68)
-        Me.Button2.Name = "Button2"
-        Me.Button2.Size = New System.Drawing.Size(192, 23)
-        Me.Button2.TabIndex = 2
-        Me.Button2.Text = "Add column"
-        Me.Button2.UseVisualStyleBackColor = True
+        Me.AddColumn.Location = New System.Drawing.Point(577, 68)
+        Me.AddColumn.Name = "AddColumn"
+        Me.AddColumn.Size = New System.Drawing.Size(192, 23)
+        Me.AddColumn.TabIndex = 2
+        Me.AddColumn.Text = "Add column"
+        Me.AddColumn.UseVisualStyleBackColor = True
         '
-        'Button4
+        'InvertMatrix
         '
-        Me.Button4.Location = New System.Drawing.Point(577, 253)
-        Me.Button4.Name = "Button4"
-        Me.Button4.Size = New System.Drawing.Size(191, 23)
-        Me.Button4.TabIndex = 4
-        Me.Button4.Text = "Invert matrix"
-        Me.Button4.UseVisualStyleBackColor = True
+        Me.InvertMatrix.Location = New System.Drawing.Point(577, 253)
+        Me.InvertMatrix.Name = "InvertMatrix"
+        Me.InvertMatrix.Size = New System.Drawing.Size(191, 23)
+        Me.InvertMatrix.TabIndex = 4
+        Me.InvertMatrix.Text = "Invert matrix"
+        Me.InvertMatrix.UseVisualStyleBackColor = True
         '
         'Label1
         '
@@ -77,71 +83,127 @@ Partial Class Form2
         Me.Label1.Size = New System.Drawing.Size(0, 13)
         Me.Label1.TabIndex = 5
         '
-        'Button3
+        'RemoveRow
         '
-        Me.Button3.Location = New System.Drawing.Point(577, 114)
-        Me.Button3.Name = "Button3"
-        Me.Button3.Size = New System.Drawing.Size(191, 23)
-        Me.Button3.TabIndex = 6
-        Me.Button3.Text = "Remove row"
-        Me.Button3.UseVisualStyleBackColor = True
+        Me.RemoveRow.Location = New System.Drawing.Point(577, 114)
+        Me.RemoveRow.Name = "RemoveRow"
+        Me.RemoveRow.Size = New System.Drawing.Size(191, 23)
+        Me.RemoveRow.TabIndex = 6
+        Me.RemoveRow.Text = "Remove row"
+        Me.RemoveRow.UseVisualStyleBackColor = True
         '
-        'Button5
+        'RemoveColumn
         '
-        Me.Button5.Location = New System.Drawing.Point(577, 157)
-        Me.Button5.Name = "Button5"
-        Me.Button5.Size = New System.Drawing.Size(191, 23)
-        Me.Button5.TabIndex = 7
-        Me.Button5.Text = "Remove column"
-        Me.Button5.UseVisualStyleBackColor = True
+        Me.RemoveColumn.Location = New System.Drawing.Point(577, 157)
+        Me.RemoveColumn.Name = "RemoveColumn"
+        Me.RemoveColumn.Size = New System.Drawing.Size(191, 23)
+        Me.RemoveColumn.TabIndex = 7
+        Me.RemoveColumn.Text = "Remove column"
+        Me.RemoveColumn.UseVisualStyleBackColor = True
         '
-        'Button6
+        'SaveMatrix
         '
-        Me.Button6.Location = New System.Drawing.Point(21, 415)
-        Me.Button6.Name = "Button6"
-        Me.Button6.Size = New System.Drawing.Size(75, 23)
-        Me.Button6.TabIndex = 9
-        Me.Button6.Text = "Save"
-        Me.Button6.UseVisualStyleBackColor = True
+        Me.SaveMatrix.Location = New System.Drawing.Point(21, 415)
+        Me.SaveMatrix.Name = "SaveMatrix"
+        Me.SaveMatrix.Size = New System.Drawing.Size(75, 23)
+        Me.SaveMatrix.TabIndex = 9
+        Me.SaveMatrix.Text = "Save"
+        Me.SaveMatrix.UseVisualStyleBackColor = True
         '
-        'Button7
+        'LoadMatrix
         '
-        Me.Button7.Location = New System.Drawing.Point(102, 415)
-        Me.Button7.Name = "Button7"
-        Me.Button7.Size = New System.Drawing.Size(75, 23)
-        Me.Button7.TabIndex = 10
-        Me.Button7.Text = "Load"
-        Me.Button7.UseVisualStyleBackColor = True
+        Me.LoadMatrix.Location = New System.Drawing.Point(102, 415)
+        Me.LoadMatrix.Name = "LoadMatrix"
+        Me.LoadMatrix.Size = New System.Drawing.Size(75, 23)
+        Me.LoadMatrix.TabIndex = 10
+        Me.LoadMatrix.Text = "Load"
+        Me.LoadMatrix.UseVisualStyleBackColor = True
+        '
+        'SelectMatrix1
+        '
+        Me.SelectMatrix1.FormattingEnabled = True
+        Me.SelectMatrix1.Items.AddRange(New Object() {"Matrix slot 1", "Matrix slot 2 ", "Matrix slot 3 ", "Matrix slot 4 ", "Matrix slot 5 "})
+        Me.SelectMatrix1.Location = New System.Drawing.Point(331, 391)
+        Me.SelectMatrix1.Name = "SelectMatrix1"
+        Me.SelectMatrix1.Size = New System.Drawing.Size(117, 21)
+        Me.SelectMatrix1.TabIndex = 0
+        '
+        'SelectMatrix2
+        '
+        Me.SelectMatrix2.FormattingEnabled = True
+        Me.SelectMatrix2.Items.AddRange(New Object() {"Matrix slot 1", "Matrix slot 2 ", "Matrix slot 3 ", "Matrix slot 4 ", "Matrix slot 5 "})
+        Me.SelectMatrix2.Location = New System.Drawing.Point(469, 391)
+        Me.SelectMatrix2.Name = "SelectMatrix2"
+        Me.SelectMatrix2.Size = New System.Drawing.Size(119, 21)
+        Me.SelectMatrix2.TabIndex = 0
+        '
+        'AddMatrix
+        '
+        Me.AddMatrix.Location = New System.Drawing.Point(331, 418)
+        Me.AddMatrix.Name = "AddMatrix"
+        Me.AddMatrix.Size = New System.Drawing.Size(75, 23)
+        Me.AddMatrix.TabIndex = 13
+        Me.AddMatrix.Text = "Add"
+        Me.AddMatrix.UseVisualStyleBackColor = True
+        '
+        'SubtractMatrix
+        '
+        Me.SubtractMatrix.Location = New System.Drawing.Point(423, 418)
+        Me.SubtractMatrix.Name = "SubtractMatrix"
+        Me.SubtractMatrix.Size = New System.Drawing.Size(75, 23)
+        Me.SubtractMatrix.TabIndex = 14
+        Me.SubtractMatrix.Text = "Subtract"
+        Me.SubtractMatrix.UseVisualStyleBackColor = True
+        '
+        'MultiplyMatrix
+        '
+        Me.MultiplyMatrix.Location = New System.Drawing.Point(513, 418)
+        Me.MultiplyMatrix.Name = "MultiplyMatrix"
+        Me.MultiplyMatrix.Size = New System.Drawing.Size(75, 23)
+        Me.MultiplyMatrix.TabIndex = 15
+        Me.MultiplyMatrix.Text = "Multiply"
+        Me.MultiplyMatrix.UseVisualStyleBackColor = True
         '
         'Form2
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(800, 450)
-        Me.Controls.Add(Me.Button7)
-        Me.Controls.Add(Me.Button6)
-        Me.Controls.Add(Me.Button5)
-        Me.Controls.Add(Me.Button3)
+        Me.Controls.Add(Me.MultiplyMatrix)
+        Me.Controls.Add(Me.SubtractMatrix)
+        Me.Controls.Add(Me.AddMatrix)
+        Me.Controls.Add(Me.SelectMatrix2)
+        Me.Controls.Add(Me.SelectMatrix1)
+        Me.Controls.Add(Me.LoadMatrix)
+        Me.Controls.Add(Me.SaveMatrix)
+        Me.Controls.Add(Me.RemoveColumn)
+        Me.Controls.Add(Me.RemoveRow)
         Me.Controls.Add(Me.Label1)
-        Me.Controls.Add(Me.Button4)
-        Me.Controls.Add(Me.Button2)
-        Me.Controls.Add(Me.Button1)
-        Me.Controls.Add(Me.DataGridView1)
+        Me.Controls.Add(Me.InvertMatrix)
+        Me.Controls.Add(Me.AddColumn)
+        Me.Controls.Add(Me.AddRow)
+        Me.Controls.Add(Me.MatrixGrid)
+        Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.Name = "Form2"
         Me.Text = "Form2"
-        CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.MatrixGrid, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
     End Sub
 
-    Friend WithEvents DataGridView1 As DataGridView
-    Friend WithEvents Button1 As Button
-    Friend WithEvents Button2 As Button
-    Friend WithEvents Button4 As Button
+    Friend WithEvents MatrixGrid As DataGridView
+    Friend WithEvents AddRow As Button
+    Friend WithEvents AddColumn As Button
+    Friend WithEvents InvertMatrix As Button
     Friend WithEvents Label1 As Label
-    Friend WithEvents Button3 As Button
-    Friend WithEvents Button5 As Button
-    Friend WithEvents Button6 As Button
-    Friend WithEvents Button7 As Button
+    Friend WithEvents RemoveRow As Button
+    Friend WithEvents RemoveColumn As Button
+    Friend WithEvents SaveMatrix As Button
+    Friend WithEvents LoadMatrix As Button
+    Friend WithEvents SelectMatrix1 As ComboBox
+    Friend WithEvents SelectMatrix2 As ComboBox
+    Friend WithEvents AddMatrix As Button
+    Friend WithEvents SubtractMatrix As Button
+    Friend WithEvents MultiplyMatrix As Button
 End Class

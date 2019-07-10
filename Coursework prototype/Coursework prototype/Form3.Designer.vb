@@ -22,46 +22,48 @@ Partial Class Form3
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Me.ComboBox1 = New System.Windows.Forms.ComboBox()
-        Me.Label1 = New System.Windows.Forms.Label()
-        Me.Button1 = New System.Windows.Forms.Button()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(Form3))
+        Me.SelectMatrix = New System.Windows.Forms.ComboBox()
+        Me.MatrixOutput = New System.Windows.Forms.Label()
+        Me.ConfirmButton = New System.Windows.Forms.Button()
         Me.SuspendLayout()
         '
-        'ComboBox1
+        'SelectMatrix
         '
-        Me.ComboBox1.FormattingEnabled = True
-        Me.ComboBox1.Items.AddRange(New Object() {"Matrix slot 1", "Matrix slot 2 ", "Matrix slot 3 ", "Matrix slot 4 ", "Matrix slot 5 "})
-        Me.ComboBox1.Location = New System.Drawing.Point(12, 13)
-        Me.ComboBox1.Name = "ComboBox1"
-        Me.ComboBox1.Size = New System.Drawing.Size(229, 21)
-        Me.ComboBox1.TabIndex = 0
+        Me.SelectMatrix.FormattingEnabled = True
+        Me.SelectMatrix.Items.AddRange(New Object() {"Matrix slot 1", "Matrix slot 2 ", "Matrix slot 3 ", "Matrix slot 4 ", "Matrix slot 5 "})
+        Me.SelectMatrix.Location = New System.Drawing.Point(12, 13)
+        Me.SelectMatrix.Name = "SelectMatrix"
+        Me.SelectMatrix.Size = New System.Drawing.Size(229, 21)
+        Me.SelectMatrix.TabIndex = 0
         '
-        'Label1
+        'MatrixOutput
         '
-        Me.Label1.AutoSize = True
-        Me.Label1.Location = New System.Drawing.Point(12, 54)
-        Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(39, 13)
-        Me.Label1.TabIndex = 1
-        Me.Label1.Text = "Label1"
+        Me.MatrixOutput.AutoSize = True
+        Me.MatrixOutput.Location = New System.Drawing.Point(12, 54)
+        Me.MatrixOutput.Name = "MatrixOutput"
+        Me.MatrixOutput.Size = New System.Drawing.Size(39, 13)
+        Me.MatrixOutput.TabIndex = 1
+        Me.MatrixOutput.Text = "Label1"
         '
-        'Button1
+        'ConfirmButton
         '
-        Me.Button1.Location = New System.Drawing.Point(12, 175)
-        Me.Button1.Name = "Button1"
-        Me.Button1.Size = New System.Drawing.Size(229, 23)
-        Me.Button1.TabIndex = 2
-        Me.Button1.Text = "Accept"
-        Me.Button1.UseVisualStyleBackColor = True
+        Me.ConfirmButton.Location = New System.Drawing.Point(12, 175)
+        Me.ConfirmButton.Name = "ConfirmButton"
+        Me.ConfirmButton.Size = New System.Drawing.Size(229, 23)
+        Me.ConfirmButton.TabIndex = 2
+        Me.ConfirmButton.Text = "Accept"
+        Me.ConfirmButton.UseVisualStyleBackColor = True
         '
         'Form3
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(253, 210)
-        Me.Controls.Add(Me.Button1)
-        Me.Controls.Add(Me.Label1)
-        Me.Controls.Add(Me.ComboBox1)
+        Me.Controls.Add(Me.ConfirmButton)
+        Me.Controls.Add(Me.MatrixOutput)
+        Me.Controls.Add(Me.SelectMatrix)
+        Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.Name = "Form3"
         Me.Text = "Form3"
         Me.ResumeLayout(False)
@@ -69,7 +71,7 @@ Partial Class Form3
 
     End Sub
 
-    Friend WithEvents ComboBox1 As ComboBox
-    Friend WithEvents Label1 As Label
-    Friend WithEvents Button1 As Button
+    Friend WithEvents SelectMatrix As ComboBox
+    Friend WithEvents MatrixOutput As Label
+    Friend WithEvents ConfirmButton As Button
 End Class

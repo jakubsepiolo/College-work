@@ -6,27 +6,45 @@
     Public MatrixSlot4(,) As Single
     Public MatrixSlot5(,) As Single
 
+    Private Function AddMatrices(Matrix1(,) As Single, Matrix2(,) As Single) As Single(,)
+        Dim TempMatrix(Matrix1.GetLength(0) - 1, Matrix1.GetLength(1) - 1) As Single
+        For x = 0 To Matrix1.GetLength(0) - 1
+            For y = 0 To Matrix1.GetLength(1) - 1
+                TempMatrix(x, y) = Matrix1(x, y) + Matrix2(x, y)
+            Next
+        Next
+        Return TempMatrix
+    End Function
+    Private Function SubtractMatrices(Matrix1(,) As Single, Matrix2(,) As Single) As Single(,)
+        Dim TempMatrix(Matrix1.GetLength(0) - 1, Matrix1.GetLength(1) - 1) As Single
+        For x = 0 To Matrix1.GetLength(0) - 1
+            For y = 0 To Matrix1.GetLength(1) - 1
+                TempMatrix(x, y) = Matrix1(x, y) - Matrix2(x, y)
+            Next
+        Next
+        Return TempMatrix
+    End Function
     Public Function GridToMatrix() As Single(,)
-        Dim TheMatrix(DataGridView1.DisplayedColumnCount(True) - 1, DataGridView1.DisplayedRowCount(True) - 1) As Single
-        For i = 0 To DataGridView1.DisplayedColumnCount(True) - 1
-            For j = 0 To DataGridView1.DisplayedRowCount(True) - 1
-                TheMatrix(i, j) = DataGridView1.Rows(j).Cells(i).Value
+        Dim TheMatrix(MatrixGrid.DisplayedRowCount(True) - 1, MatrixGrid.DisplayedColumnCount(True) - 1) As Single
+        For i = 0 To MatrixGrid.DisplayedRowCount(True) - 1
+            For j = 0 To MatrixGrid.DisplayedColumnCount(True) - 1
+                TheMatrix(i, j) = MatrixGrid.Rows(i).Cells(j).Value
             Next
         Next
         Return TheMatrix
     End Function
     Private Sub Loaded() Handles Me.Load
-        DataGridView1.AllowUserToAddRows = False
+        MatrixGrid.AllowUserToAddRows = False
     End Sub
 
-    Private Sub selection(sender As Object, e As EventArgs) Handles DataGridView1.SelectionChanged
-        DataGridView1.ClearSelection()
+    Private Sub selection(sender As Object, e As EventArgs) Handles MatrixGrid.SelectionChanged
+        MatrixGrid.ClearSelection()
     End Sub
 
-    Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
+    Private Sub Button1_Click(sender As Object, e As EventArgs) Handles AddRow.Click
         Try
-            If DataGridView1.DisplayedRowCount(True) < 4 Then
-                DataGridView1.Rows.Add()
+            If MatrixGrid.DisplayedRowCount(True) < 4 Then
+                MatrixGrid.Rows.Add()
             End If
 
         Catch ex As InvalidOperationException
@@ -35,10 +53,10 @@
 
     End Sub
 
-    Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
-        If DataGridView1.DisplayedColumnCount(True) < 4 Then
-            DataGridView1.Columns.Add(Str(DataGridView1.DisplayedColumnCount(True)), " ")
-            DataGridView1.Columns(DataGridView1.DisplayedColumnCount(True) - 1).SortMode = DataGridViewColumnSortMode.NotSortable
+    Private Sub Button2_Click(sender As Object, e As EventArgs) Handles AddColumn.Click
+        If MatrixGrid.DisplayedColumnCount(True) < 4 Then
+            MatrixGrid.Columns.Add(Str(MatrixGrid.DisplayedColumnCount(True)), " ")
+            MatrixGrid.Columns(MatrixGrid.DisplayedColumnCount(True) - 1).SortMode = DataGridViewColumnSortMode.NotSortable
         End If
 
     End Sub
@@ -95,27 +113,22 @@
                 Determinant += Matrix(2, 0) * (TempMatrix(0, 0) * TempMatrix(1, 1) - TempMatrix(1, 0) * TempMatrix(0, 1))
             End If
         Next
-        For x = 0 To 2
-            For y = 0 To 2
-                InverseMatrix(y, x) = Matrix(x, y)
-            Next
-        Next
 
         InverseMatrix(0, 0) = Matrix(1, 1) * Matrix(2, 2) - Matrix(2, 1) * Matrix(1, 2)
 
-        InverseMatrix(1, 0) = -(Matrix(0, 1) * Matrix(2, 2) - Matrix(0, 2) * Matrix(2, 1))
+        InverseMatrix(0, 1) = -(Matrix(0, 1) * Matrix(2, 2) - Matrix(0, 2) * Matrix(2, 1))
 
-        InverseMatrix(2, 0) = Matrix(0, 1) * Matrix(1, 2) - Matrix(0, 2) * Matrix(1, 1)
+        InverseMatrix(0, 2) = Matrix(0, 1) * Matrix(1, 2) - Matrix(0, 2) * Matrix(1, 1)
 
-        InverseMatrix(0, 1) = -(Matrix(1, 0) * Matrix(2, 2) - Matrix(1, 2) * Matrix(2, 0))
+        InverseMatrix(1, 0) = -(Matrix(1, 0) * Matrix(2, 2) - Matrix(1, 2) * Matrix(2, 0))
 
         InverseMatrix(1, 1) = Matrix(0, 0) * Matrix(2, 2) - Matrix(2, 0) * Matrix(0, 2)
 
-        InverseMatrix(2, 1) = -(Matrix(0, 0) * Matrix(1, 2) - Matrix(0, 2) * Matrix(1, 0))
+        InverseMatrix(1, 2) = -(Matrix(0, 0) * Matrix(1, 2) - Matrix(0, 2) * Matrix(1, 0))
 
-        InverseMatrix(0, 2) = Matrix(1, 0) * Matrix(2, 1) - Matrix(1, 1) * Matrix(2, 0)
+        InverseMatrix(2, 0) = Matrix(1, 0) * Matrix(2, 1) - Matrix(1, 1) * Matrix(2, 0)
 
-        InverseMatrix(1, 2) = -(Matrix(0, 0) * Matrix(2, 1) - Matrix(0, 1) * Matrix(2, 0))
+        InverseMatrix(2, 1) = -(Matrix(0, 0) * Matrix(2, 1) - Matrix(0, 1) * Matrix(2, 0))
 
         InverseMatrix(2, 2) = Matrix(0, 0) * Matrix(1, 1) - Matrix(1, 0) * Matrix(0, 1)
 
@@ -129,11 +142,11 @@
     End Function
 
 
-    Private Sub Button4_Click(sender As Object, e As EventArgs) Handles Button4.Click
+    Private Sub Button4_Click(sender As Object, e As EventArgs) Handles InvertMatrix.Click
         Label1.Visible = False
         Dim TheMatrix(,) As Single = GridToMatrix()
-        If DataGridView1.DisplayedColumnCount(True) = DataGridView1.DisplayedRowCount(True) Then
-            If DataGridView1.DisplayedColumnCount(True) = 2 Then
+        If MatrixGrid.DisplayedColumnCount(True) = MatrixGrid.DisplayedRowCount(True) Then
+            If MatrixGrid.DisplayedColumnCount(True) = 2 Then
                 Label1.Text = Nothing
                 Dim InverseMatrix(,) As Single = Invert2xMatrix(TheMatrix)
                 For x = 0 To 1
@@ -142,7 +155,7 @@
                     Next
                     Label1.Text = Label1.Text & vbCrLf
                 Next
-            ElseIf DataGridView1.DisplayedColumnCount(True) = 3 Then
+            ElseIf MatrixGrid.DisplayedColumnCount(True) = 3 Then
                 Label1.Text = Nothing
                 Dim InverseMatrix(,) As Single = Invert3xMatrix(TheMatrix)
                 For x = 0 To 2
@@ -156,29 +169,105 @@
         MsgBox(Label1.Text, vbInformation, "Matrix inverse returned:")
     End Sub
 
-    Private Sub Button3_Click(sender As Object, e As EventArgs) Handles Button3.Click
-        If DataGridView1.DisplayedRowCount(True) > 1 Then
-            DataGridView1.Rows.RemoveAt(DataGridView1.DisplayedRowCount(True) - 1)
+    Private Sub Button3_Click(sender As Object, e As EventArgs) Handles RemoveRow.Click
+        If MatrixGrid.DisplayedRowCount(True) > 1 Then
+            MatrixGrid.Rows.RemoveAt(MatrixGrid.DisplayedRowCount(True) - 1)
         Else
             MsgBox("You cannot have 0 rows!")
         End If
 
     End Sub
 
-    Private Sub Button5_Click(sender As Object, e As EventArgs) Handles Button5.Click
-        If DataGridView1.DisplayedColumnCount(True) > 1 Then
-            DataGridView1.Columns.RemoveAt(DataGridView1.DisplayedColumnCount(True) - 1)
+    Private Sub Button5_Click(sender As Object, e As EventArgs) Handles RemoveColumn.Click
+        If MatrixGrid.DisplayedColumnCount(True) > 1 Then
+            MatrixGrid.Columns.RemoveAt(MatrixGrid.DisplayedColumnCount(True) - 1)
         Else
             MsgBox("You cannot have 0 columns!")
         End If
 
     End Sub
 
-    Private Sub Button6_Click(sender As Object, e As EventArgs) Handles Button6.Click
-        Form3.OpenThisForm(Button6, e)
+    Private Sub Button6_Click(sender As Object, e As EventArgs) Handles SaveMatrix.Click
+        Form3.OpenThisForm(SaveMatrix, e)
     End Sub
 
-    Private Sub Button7_Click(sender As Object, e As EventArgs) Handles Button7.Click
-        Form3.OpenThisForm(Button7, e)
+    Private Sub Button7_Click(sender As Object, e As EventArgs) Handles LoadMatrix.Click
+        Form3.OpenThisForm(LoadMatrix, e)
+    End Sub
+
+    Private Sub ComboBox1_SelectedIndexChanged(sender As Object, e As EventArgs) Handles SelectMatrix1.SelectedIndexChanged
+
+    End Sub
+
+    Private Sub Button8_Click(sender As Object, e As EventArgs) Handles AddMatrix.Click
+        Dim FirstMatrix(,) As Single
+        If SelectMatrix1.Text = "Matrix slot 1 " Then
+            FirstMatrix = MatrixSlot1
+        ElseIf SelectMatrix1.Text = "Matrix slot 2 " Then
+            FirstMatrix = MatrixSlot2
+        ElseIf SelectMatrix1.Text = "Matrix slot 3 " Then
+            FirstMatrix = MatrixSlot3
+        ElseIf SelectMatrix1.Text = "Matrix slot 4 " Then
+            FirstMatrix = MatrixSlot4
+        ElseIf SelectMatrix1.Text = "Matrix slot 5 " Then
+            FirstMatrix = MatrixSlot5
+        End If
+        Dim SecondMatrix(,) As Single
+        If SelectMatrix2.Text = "Matrix slot 1 " Then
+            SecondMatrix = MatrixSlot1
+        ElseIf SelectMatrix2.Text = "Matrix slot 2 " Then
+            SecondMatrix = MatrixSlot2
+        ElseIf SelectMatrix2.Text = "Matrix slot 3 " Then
+            SecondMatrix = MatrixSlot3
+        ElseIf SelectMatrix2.Text = "Matrix slot 4 " Then
+            SecondMatrix = MatrixSlot4
+        ElseIf SelectMatrix2.Text = "Matrix slot 5 " Then
+            SecondMatrix = MatrixSlot5
+        End If
+        Try
+            If FirstMatrix.GetLength(0) = SecondMatrix.GetLength(0) And FirstMatrix.GetLength(1) = SecondMatrix.GetLength(1) Then
+                MatrixSlot3 = AddMatrices(FirstMatrix, SecondMatrix)
+            End If
+        Catch ex As NullReferenceException
+            MsgBox("One of the matrix slots has no matrix stored...")
+
+        End Try
+
+    End Sub
+
+    Private Sub Button9_Click(sender As Object, e As EventArgs) Handles SubtractMatrix.Click
+        Dim FirstMatrix(,) As Single
+        If SelectMatrix1.Text = "Matrix slot 1 " Then
+            FirstMatrix = MatrixSlot1
+        ElseIf SelectMatrix1.Text = "Matrix slot 2 " Then
+            FirstMatrix = MatrixSlot2
+        ElseIf SelectMatrix1.Text = "Matrix slot 3 " Then
+            FirstMatrix = MatrixSlot3
+        ElseIf SelectMatrix1.Text = "Matrix slot 4 " Then
+            FirstMatrix = MatrixSlot4
+        ElseIf SelectMatrix1.Text = "Matrix slot 5 " Then
+            FirstMatrix = MatrixSlot5
+        End If
+        Dim SecondMatrix(,) As Single
+        If SelectMatrix2.Text = "Matrix slot 1 " Then
+            SecondMatrix = MatrixSlot1
+        ElseIf SelectMatrix2.Text = "Matrix slot 2 " Then
+            SecondMatrix = MatrixSlot2
+        ElseIf SelectMatrix2.Text = "Matrix slot 3 " Then
+            SecondMatrix = MatrixSlot3
+        ElseIf SelectMatrix2.Text = "Matrix slot 4 " Then
+            SecondMatrix = MatrixSlot4
+        ElseIf SelectMatrix2.Text = "Matrix slot 5 " Then
+            SecondMatrix = MatrixSlot5
+        End If
+        Try
+            If FirstMatrix.GetLength(0) = SecondMatrix.GetLength(0) And FirstMatrix.GetLength(1) = SecondMatrix.GetLength(1) Then
+                MatrixSlot3 = SubtractMatrices(FirstMatrix, SecondMatrix)
+            End If
+        Catch ex As NullReferenceException
+            MsgBox("One of the matrix slots has no matrix stored...")
+
+        End Try
+
     End Sub
 End Class
