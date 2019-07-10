@@ -75,9 +75,9 @@
 
             End While
             While Form2.DataGridView1.DisplayedColumnCount(True) <> WorkingMatrix.GetLength(1)
-                If Form2.DataGridView1.DisplayedColumnCount(True) > WorkingMatrix.GetLength(0) Then
+                If Form2.DataGridView1.DisplayedColumnCount(True) > WorkingMatrix.GetLength(1) Then
                     Form2.DataGridView1.Columns.RemoveAt(Form2.DataGridView1.DisplayedColumnCount(True) - 1)
-                ElseIf Form2.DataGridView1.DisplayedColumnCount(True) < WorkingMatrix.GetLength(0) Then
+                ElseIf Form2.DataGridView1.DisplayedColumnCount(True) < WorkingMatrix.GetLength(1) Then
                     Form2.DataGridView1.Columns.Add(Str(Form2.DataGridView1.DisplayedColumnCount(True)), " ")
                     Form2.DataGridView1.Columns(Form2.DataGridView1.DisplayedColumnCount(True) - 1).SortMode = DataGridViewColumnSortMode.NotSortable
                 End If
