@@ -3,7 +3,7 @@
     Dim WhatWeAreDoing As String
     Dim WorkingMatrix(,) As Single
     Dim WhoSentUs As Object
-
+    'function for label rather than 5 2*for loops
     Private Sub Loaded() Handles Me.Load
         Label1.Text = Nothing
     End Sub
