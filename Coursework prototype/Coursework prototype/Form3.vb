@@ -76,6 +76,8 @@
                     Form2.MatrixGrid.Rows(x).Cells(y).Value = WorkingMatrix(x, y)
                 Next
             Next
+            MsgBox($"Matrix loaded from {SelectMatrix.Text} ")
+            Close()
 
         ElseIf WhatWeAreDoing = "Save" Then
             If Form2.GridToMatrix().GetLength(0) < 1 Then
@@ -92,10 +94,13 @@
                 ElseIf SelectMatrix.Text = "Matrix slot 5 " Then
                     Form2.MatrixSlot5 = Form2.GridToMatrix()
                 End If
-
+                MsgBox($"Matrix saved to {SelectMatrix.Text} ")
+                Close()
             End If
         End If
     End Sub
+
+
 
     Private Sub Label1_Click(sender As Object, e As EventArgs) Handles MatrixOutput.Click
         My.Computer.Clipboard.SetText(MatrixOutput.Text)

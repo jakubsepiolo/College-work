@@ -6,8 +6,39 @@
     Public MatrixSlot4(,) As Single
     Public MatrixSlot5(,) As Single
 
+    Public Function MatrixFromComboBox(ComboBox As Object) As Single(,)
+        If ComboBox.Text = "Matrix slot 1 " Then
+            Return MatrixSlot1
+        ElseIf ComboBox.Text = "Matrix slot 2 " Then
+            Return MatrixSlot2
+        ElseIf ComboBox.Text = "Matrix slot 3 " Then
+            Return MatrixSlot3
+        ElseIf ComboBox.Text = "Matrix slot 4 " Then
+            Return MatrixSlot4
+        ElseIf ComboBox.Text = "Matrix slot 5 " Then
+            Return MatrixSlot5
+        Else
+            Return {{0}}
+        End If
+    End Function
+
+    Private Function SquareMultiplyMatrices(Matrix1(,) As Single, Matrix2(,) As Single) As Single(,)
+        Dim Temp As Single = 0
+        Dim ReturnMatrix(Matrix1.GetLength(0) - 1, Matrix2.GetLength(1) - 1) As Single
+        For i = 0 To Matrix1.GetLength(1) - 1
+            For j = 0 To Matrix2.GetLength(0) - 1
+                For k = 0 To Matrix2.GetLength(1) - 1
+                    Temp = Temp + Matrix1(i, k) * Matrix2(k, j)
+                Next
+                ReturnMatrix(i, j) = Temp
+                Temp = 0
+            Next
+        Next
+        Return ReturnMatrix
+    End Function
+
     Private Function AddMatrices(Matrix1(,) As Single, Matrix2(,) As Single) As Single(,)
-        Dim TempMatrix(Matrix1.GetLength(0) - 1, Matrix1.GetLength(1) - 1) As Single
+        Dim TempMatrix(Matrix1.GetLength(1) - 1, Matrix1.GetLength(0) - 1) As Single
         For x = 0 To Matrix1.GetLength(0) - 1
             For y = 0 To Matrix1.GetLength(1) - 1
                 TempMatrix(x, y) = Matrix1(x, y) + Matrix2(x, y)
@@ -200,74 +231,45 @@
     End Sub
 
     Private Sub Button8_Click(sender As Object, e As EventArgs) Handles AddMatrix.Click
-        Dim FirstMatrix(,) As Single
-        If SelectMatrix1.Text = "Matrix slot 1 " Then
-            FirstMatrix = MatrixSlot1
-        ElseIf SelectMatrix1.Text = "Matrix slot 2 " Then
-            FirstMatrix = MatrixSlot2
-        ElseIf SelectMatrix1.Text = "Matrix slot 3 " Then
-            FirstMatrix = MatrixSlot3
-        ElseIf SelectMatrix1.Text = "Matrix slot 4 " Then
-            FirstMatrix = MatrixSlot4
-        ElseIf SelectMatrix1.Text = "Matrix slot 5 " Then
-            FirstMatrix = MatrixSlot5
-        End If
-        Dim SecondMatrix(,) As Single
-        If SelectMatrix2.Text = "Matrix slot 1 " Then
-            SecondMatrix = MatrixSlot1
-        ElseIf SelectMatrix2.Text = "Matrix slot 2 " Then
-            SecondMatrix = MatrixSlot2
-        ElseIf SelectMatrix2.Text = "Matrix slot 3 " Then
-            SecondMatrix = MatrixSlot3
-        ElseIf SelectMatrix2.Text = "Matrix slot 4 " Then
-            SecondMatrix = MatrixSlot4
-        ElseIf SelectMatrix2.Text = "Matrix slot 5 " Then
-            SecondMatrix = MatrixSlot5
-        End If
+        Dim FirstMatrix(,) As Single = MatrixFromComboBox(SelectMatrix1)
+        Dim SecondMatrix(,) As Single = MatrixFromComboBox(SelectMatrix2)
         Try
             If FirstMatrix.GetLength(0) = SecondMatrix.GetLength(0) And FirstMatrix.GetLength(1) = SecondMatrix.GetLength(1) Then
-                MatrixSlot3 = AddMatrices(FirstMatrix, SecondMatrix)
+                MatrixSlot3 = AddMatrices(FirstMatrix, SecondMatrix) 'tempstoring
             End If
         Catch ex As NullReferenceException
             MsgBox("One of the matrix slots has no matrix stored...")
-
         End Try
+    End Sub
 
+    Public Sub test() Handles SelectMatrix1.MouseHover
+        Dim ToolTip As New ToolTip
+        If SelectMatrix1.SelectedItem IsNot Nothing Then
+            ToolTip.SetToolTip(SelectMatrix1, SelectMatrix1.SelectedItem.ToString())
+        End If
     End Sub
 
     Private Sub Button9_Click(sender As Object, e As EventArgs) Handles SubtractMatrix.Click
-        Dim FirstMatrix(,) As Single
-        If SelectMatrix1.Text = "Matrix slot 1 " Then
-            FirstMatrix = MatrixSlot1
-        ElseIf SelectMatrix1.Text = "Matrix slot 2 " Then
-            FirstMatrix = MatrixSlot2
-        ElseIf SelectMatrix1.Text = "Matrix slot 3 " Then
-            FirstMatrix = MatrixSlot3
-        ElseIf SelectMatrix1.Text = "Matrix slot 4 " Then
-            FirstMatrix = MatrixSlot4
-        ElseIf SelectMatrix1.Text = "Matrix slot 5 " Then
-            FirstMatrix = MatrixSlot5
-        End If
-        Dim SecondMatrix(,) As Single
-        If SelectMatrix2.Text = "Matrix slot 1 " Then
-            SecondMatrix = MatrixSlot1
-        ElseIf SelectMatrix2.Text = "Matrix slot 2 " Then
-            SecondMatrix = MatrixSlot2
-        ElseIf SelectMatrix2.Text = "Matrix slot 3 " Then
-            SecondMatrix = MatrixSlot3
-        ElseIf SelectMatrix2.Text = "Matrix slot 4 " Then
-            SecondMatrix = MatrixSlot4
-        ElseIf SelectMatrix2.Text = "Matrix slot 5 " Then
-            SecondMatrix = MatrixSlot5
-        End If
+        Dim FirstMatrix(,) As Single = MatrixFromComboBox(SelectMatrix1)
+        Dim SecondMatrix(,) As Single = MatrixFromComboBox(SelectMatrix2)
         Try
             If FirstMatrix.GetLength(0) = SecondMatrix.GetLength(0) And FirstMatrix.GetLength(1) = SecondMatrix.GetLength(1) Then
-                MatrixSlot3 = SubtractMatrices(FirstMatrix, SecondMatrix)
+                MatrixSlot3 = SubtractMatrices(FirstMatrix, SecondMatrix) 'tempstoring
             End If
         Catch ex As NullReferenceException
             MsgBox("One of the matrix slots has no matrix stored...")
-
         End Try
+    End Sub
 
+    Private Sub MultiplyMatrix_Click(sender As Object, e As EventArgs) Handles MultiplyMatrix.Click
+        Dim FirstMatrix(,) As Single = MatrixFromComboBox(SelectMatrix1)
+        Dim SecondMatrix(,) As Single = MatrixFromComboBox(SelectMatrix2)
+        Try
+            'If FirstMatrix.GetLength(0) = SecondMatrix.GetLength(0) And FirstMatrix.GetLength(1) = SecondMatrix.GetLength(1) Then
+            MatrixSlot3 = SquareMultiplyMatrices(FirstMatrix, SecondMatrix) 'tempstoring
+            'End If
+        Catch ex As NullReferenceException
+            MsgBox("One of the matrix slots has no matrix stored...")
+        End Try
     End Sub
 End Class

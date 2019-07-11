@@ -122,7 +122,7 @@ Partial Class Form2
         'SelectMatrix1
         '
         Me.SelectMatrix1.FormattingEnabled = True
-        Me.SelectMatrix1.Items.AddRange(New Object() {"Matrix slot 1", "Matrix slot 2 ", "Matrix slot 3 ", "Matrix slot 4 ", "Matrix slot 5 "})
+        Me.SelectMatrix1.Items.AddRange(New Object() {"Matrix slot 1 ", "Matrix slot 2 ", "Matrix slot 3 ", "Matrix slot 4 ", "Matrix slot 5 "})
         Me.SelectMatrix1.Location = New System.Drawing.Point(331, 391)
         Me.SelectMatrix1.Name = "SelectMatrix1"
         Me.SelectMatrix1.Size = New System.Drawing.Size(117, 21)
@@ -131,7 +131,7 @@ Partial Class Form2
         'SelectMatrix2
         '
         Me.SelectMatrix2.FormattingEnabled = True
-        Me.SelectMatrix2.Items.AddRange(New Object() {"Matrix slot 1", "Matrix slot 2 ", "Matrix slot 3 ", "Matrix slot 4 ", "Matrix slot 5 "})
+        Me.SelectMatrix2.Items.AddRange(New Object() {"Matrix slot 1 ", "Matrix slot 2 ", "Matrix slot 3 ", "Matrix slot 4 ", "Matrix slot 5 "})
         Me.SelectMatrix2.Location = New System.Drawing.Point(469, 391)
         Me.SelectMatrix2.Name = "SelectMatrix2"
         Me.SelectMatrix2.Size = New System.Drawing.Size(119, 21)

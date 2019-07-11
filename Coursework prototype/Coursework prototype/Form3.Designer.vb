@@ -31,7 +31,7 @@ Partial Class Form3
         'SelectMatrix
         '
         Me.SelectMatrix.FormattingEnabled = True
-        Me.SelectMatrix.Items.AddRange(New Object() {"Matrix slot 1", "Matrix slot 2 ", "Matrix slot 3 ", "Matrix slot 4 ", "Matrix slot 5 "})
+        Me.SelectMatrix.Items.AddRange(New Object() {"Matrix slot 1 ", "Matrix slot 2 ", "Matrix slot 3 ", "Matrix slot 4 ", "Matrix slot 5 "})
         Me.SelectMatrix.Location = New System.Drawing.Point(12, 13)
         Me.SelectMatrix.Name = "SelectMatrix"
         Me.SelectMatrix.Size = New System.Drawing.Size(229, 21)
