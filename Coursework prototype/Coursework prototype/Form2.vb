@@ -130,7 +130,20 @@
         End If
         Return ReturnMatrix
     End Function
-
+    Public Function aaaaaaa(Matrix(,) As Single) As Single
+        Dim Determinant As Single
+        For x = 0 To 2
+            Dim TempMatrix(,) As Single = CreateTempMatrix(Matrix, x, 1)
+            If x = 0 Then
+                Determinant += Matrix(0, 0) * (TempMatrix(0, 0) * TempMatrix(1, 1) - TempMatrix(1, 0) * TempMatrix(0, 1))
+            ElseIf x = 1 Then
+                Determinant += -Matrix(1, 0) * (TempMatrix(0, 0) * TempMatrix(1, 1) - TempMatrix(1, 0) * TempMatrix(0, 1))
+            ElseIf x = 2 Then
+                Determinant += Matrix(2, 0) * (TempMatrix(0, 0) * TempMatrix(1, 1) - TempMatrix(1, 0) * TempMatrix(0, 1))
+            End If
+        Next
+        Return Determinant
+    End Function
     Public Function Invert3xMatrix(Matrix(,) As Single) As Single(,)
         Dim Determinant As Single
         Dim InverseMatrix(2, 2) As Single
@@ -172,7 +185,41 @@
         Return InverseMatrix
     End Function
 
+    Public Function Invert4xMatrix(Matrix(,) As Single) As Single(,)
+        Dim Determinant As Single = 0
+#Region "Determinant calculation"
+        Determinant += Matrix(0, 0) * Matrix(1, 1) * Matrix(2, 2) * Matrix(3, 3)
+        Determinant += Matrix(0, 0) * Matrix(1, 2) * Matrix(2, 3) * Matrix(3, 1)
+        Determinant += Matrix(0, 0) * Matrix(1, 3) * Matrix(2, 1) * Matrix(3, 2)
+        Determinant += -Matrix(0, 0) * Matrix(1, 3) * Matrix(2, 2) * Matrix(3, 1)
+        Determinant += -Matrix(0, 0) * Matrix(1, 2) * Matrix(2, 1) * Matrix(3, 3)
+        Determinant += -Matrix(0, 0) * Matrix(1, 1) * Matrix(2, 3) * Matrix(3, 2)
+        Determinant += -Matrix(0, 1) * Matrix(1, 0) * Matrix(2, 2) * Matrix(3, 3)
+        Determinant += -Matrix(0, 2) * Matrix(1, 0) * Matrix(2, 3) * Matrix(3, 1)
+        Determinant += -Matrix(0, 3) * Matrix(1, 0) * Matrix(2, 1) * Matrix(3, 2)
+        Determinant += Matrix(0, 3) * Matrix(1, 0) * Matrix(2, 2) * Matrix(3, 1)
+        Determinant += Matrix(0, 2) * Matrix(1, 0) * Matrix(2, 1) * Matrix(3, 3)
+        Determinant += Matrix(0, 1) * Matrix(1, 0) * Matrix(2, 3) * Matrix(3, 2)
+        Determinant += Matrix(0, 1) * Matrix(1, 2) * Matrix(2, 0) * Matrix(3, 3)
+        Determinant += Matrix(0, 2) * Matrix(1, 3) * Matrix(2, 0) * Matrix(3, 1)
+        Determinant += Matrix(0, 3) * Matrix(1, 1) * Matrix(2, 0) * Matrix(3, 2)
+        Determinant += -Matrix(0, 3) * Matrix(1, 2) * Matrix(2, 0) * Matrix(3, 1)
+        Determinant += -Matrix(0, 2) * Matrix(1, 1) * Matrix(2, 0) * Matrix(3, 3)
+        Determinant += -Matrix(0, 1) * Matrix(1, 3) * Matrix(2, 0) * Matrix(3, 2)
+        Determinant += -Matrix(0, 1) * Matrix(1, 2) * Matrix(2, 3) * Matrix(3, 0)
+        Determinant += -Matrix(0, 2) * Matrix(1, 3) * Matrix(2, 1) * Matrix(3, 0)
+        Determinant += -Matrix(0, 3) * Matrix(1, 1) * Matrix(2, 2) * Matrix(3, 0)
+        Determinant += Matrix(0, 3) * Matrix(1, 2) * Matrix(2, 1) * Matrix(3, 0)
+        Determinant += Matrix(0, 2) * Matrix(1, 1) * Matrix(2, 3) * Matrix(3, 0)
+        Determinant += Matrix(0, 1) * Matrix(1, 3) * Matrix(2, 2) * Matrix(3, 0)
+#End Region
+        Dim TempMatrix(2, 2) As Single
+        Dim SuperMatrix(3, 3) As Single
+        ''wrong btw
+        TempMatrix = {{Matrix(1, 1), Matrix(2, 1), Matrix(3, 1)}, {Matrix(1, 2), Matrix(2, 2), Matrix(3, 2)}, {Matrix(1, 3), Matrix(2, 3), Matrix(3, 3)}}
+        SuperMatrix(0, 0) = aaaaaaa(TempMatrix) * (1 / Determinant)
 
+    End Function
     Private Sub Button4_Click(sender As Object, e As EventArgs) Handles InvertMatrix.Click
         Label1.Visible = False
         Dim TheMatrix(,) As Single = GridToMatrix()
@@ -195,6 +242,9 @@
                     Next
                     Label1.Text = Label1.Text & vbCrLf
                 Next
+            ElseIf MatrixGrid.DisplayedColumnCount(True) = 4 Then
+                Label1.Text = Nothing
+                Invert4xMatrix(TheMatrix)
             End If
         End If
         MsgBox(Label1.Text, vbInformation, "Matrix inverse returned:")
