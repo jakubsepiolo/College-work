@@ -215,9 +215,42 @@
 #End Region
         Dim TempMatrix(2, 2) As Single
         Dim SuperMatrix(3, 3) As Single
-        ''wrong btw
         TempMatrix = {{Matrix(1, 1), Matrix(2, 1), Matrix(3, 1)}, {Matrix(1, 2), Matrix(2, 2), Matrix(3, 2)}, {Matrix(1, 3), Matrix(2, 3), Matrix(3, 3)}}
         SuperMatrix(0, 0) = aaaaaaa(TempMatrix) * (1 / Determinant)
+        TempMatrix = {{Matrix(0, 1), Matrix(2, 1), Matrix(3, 1)}, {Matrix(0, 2), Matrix(2, 2), Matrix(3, 2)}, {Matrix(0, 3), Matrix(2, 3), Matrix(3, 3)}}
+        SuperMatrix(0, 1) = aaaaaaa(TempMatrix) * (-1 / Determinant)
+        TempMatrix = {{Matrix(0, 1), Matrix(1, 1), Matrix(3, 1)}, {Matrix(0, 2), Matrix(1, 2), Matrix(3, 2)}, {Matrix(0, 3), Matrix(1, 3), Matrix(3, 3)}}
+        SuperMatrix(0, 2) = aaaaaaa(TempMatrix) * (1 / Determinant)
+        TempMatrix = {{Matrix(0, 1), Matrix(1, 1), Matrix(2, 1)}, {Matrix(0, 2), Matrix(1, 2), Matrix(2, 2)}, {Matrix(0, 3), Matrix(1, 3), Matrix(2, 3)}}
+        SuperMatrix(0, 3) = aaaaaaa(TempMatrix) * (-1 / Determinant)
+        TempMatrix = {{Matrix(1, 0), Matrix(2, 0), Matrix(3, 0)}, {Matrix(1, 2), Matrix(2, 2), Matrix(3, 2)}, {Matrix(1, 3), Matrix(2, 3), Matrix(3, 3)}}
+        SuperMatrix(1, 0) = aaaaaaa(TempMatrix) * (-1 / Determinant)
+        TempMatrix = {{Matrix(0, 0), Matrix(2, 0), Matrix(3, 0)}, {Matrix(0, 2), Matrix(2, 2), Matrix(3, 2)}, {Matrix(0, 3), Matrix(2, 3), Matrix(3, 3)}}
+        SuperMatrix(1, 1) = aaaaaaa(TempMatrix) * (1 / Determinant)
+        TempMatrix = {{Matrix(0, 0), Matrix(1, 0), Matrix(3, 0)}, {Matrix(0, 2), Matrix(1, 2), Matrix(3, 2)}, {Matrix(0, 3), Matrix(1, 3), Matrix(3, 3)}}
+        SuperMatrix(1, 2) = aaaaaaa(TempMatrix) * (-1 / Determinant)
+        TempMatrix = {{Matrix(0, 0), Matrix(1, 0), Matrix(2, 0)}, {Matrix(0, 2), Matrix(1, 2), Matrix(2, 2)}, {Matrix(0, 3), Matrix(1, 3), Matrix(2, 3)}}
+        SuperMatrix(1, 3) = aaaaaaa(TempMatrix) * (1 / Determinant)
+        TempMatrix = {{Matrix(1, 0), Matrix(2, 0), Matrix(3, 0)}, {Matrix(1, 1), Matrix(2, 1), Matrix(3, 1)}, {Matrix(1, 3), Matrix(2, 3), Matrix(3, 3)}}
+        SuperMatrix(2, 0) = aaaaaaa(TempMatrix) * (1 / Determinant)
+        TempMatrix = {{Matrix(0, 0), Matrix(2, 0), Matrix(3, 0)}, {Matrix(0, 1), Matrix(2, 1), Matrix(3, 1)}, {Matrix(0, 3), Matrix(2, 3), Matrix(3, 3)}}
+        SuperMatrix(2, 1) = aaaaaaa(TempMatrix) * (-1 / Determinant)
+        TempMatrix = {{Matrix(0, 0), Matrix(1, 0), Matrix(3, 0)}, {Matrix(0, 1), Matrix(1, 1), Matrix(3, 1)}, {Matrix(0, 3), Matrix(1, 3), Matrix(3, 3)}}
+        SuperMatrix(2, 2) = aaaaaaa(TempMatrix) * (1 / Determinant)
+        TempMatrix = {{Matrix(0, 0), Matrix(1, 0), Matrix(2, 0)}, {Matrix(0, 1), Matrix(1, 1), Matrix(2, 1)}, {Matrix(0, 3), Matrix(1, 3), Matrix(2, 3)}}
+        SuperMatrix(2, 3) = aaaaaaa(TempMatrix) * (-1 / Determinant)
+        TempMatrix = {{Matrix(1, 0), Matrix(2, 0), Matrix(3, 0)}, {Matrix(1, 1), Matrix(2, 1), Matrix(3, 1)}, {Matrix(1, 2), Matrix(2, 2), Matrix(3, 2)}}
+        SuperMatrix(3, 0) = aaaaaaa(TempMatrix) * (-1 / Determinant)
+        TempMatrix = {{Matrix(0, 0), Matrix(2, 0), Matrix(3, 0)}, {Matrix(0, 1), Matrix(2, 1), Matrix(3, 1)}, {Matrix(0, 2), Matrix(2, 2), Matrix(3, 2)}}
+        SuperMatrix(3, 1) = aaaaaaa(TempMatrix) * (1 / Determinant)
+        TempMatrix = {{Matrix(0, 0), Matrix(1, 0), Matrix(3, 0)}, {Matrix(0, 1), Matrix(1, 1), Matrix(3, 1)}, {Matrix(0, 2), Matrix(1, 2), Matrix(3, 2)}}
+        SuperMatrix(3, 2) = aaaaaaa(TempMatrix) * (-1 / Determinant)
+        TempMatrix = {{Matrix(0, 0), Matrix(1, 0), Matrix(2, 0)}, {Matrix(0, 1), Matrix(1, 1), Matrix(2, 1)}, {Matrix(0, 2), Matrix(1, 2), Matrix(2, 2)}}
+        SuperMatrix(3, 3) = aaaaaaa(TempMatrix) * (1 / Determinant)
+
+        Return SuperMatrix
+
+
 
     End Function
     Private Sub Button4_Click(sender As Object, e As EventArgs) Handles InvertMatrix.Click
@@ -244,7 +277,13 @@
                 Next
             ElseIf MatrixGrid.DisplayedColumnCount(True) = 4 Then
                 Label1.Text = Nothing
-                Invert4xMatrix(TheMatrix)
+                Dim InverseMatrix(,) As Single = Invert4xMatrix(TheMatrix)
+                For x = 0 To 3
+                    For y = 0 To 3
+                        Label1.Text = Label1.Text & " " & LSet(InverseMatrix(x, y), 7)
+                    Next
+                    Label1.Text = Label1.Text & vbCrLf
+                Next
             End If
         End If
         MsgBox(Label1.Text, vbInformation, "Matrix inverse returned:")
