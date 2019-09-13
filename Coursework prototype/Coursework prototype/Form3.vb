@@ -27,7 +27,7 @@
 
     End Sub
     Private Sub ComboBox1_SelectedIndexChanged(sender As Object, e As EventArgs) Handles SelectMatrix.SelectedIndexChanged
-        If WhoSentUs Is Form2.LoadMatrix Then
+        If WhoSentUs Is Form2.LoadMatrix Or WhoSentUs Is Form2.SaveMatrix Then
             If SelectMatrix.Text = "Matrix slot 1 " Then
                 UpdateLabel(Form2.MatrixSlot1)
                 WorkingMatrix = Form2.MatrixSlot1
