@@ -22,13 +22,48 @@
             End If
 
         Next
-        e.Graphics.DrawLine(pen, 0, Height, Width, 0)
 
     End Sub
     Private Sub Resized(ByVal sender As Object, ByVal e As EventArgs) Handles Me.Resize
         Invalidate()
 
     End Sub
+
+    Private Sub Form4_MouseMove(sender As Object, e As MouseEventArgs) Handles Me.MouseMove
+        'Dim gradientscale As Single = Height / Width
+        'For i = 0 To (Width / 1)
+
+
+        '    Dim g As Graphics = Me.CreateGraphics
+        '    Dim mybrush = New SolidBrush(Color.FromArgb(255, 0, 0, 0))
+        '    Dim x As Single = i * 1
+        '    Dim y As Single = i * 1 * gradientscale
+        '    g.FillRectangle(mybrush, x, Height - y, 3, 3)
+        '    Threading.Thread.Sleep(1)
+        'Next
+        'For i = 0 To (Width / 1)
+
+
+        '    Dim g As Graphics = Me.CreateGraphics
+        '    Dim mybrush = New SolidBrush(Color.FromArgb(255, 0, 0, 0))
+        '    Dim x As Single = i * 1
+        '    Dim y As Single = (i * 5 * gradientscale)
+        '    g.FillRectangle(mybrush, x, Height - y, 3, 3)
+        '    Threading.Thread.Sleep(1)
+        'Next
+        Dim g As Graphics = Me.CreateGraphics
+        Dim pixelmultiplier As Integer = 15
+        Dim mybrush = New SolidBrush(Color.FromArgb(255, 0, 0, 0))
+        Dim complex As New ComplexNumber(-13, -9)
+        Dim x As Single = complex.RealPart
+        Dim y As Single = complex.ComplexPart
+        g.DrawLine(Pens.Black, Width \ 2, Height \ 2, (Width \ 2) + x * pixelmultiplier, (Height \ 2) - y * pixelmultiplier)
+        g.DrawEllipse(Pens.Blue, (Width \ 2) + x * pixelmultiplier, (Height \ 2) - y * pixelmultiplier, 5, 5)
+        g.DrawString(complex.Real & " " & complex.Complex & "i", New Font("Times New Roman", 12, FontStyle.Regular), Brushes.Black, (Width \ 2) + x * pixelmultiplier, (Height \ 2) - y * pixelmultiplier)
+
+
+    End Sub
+
 
     Private Sub Form4_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         ' DrawCircle(5, 5, 5)
