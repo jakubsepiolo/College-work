@@ -47,6 +47,7 @@
         Return {X, Y}
     End Function
     Private Sub DrawNumber(ByVal sender As Object, ByVal e As MouseEventArgs) Handles Me.MouseClick
+        ''new function handles left right click, right click removes closest point to click, store points in array
         Dim X As Integer = e.X
         Dim Y As Integer = e.Y
         Dim Number() As Integer = CoordinatesToNumber(X, Y)
