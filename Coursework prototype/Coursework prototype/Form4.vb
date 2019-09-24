@@ -11,7 +11,13 @@
         Dim g As Graphics = CreateGraphics()
         g.DrawLine(pen, 0, Height \ 2, Width, Height \ 2)
         g.DrawLine(pen, Width \ 2, 0, Width \ 2, Height)
-        For i = 1 To Width \ 7
+        Dim loopn As Integer
+        If Width / 7 < Height / 7 Then
+            loopn = Height / 7
+        Else
+            loopn = Width / 7
+        End If
+        For i = 1 To loopn
             g.DrawLine(pen, Width \ 2, 3 + 15 * i, Width \ 2 + 5, 3 + 15 * i)
             g.DrawLine(pen, -7 + 15 * i, Height \ 2 - 5, -7 + 15 * i, Height \ 2)
             If i Mod 2 = 0 Then
@@ -29,7 +35,13 @@
         Dim g As Graphics = CreateGraphics()
         g.DrawLine(pen, 0, Height \ 2, Width, Height \ 2)
         g.DrawLine(pen, Width \ 2, 0, Width \ 2, Height)
-        For i = 1 To Width \ 7
+        Dim loopn As Integer
+        If Width / 7 < Height / 7 Then
+            loopn = Height / 7
+        Else
+            loopn = Width / 7
+        End If
+        For i = 1 To loopn
             g.DrawLine(pen, Width \ 2, 3 + 15 * i, Width \ 2 + 5, 3 + 15 * i)
             g.DrawLine(pen, -7 + 15 * i, Height \ 2 - 5, -7 + 15 * i, Height \ 2)
             If i Mod 2 = 0 Then
