@@ -29,6 +29,32 @@
 
     End Sub
 
+    Private Function CoordinatesToNumber(ByVal X As Single, ByVal Y As Single) As Integer()
+        If X > Width / 2 Then
+            X = (X - Width / 2) \ 15
+        ElseIf X < Width / 2 Then
+            X = (-X + Width / 2) \ 15
+        Else
+            X = Width \ 30
+        End If
+        If Y > Height / 2 Then
+            Y = (Y - Height / 2) \ 15
+        ElseIf X < Height / 2 Then
+            Y = (-Y + Height / 2) \ 15
+        Else
+            Y = Height \ 30
+        End If
+        Return {X, Y}
+    End Function
+    Private Sub DrawNumber(ByVal sender As Object, ByVal e As MouseEventArgs) Handles Me.MouseClick
+        Dim X As Integer = e.X
+        Dim Y As Integer = e.Y
+        Dim Number() As Integer = CoordinatesToNumber(X, Y)
+        Dim g As Graphics = Me.CreateGraphics
+        Dim mybrush = New SolidBrush(Color.FromArgb(255, 0, 0, 0))
+        g.DrawEllipse(Pens.Blue, X, Y, 5, 5)
+        g.DrawString(Number(0) & " " & Number(1) & "i", New Font("Times New Roman", 12, FontStyle.Regular), Brushes.Black, X, Y)
+    End Sub
     Private Sub Form4_MouseMove(sender As Object, e As MouseEventArgs) Handles Me.MouseMove
         'Dim gradientscale As Single = Height / Width
         'For i = 0 To (Width / 1)
