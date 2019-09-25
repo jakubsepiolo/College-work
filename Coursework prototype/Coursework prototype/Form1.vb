@@ -8,7 +8,7 @@ Public Class Form1
         Dim ComplexOne As String
         Dim RealOne As String
         For i = 0 To Len(Text) - 2
-
+        '	^([-+]?(\d+\.?\d*|\d*\.?\d+)([Ee][-+]?[0-2]?\d{1,2})?[r]?|[-+]?((\d+\.?\d*|\d*\.?\d+)([Ee][-+]?[0-2]?\d{1,2})?)?[i]|[-+]?(\d+\.?\d*|\d*\.?\d+)([Ee][-+]?[0-2]?\d{1
             If InStr(Text, "+") = 0 Then
                 If InStr(Text, "-") <> 1 Then ' if negative symbol in string then follow this
                     If i > InStr(Text, "-") - 1 Then
