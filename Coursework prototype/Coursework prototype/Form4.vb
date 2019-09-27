@@ -1,10 +1,5 @@
 ﻿Public Class Form4
-    Private Sub DrawCircle(ByVal radius As Integer, ByVal x As Integer, ByVal y As Integer)
-        Dim myGraphics As Graphics = Me.CreateGraphics
-        Dim myPen As Pen
-        myPen = New Pen(Brushes.DarkMagenta, 20)
-        myGraphics.DrawLine(myPen, 60, 180, 220, 50)
-    End Sub
+
 
     Private Sub DrawGrid()
         Dim pen As New Pen(Color.FromArgb(255, 255, 0, 0))
@@ -77,14 +72,34 @@
             Y = 0
         End If
         Return {Math.Round(X, 2), Math.Round(Y, 2)}
+
+    End Function
+
+    Public Function NumbersToCoordinate(ByVal Number As ComplexNumber) As Integer()
+        Dim X, Y As Integer
+        If Number.Real <> 0 Then
+            X = (Width / 2) + 15 * Number.Real
+        Else
+            X = Width / 2
+        End If
+        If Number.Complex <> 0 Then
+            Y = (Height / 2) - 15 * Number.Complex
+
+        Else
+            Y = Height / 2
+        End If
+        Return {X, Y}
     End Function
     Private Sub DrawNumber(ByVal x1 As Integer, y1 As Integer)
         Dim X As Integer = x1
         Dim Y As Integer = y1
         Dim Number() As Integer = CoordinatesToNumber(X, Y)
+        Dim Complex As New ComplexNumber(Number(0), Number(1))
+        X = NumbersToCoordinate(Complex)(0)
+        Y = NumbersToCoordinate(Complex)(1)
         Dim g As Graphics = Me.CreateGraphics
         Dim mybrush = New SolidBrush(Color.FromArgb(255, 0, 0, 0))
-        g.DrawEllipse(Pens.Blue, X, Y, 5, 5)
+        g.DrawEllipse(Pens.Blue, X - 3, Y - 4, 5, 5)
         g.DrawString(Number(0) & " " & Number(1) & "i", New Font("Times New Roman", 12, FontStyle.Regular), Brushes.Black, X, Y)
     End Sub
 
@@ -101,45 +116,17 @@
         End Select
 
     End Sub
-    Private Sub Form4_MouseMove(sender As Object, e As MouseEventArgs) Handles Me.MouseMove
-        'Dim gradientscale As Single = Height / Width
-        'For i = 0 To (Width / 1)
 
-
-        '    Dim g As Graphics = Me.CreateGraphics
-        '    Dim mybrush = New SolidBrush(Color.FromArgb(255, 0, 0, 0))
-        '    Dim x As Single = i * 1
-        '    Dim y As Single = i * 1 * gradientscale
-        '    g.FillRectangle(mybrush, x, Height - y, 3, 3)
-        '    Threading.Thread.Sleep(1)
-        'Next
-        'For i = 0 To (Width / 1)
-
-
-        '    Dim g As Graphics = Me.CreateGraphics
-        '    Dim mybrush = New SolidBrush(Color.FromArgb(255, 0, 0, 0))
-        '    Dim x As Single = i * 1
-        '    Dim y As Single = (i * 5 * gradientscale)
-        '    g.FillRectangle(mybrush, x, Height - y, 3, 3)
-        '    Threading.Thread.Sleep(1)
-        'Next
-        'Dim g As Graphics = Me.CreateGraphics
-        'Dim pixelmultiplier As Integer = 15
-        'Dim mybrush = New SolidBrush(Color.FromArgb(255, 0, 0, 0))
-        'Dim complex As New ComplexNumber(-13, -9)
-        'Dim x As Single = complex.RealPart
-        'Dim y As Single = complex.ComplexPart
-        'g.DrawLine(Pens.Black, Width \ 2, Height \ 2, (Width \ 2) + x * pixelmultiplier, (Height \ 2) - y * pixelmultiplier)
-        'g.DrawEllipse(Pens.Blue, (Width \ 2) + x * pixelmultiplier, (Height \ 2) - y * pixelmultiplier, 5, 5)
-        'g.DrawString(complex.Real & " " & complex.Complex & "i", New Font("Times New Roman", 12, FontStyle.Regular), Brushes.Black, (Width \ 2) + x * pixelmultiplier, (Height \ 2) - y * pixelmultiplier)
-
-
-    End Sub
 
 
     Private Sub Form4_Load(sender As Object, e As EventArgs) Handles Me.Shown
 
         DrawGrid()
+        Dim mynumber As New ComplexNumber(0, -2)
+        DrawNumber(NumbersToCoordinate(mynumber)(0), NumbersToCoordinate(mynumber)(1))
+    End Sub
+
+    Private Sub Form4_Load_1(sender As Object, e As EventArgs) Handles MyBase.Load
 
     End Sub
 End Class
