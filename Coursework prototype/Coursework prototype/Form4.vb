@@ -119,7 +119,7 @@
 
 
 
-    Private Sub Form4_Load(sender As Object, e As EventArgs) Handles Me.Shown
+    Private Sub Form4_Displayed(sender As Object, e As EventArgs) Handles Me.Shown
 
         DrawGrid()
         Dim mynumber As New ComplexNumber(0, -2)

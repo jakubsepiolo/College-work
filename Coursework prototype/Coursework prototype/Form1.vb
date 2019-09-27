@@ -1,4 +1,5 @@
 ﻿
+Imports System.Text.RegularExpressions
 Public Class Form1
     'todo: make input of "3+i" detect complex part as 1 (no need for 3+1i to be input)
     '      stuff to do with matricies
@@ -7,8 +8,9 @@ Public Class Form1
         Dim IsNegativeReal As Boolean = False
         Dim ComplexOne As String
         Dim RealOne As String
+        Dim reg As New Regex("^([-+]?(\d+\.?\d*|\d*\.?\d+)([Ee][-+]?[0-2]?\d{1,2})?[r]?|[-+]?((\d+\.?\d*|\d*\.?\d+)([Ee][-+]?[0-2]?\d{1,2})?)?[i]|[-+]?(\d+\.?\d*|\d*\.?\d+)([Ee][-+]?[0-2]?\d{1,2})?[r]?[-+]((\d+\.?\d*|\d*\.?\d+)([Ee][-+]?[0-2]?\d{1,2})?)?[i])$")
         For i = 0 To Len(Text) - 2
-        '	^([-+]?(\d+\.?\d*|\d*\.?\d+)([Ee][-+]?[0-2]?\d{1,2})?[r]?|[-+]?((\d+\.?\d*|\d*\.?\d+)([Ee][-+]?[0-2]?\d{1,2})?)?[i]|[-+]?(\d+\.?\d*|\d*\.?\d+)([Ee][-+]?[0-2]?\d{1
+
             If InStr(Text, "+") = 0 Then
                 If InStr(Text, "-") <> 1 Then ' if negative symbol in string then follow this
                     If i > InStr(Text, "-") - 1 Then
@@ -150,11 +152,15 @@ Public Class Form1
 
     End Sub
 
-    Private Sub Button2_Click_1(sender As Object, e As EventArgs) Handles OpenMatrix.Click
+    Private Sub MatrixButton(sender As Object, e As EventArgs) Handles OpenMatrix.Click
         Form2.Show()
     End Sub
 
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
         Form4.Show()
+    End Sub
+
+    Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+
     End Sub
 End Class
