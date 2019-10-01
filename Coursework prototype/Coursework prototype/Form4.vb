@@ -1,6 +1,6 @@
 ﻿Public Class Form4
-
-
+    Private GraphScale As Decimal = 1
+    Private Points As New List(Of ComplexNumber)
     Private Sub DrawGrid()
         Dim pen As New Pen(Color.FromArgb(255, 255, 0, 0))
         Dim g As Graphics = CreateGraphics()
@@ -16,9 +16,9 @@
             g.DrawLine(pen, Width \ 2, 3 + 15 * i, Width \ 2 + 5, 3 + 15 * i)
             g.DrawLine(pen, -7 + 15 * i, Height \ 2 - 5, -7 + 15 * i, Height \ 2)
             If i Mod 2 = 0 Then
-                g.DrawString(((Height \ 30) - i) * 1, New Font("Times New Roman", 6, FontStyle.Regular), Brushes.Black, Width \ 2 + 6, -2 + 15 * i)
+                g.DrawString(Int(((Height \ 30) - i) * GraphScale), New Font("Times New Roman", 6, FontStyle.Regular), Brushes.Black, Width \ 2 + 6, -2 + 15 * i)
 
-                g.DrawString((-(Width \ 30) - 1 + i) * 1, New Font("Times New Roman", 6, FontStyle.Regular), Brushes.Black, -8 + 15 * i, Height \ 2)
+                g.DrawString(Int((-(Width \ 30) - 1 + i) * GraphScale), New Font("Times New Roman", 6, FontStyle.Regular), Brushes.Black, -8 + 15 * i, Height \ 2)
 
             End If
 
@@ -40,12 +40,15 @@
             g.DrawLine(pen, Width \ 2, 3 + 15 * i, Width \ 2 + 5, 3 + 15 * i)
             g.DrawLine(pen, -7 + 15 * i, Height \ 2 - 5, -7 + 15 * i, Height \ 2)
             If i Mod 2 = 0 Then
-                g.DrawString(((Height \ 30) - i) * 1, New Font("Times New Roman", 6, FontStyle.Regular), Brushes.Black, Width \ 2 + 6, -2 + 15 * i)
+                g.DrawString(Int(((Height \ 30) - i) * GraphScale), New Font("Times New Roman", 6, FontStyle.Regular), Brushes.Black, Width \ 2 + 6, -2 + 15 * i)
 
-                g.DrawString((-(Width \ 30) - 1 + i) * 1, New Font("Times New Roman", 6, FontStyle.Regular), Brushes.Black, -8 + 15 * i, Height \ 2)
+                g.DrawString(Int((-(Width \ 30) - 1 + i) * GraphScale), New Font("Times New Roman", 6, FontStyle.Regular), Brushes.Black, -8 + 15 * i, Height \ 2)
 
             End If
 
+        Next
+        For i = 0 To Points.Count - 1
+            DrawNumber(NumbersToCoordinate(Points(i))(0), NumbersToCoordinate(Points(i))(1))
         Next
     End Sub
 
@@ -107,10 +110,12 @@
         Select Case e.Button
             Case MouseButtons.Left
                 DrawNumber(e.X, e.Y)
+                Points.Add(New ComplexNumber(CoordinatesToNumber(e.X, e.Y)(0), CoordinatesToNumber(e.X, e.Y)(1)))
             Case MouseButtons.Right
                 Dim prompt As  DialogResult = MessageBox.Show("Are you sure you want to clear the graph?", "Are you sure?", MessageBoxButtons.YesNo)
                 If prompt = DialogResult.Yes Then
                     CreateGraphics.Clear(Color.FromKnownColor(KnownColor.Control))
+                    Points.Clear()
                     DrawGrid()
                 End If
         End Select
@@ -122,8 +127,10 @@
     Private Sub Form4_Displayed(sender As Object, e As EventArgs) Handles Me.Shown
 
         DrawGrid()
-        Dim mynumber As New ComplexNumber(0, -2)
-        DrawNumber(NumbersToCoordinate(mynumber)(0), NumbersToCoordinate(mynumber)(1))
+        Randomize()
+        For i = 0 To 10
+            Points.Add(New ComplexNumber(Int(-10 + Rnd() * 25), Int(-10 + Rnd() * 25)))
+        Next
     End Sub
 
     Private Sub Form4_Load_1(sender As Object, e As EventArgs) Handles MyBase.Load
