@@ -16,9 +16,9 @@
             g.DrawLine(pen, Width \ 2, 3 + 15 * i, Width \ 2 + 5, 3 + 15 * i)
             g.DrawLine(pen, -7 + 15 * i, Height \ 2 - 5, -7 + 15 * i, Height \ 2)
             If i Mod 2 = 0 Then
-                g.DrawString(Int(((Height \ 30) - i) * GraphScale), New Font("Times New Roman", 6, FontStyle.Regular), Brushes.Black, Width \ 2 + 6, -2 + 15 * i)
+                g.DrawString(Int(((Height \ 30) - i) * GraphScale), New Font("Arial", 6, FontStyle.Regular), Brushes.Black, Width \ 2 + 6, -2 + 15 * i)
 
-                g.DrawString(Int((-(Width \ 30) - 1 + i) * GraphScale), New Font("Times New Roman", 6, FontStyle.Regular), Brushes.Black, -8 + 15 * i, Height \ 2)
+                g.DrawString(Int((-(Width \ 30) - 1 + i) * GraphScale), New Font("Arial", 6, FontStyle.Regular), Brushes.Black, -8 + 15 * i, Height \ 2)
 
             End If
 
@@ -40,9 +40,9 @@
             g.DrawLine(pen, Width \ 2, 3 + 15 * i, Width \ 2 + 5, 3 + 15 * i)
             g.DrawLine(pen, -7 + 15 * i, Height \ 2 - 5, -7 + 15 * i, Height \ 2)
             If i Mod 2 = 0 Then
-                g.DrawString(Int(((Height \ 30) - i) * GraphScale), New Font("Times New Roman", 6, FontStyle.Regular), Brushes.Black, Width \ 2 + 6, -2 + 15 * i)
+                g.DrawString(Int(((Height \ 30) - i) * GraphScale), New Font("Arial", 6, FontStyle.Regular), Brushes.Black, Width \ 2 + 6, -2 + 15 * i)
 
-                g.DrawString(Int((-(Width \ 30) - 1 + i) * GraphScale), New Font("Times New Roman", 6, FontStyle.Regular), Brushes.Black, -8 + 15 * i, Height \ 2)
+                g.DrawString(Int((-(Width \ 30) - 1 + i) * GraphScale), New Font("Arial", 6, FontStyle.Regular), Brushes.Black, -8 + 15 * i, Height \ 2)
 
             End If
 
@@ -103,7 +103,10 @@
         Dim g As Graphics = Me.CreateGraphics
         Dim mybrush = New SolidBrush(Color.FromArgb(255, 0, 0, 0))
         g.DrawEllipse(Pens.Blue, X - 3, Y - 4, 5, 5)
-        g.DrawString(Number(0) & " " & Number(1) & "i", New Font("Times New Roman", 12, FontStyle.Regular), Brushes.Black, X, Y)
+        g.DrawString(Number(0) & " " & Number(1) & "i", New Font("Arial", 12, FontStyle.Regular), Brushes.Black, X, Y)
+        Dim a As Single = (Complex.Modulus) * 7.5
+        g.DrawLine(Pens.Black, Width \ 2, Height \ 2, X, Y)
+        g.DrawArc(Pens.Black, Width \ 2 - a \ 2, Height \ 2 - a \ 2, a, a, 0, -Int(Complex.Argument * 180 \ Math.PI))
     End Sub
 
     Private Sub Mouse_Click(ByVal sender As Object, ByVal e As MouseEventArgs) Handles Me.MouseClick
@@ -128,9 +131,9 @@
 
         DrawGrid()
         Randomize()
-        For i = 0 To 10
-            Points.Add(New ComplexNumber(Int(-10 + Rnd() * 25), Int(-10 + Rnd() * 25)))
-        Next
+        'For i = 0 To 10
+        'Points.Add(New ComplexNumber(Int(-10 + Rnd() * 25), Int(-10 + Rnd() * 25)))
+        'Next
     End Sub
 
     Private Sub Form4_Load_1(sender As Object, e As EventArgs) Handles MyBase.Load
