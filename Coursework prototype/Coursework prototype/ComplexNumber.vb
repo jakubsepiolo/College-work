@@ -36,7 +36,7 @@
         Return Math.Sqrt(Me.Real ^ 2 + Me.Complex ^ 2)
     End Function
     Public Function Argument() As Single
-        Return Math.Atan(Me.Complex / Me.Real)
+        Return Math.Atan2(Me.Complex, Me.Real)
     End Function
     Public Function RealPart() As Single
         Return Real
