@@ -139,7 +139,7 @@
             End If
         Else
             If GraphScale - 0.1 = 0 Then
-                GraphScale = -0.1
+                GraphScale = 0.1
             Else
                 GraphScale -= 0.1
             End If
