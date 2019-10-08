@@ -49,6 +49,7 @@
         Next
         For i = 0 To Points.Count - 1
             DrawNumber(NumbersToCoordinate(Points(i))(0), NumbersToCoordinate(Points(i))(1))
+            g.DrawString(Points(i).Real & " " & Points(i).Complex & "i", New Font("Arial", 12, FontStyle.Regular), Brushes.Black, NumbersToCoordinate(Points(i))(0), NumbersToCoordinate(Points(i))(1))
         Next
     End Sub
 
@@ -103,19 +104,21 @@
         Dim g As Graphics = Me.CreateGraphics
         Dim mybrush = New SolidBrush(Color.FromArgb(255, 0, 0, 0))
         g.DrawEllipse(Pens.Blue, (X - 3), (Y - 4), 5, 5)
-        g.DrawString(Number(0) & " " & Number(1) & "i", New Font("Arial", 12, FontStyle.Regular), Brushes.Black, X, Y)
+
         Dim a As Single = (Complex.Modulus) * 8
         g.DrawLine(Pens.Black, Width \ 2, Height \ 2, X, Y)
-        g.DrawArc(Pens.Black, Width \ 2 - a \ 2, Height \ 2 - a \ 2, a, a, 0, -Int(Complex.Argument * 180 * 0.96 \ Math.PI))
+        g.DrawArc(Pens.Black, Width \ 2 - a \ 2, Height \ 2 - a \ 2, a, a, 0, -Int(Complex.Argument * 180 \ 3.14))
     End Sub
 
     Private Sub Mouse_Click(ByVal sender As Object, ByVal e As MouseEventArgs) Handles Me.MouseClick
+        Dim g As Graphics = Me.CreateGraphics
         Select Case e.Button
             Case MouseButtons.Left
                 DrawNumber(e.X, e.Y)
                 Points.Add(New ComplexNumber(CoordinatesToNumber(e.X, e.Y)(0), CoordinatesToNumber(e.X, e.Y)(1)))
+                g.DrawString(Points(Points.Count - 1).Real & " " & Points(Points.Count - 1).Complex & "i", New Font("Arial", 12, FontStyle.Regular), Brushes.Black, NumbersToCoordinate(Points(Points.Count - 1))(0), NumbersToCoordinate(Points(Points.Count - 1))(1))
             Case MouseButtons.Right
-                Dim prompt As  DialogResult = MessageBox.Show("Are you sure you want to clear the graph?", "Are you sure?", MessageBoxButtons.YesNo)
+                Dim prompt As DialogResult = MessageBox.Show("Are you sure you want to clear the graph?", "Are you sure?", MessageBoxButtons.YesNo)
                 If prompt = DialogResult.Yes Then
                     CreateGraphics.Clear(Color.FromKnownColor(KnownColor.Control))
                     Points.Clear()
