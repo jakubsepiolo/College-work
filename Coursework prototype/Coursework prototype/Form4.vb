@@ -1,24 +1,29 @@
 ﻿Public Class Form4
     Private GraphScale As Decimal = 1
     Private Points As New List(Of ComplexNumber)
+    Dim AxisFont As New Font("Arial", 6, FontStyle.Regular)
+    Dim PointFont As New Font("Arial", 12, FontStyle.Regular)
     Private Sub DrawGrid()
-        Dim pen As New Pen(Color.FromArgb(255, 255, 0, 0))
+        Dim AxisPen As New Pen(Color.FromArgb(255, 255, 0, 0))
         Dim g As Graphics = CreateGraphics()
-        g.DrawLine(pen, 0, Height \ 2, Width, Height \ 2)
-        g.DrawLine(pen, Width \ 2, 0, Width \ 2, Height)
-        Dim loopn As Integer
+        Dim X As Integer = Width \ 2 + 6
+        Dim XOffset As Integer = -7
+        Dim YOffset As Integer = 3
+        g.DrawLine(AxisPen, 0, Height \ 2, Width, Height \ 2)
+        g.DrawLine(AxisPen, Width \ 2, 0, Width \ 2, Height)
+        Dim loopcount As Integer
         If Width / 7 < Height / 7 Then
-            loopn = Height / 7
+            loopcount = Height / 7
         Else
-            loopn = Width / 7
+            loopcount = Width / 7
         End If
-        For i = 1 To loopn
-            g.DrawLine(pen, Width \ 2, 3 + 15 * i, Width \ 2 + 5, 3 + 15 * i)
-            g.DrawLine(pen, -7 + 15 * i, Height \ 2 - 5, -7 + 15 * i, Height \ 2)
+        For i = 1 To loopcount
+            g.DrawLine(AxisPen, Width \ 2, YOffset + 15 * i, X, YOffset + 15 * i)
+            g.DrawLine(AxisPen, XOffset + 15 * i, Height \ 2 - 5, XOffset + 15 * i, Height \ 2)
             If i Mod 2 = 0 Then
-                g.DrawString((((Height \ 30) - i) * GraphScale), New Font("Arial", 6, FontStyle.Regular), Brushes.Black, Width \ 2 + 6, -2 + 15 * i)
+                g.DrawString((((Height \ 30) - i) * GraphScale), AxisFont, Brushes.Black, X, -YOffset + 15 * i)
 
-                g.DrawString(((-(Width \ 30) - 1 + i) * GraphScale), New Font("Arial", 6, FontStyle.Regular), Brushes.Black, -8 + 15 * i, Height \ 2)
+                g.DrawString(((-(Width \ 30) - 1 + i) * GraphScale), AxisFont, Brushes.Black, XOffset + 15 * i, Height \ 2)
 
             End If
 
@@ -40,16 +45,16 @@
             g.DrawLine(pen, Width \ 2, 3 + 15 * i, Width \ 2 + 5, 3 + 15 * i)
             g.DrawLine(pen, -7 + 15 * i, Height \ 2 - 5, -7 + 15 * i, Height \ 2)
             If i Mod 2 = 0 Then
-                g.DrawString((((Height \ 30) - i) * GraphScale), New Font("Arial", 6, FontStyle.Regular), Brushes.Black, Width \ 2 + 6, -2 + 15 * i)
+                g.DrawString((((Height \ 30) - i) * GraphScale), AxisFont, Brushes.Black, Width \ 2 + 6, -2 + 15 * i)
 
-                g.DrawString(((-(Width \ 30) - 1 + i) * GraphScale), New Font("Arial", 6, FontStyle.Regular), Brushes.Black, -8 + 15 * i, Height \ 2)
+                g.DrawString(((-(Width \ 30) - 1 + i) * GraphScale), AxisFont, Brushes.Black, -8 + 15 * i, Height \ 2)
 
             End If
 
         Next
         For i = 0 To Points.Count - 1
             DrawNumber(NumbersToCoordinate(Points(i))(0), NumbersToCoordinate(Points(i))(1))
-            g.DrawString(Points(i).Real & " " & Points(i).Complex & "i", New Font("Arial", 12, FontStyle.Regular), Brushes.Black, NumbersToCoordinate(Points(i))(0), NumbersToCoordinate(Points(i))(1))
+            g.DrawString(Points(i).Real & " " & Points(i).Complex & "i", PointFont, Brushes.Black, NumbersToCoordinate(Points(i))(0), NumbersToCoordinate(Points(i))(1))
         Next
     End Sub
 
@@ -130,7 +135,7 @@
 
     Private Sub ScrollWheel(sender As Object, e As MouseEventArgs) Handles Me.MouseWheel
 
-        If e.Delta > 0 Then
+        If e.Delta < 0 Then
             If GraphScale + 0.1 = 0 Then
                 GraphScale = 0.1
             Else
