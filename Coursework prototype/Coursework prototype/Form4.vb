@@ -5,36 +5,7 @@
     Private Points As New List(Of ComplexNumber)
     Dim AxisFont As New Font("Arial", 6, FontStyle.Regular)
     Dim PointFont As New Font("Arial", 12, FontStyle.Regular)
-    Private Sub DrawGrid()
 
-        Dim AxisPen As New Pen(Color.FromArgb(255, 255, 0, 0))
-        Dim g As Graphics = CreateGraphics()
-        Dim X As Integer = Width \ 2 + 6
-        Dim XOffset As Integer = -7
-        Dim YOffset As Integer = 3
-        Dim loopcount As Integer
-
-        g.DrawLine(AxisPen, 0, Height \ 2, Width, Height \ 2)
-        g.DrawLine(AxisPen, Width \ 2, 0, Width \ 2, Height)
-
-
-        If Width / 7 < Height / 7 Then
-            loopcount = Height / 7
-        Else
-            loopcount = Width / 7
-        End If
-
-        For i = 1 To loopcount
-
-            g.DrawLine(AxisPen, Width \ 2, YOffset + PixelPerPoint * i, X, YOffset + PixelPerPoint * i)
-            g.DrawLine(AxisPen, XOffset + PixelPerPoint * i, Height \ 2 - 5, XOffset + PixelPerPoint * i, Height \ 2)
-
-            If i Mod 2 = 0 Then
-                g.DrawString((((Height \ (PixelPerPoint * 2)) - i) * GraphScale), AxisFont, Brushes.Black, X, -YOffset + PixelPerPoint * i)
-                g.DrawString(((-(Width \ (PixelPerPoint * 2)) - 1 + i) * GraphScale), AxisFont, Brushes.Black, XOffset + PixelPerPoint * i, Height \ 2)
-            End If
-        Next
-    End Sub
 
     Private Sub Form4_Paint(ByVal sender As Object, ByVal e As PaintEventArgs) Handles Me.Paint
         Dim AxisPen As New Pen(Color.FromArgb(255, 255, 0, 0))
@@ -68,7 +39,7 @@
             Dim yb As Integer = NumbersToCoordinate(Points(i))(1)
             Dim Number() As Decimal = CoordinatesToNumber(Xb, yb)
             Dim Complex As New ComplexNumber(Number(0), Number(1))
-            Dim Modulus As Single = (Complex.Modulus) * (PixelPerPoint / 2)
+            Dim Modulus As Single = (Complex.Modulus) * (PixelPerPoint / 2) * (1 / GraphScale)
 
             Dim mybrush = New SolidBrush(Color.FromArgb(255, 0, 0, 0))
 
@@ -147,7 +118,8 @@
                 If prompt = DialogResult.Yes Then
                     CreateGraphics.Clear(Color.FromKnownColor(KnownColor.Control))
                     Points.Clear()
-                    DrawGrid()
+                    GraphScale = 1
+                    Invalidate()
                 End If
 
         End Select
@@ -174,7 +146,7 @@
 
 
     Private Sub Form4_Displayed(sender As Object, e As EventArgs) Handles Me.Shown
-        DrawGrid()
+        Invalidate()
         Randomize()
         DoubleBuffered = True
         'For i = 0 To 10
