@@ -260,30 +260,42 @@
             If MatrixGrid.DisplayedColumnCount(True) = 2 Then
                 Label1.Text = Nothing
                 Dim InverseMatrix(,) As Single = Invert2xMatrix(TheMatrix)
+                Label1.Text &= "┌                             ┐"
+                Label1.Text &= vbCrLf
                 For x = 0 To 1
+                    Label1.Text &= "│ "
                     For y = 0 To 1
-                        Label1.Text = Label1.Text & " " & InverseMatrix(x, y)
+                        Label1.Text = Label1.Text & " " & LSet(InverseMatrix(x, y), 9)
                     Next
-                    Label1.Text = Label1.Text & vbCrLf
+                    Label1.Text = Label1.Text & " │" & vbCrLf
                 Next
+                Label1.Text &= "└                             ┘"
             ElseIf MatrixGrid.DisplayedColumnCount(True) = 3 Then
                 Label1.Text = Nothing
                 Dim InverseMatrix(,) As Single = Invert3xMatrix(TheMatrix)
+                Label1.Text &= "┌                                       ┐"
+                Label1.Text &= vbCrLf
                 For x = 0 To 2
+                    Label1.Text &= "│ "
                     For y = 0 To 2
-                        Label1.Text = Label1.Text & " " & LSet(InverseMatrix(x, y), 7)
+                        Label1.Text = Label1.Text & " " & LSet(InverseMatrix(x, y), 9)
                     Next
-                    Label1.Text = Label1.Text & vbCrLf
+                    Label1.Text = Label1.Text & " │" & vbCrLf
                 Next
+                Label1.Text &= "└                                       ┘"
             ElseIf MatrixGrid.DisplayedColumnCount(True) = 4 Then
                 Label1.Text = Nothing
                 Dim InverseMatrix(,) As Single = Invert4xMatrix(TheMatrix)
+                Label1.Text &= "┌                                                   ┐"
+                Label1.Text &= vbCrLf
                 For x = 0 To 3
+                    Label1.Text &= "│ "
                     For y = 0 To 3
-                        Label1.Text = Label1.Text & " " & LSet(InverseMatrix(x, y), 7)
+                        Label1.Text = Label1.Text & " " & LSet(InverseMatrix(x, y), 9)
                     Next
-                    Label1.Text = Label1.Text & vbCrLf
+                    Label1.Text = Label1.Text & " │" & vbCrLf
                 Next
+                Label1.Text &= "└                                                   ┘"
             End If
         End If
         MsgBox(Label1.Text, vbInformation, "Matrix inverse returned:")
