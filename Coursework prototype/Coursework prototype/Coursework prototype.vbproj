@@ -180,5 +180,17 @@
       <Install>false</Install>
     </BootstrapperPackage>
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\add-128.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\cross-solid.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\minus-128.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\divide-59-884586.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
 </Project>

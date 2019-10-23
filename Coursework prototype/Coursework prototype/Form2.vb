@@ -298,7 +298,7 @@
                 Label1.Text &= "└                                                   ┘"
             End If
         End If
-        MsgBox(Label1.Text, vbInformation, "Matrix inverse returned:")
+        Label1.Visible = True
     End Sub
 
     Private Sub Button3_Click(sender As Object, e As EventArgs) Handles RemoveRow.Click

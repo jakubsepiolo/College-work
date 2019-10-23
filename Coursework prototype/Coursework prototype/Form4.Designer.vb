@@ -22,16 +22,29 @@ Partial Class Form4
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
+        Me.LociButton = New System.Windows.Forms.Button()
         Me.SuspendLayout()
+        '
+        'LociButton
+        '
+        Me.LociButton.Location = New System.Drawing.Point(1143, 637)
+        Me.LociButton.Name = "LociButton"
+        Me.LociButton.Size = New System.Drawing.Size(85, 50)
+        Me.LociButton.TabIndex = 0
+        Me.LociButton.Text = "Add Loci"
+        Me.LociButton.UseVisualStyleBackColor = True
         '
         'Form4
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(1230, 688)
+        Me.Controls.Add(Me.LociButton)
         Me.Name = "Form4"
         Me.Text = "Form4"
         Me.ResumeLayout(False)
 
     End Sub
+
+    Friend WithEvents LociButton As Button
 End Class

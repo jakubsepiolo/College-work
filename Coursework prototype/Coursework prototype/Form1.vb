@@ -79,7 +79,7 @@ Public Class Form1
         End Try
     End Function
 
-    Private Sub Add_Button(sender As Object, e As EventArgs) Handles AddComplex.Click
+    Private Sub Add_Button(sender As Object, e As EventArgs) Handles AddButton.Click
         Dim FirstInput As String = InputComplex1.Text
         Dim SecondInput As String = InputComplex2.Text
         Dim NumberOne As ComplexNumber = StringToComplexNumber(FirstInput)
@@ -98,7 +98,7 @@ Public Class Form1
     End Sub
 
 
-    Private Sub Subtract_Button(sender As Object, e As EventArgs) Handles SubtractComplex.Click
+    Private Sub Subtract_Button(sender As Object, e As EventArgs) Handles SubtractButton.Click
         Dim FirstInput As String = InputComplex1.Text
         Dim SecondInput As String = InputComplex2.Text
         Dim NumberOne As ComplexNumber = StringToComplexNumber(FirstInput)
@@ -116,7 +116,7 @@ Public Class Form1
 
     End Sub
 
-    Private Sub Multiply_Button(sender As Object, e As EventArgs) Handles MultiplyComplex.Click
+    Private Sub Multiply_Button(sender As Object, e As EventArgs) Handles ProductButton.Click
         Dim FirstInput As String = InputComplex1.Text
         Dim SecondInput As String = InputComplex2.Text
         Dim NumberOne As ComplexNumber = StringToComplexNumber(FirstInput)
@@ -134,7 +134,7 @@ Public Class Form1
 
     End Sub
 
-    Private Sub Divide_Button(sender As Object, e As EventArgs) Handles DivideComplex.Click
+    Private Sub Divide_Button(sender As Object, e As EventArgs) Handles DivideButton.Click
         Dim FirstInput As String = InputComplex1.Text
         Dim SecondInput As String = InputComplex2.Text
         Dim NumberOne As ComplexNumber = StringToComplexNumber(FirstInput)
