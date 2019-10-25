@@ -103,6 +103,7 @@ Partial Class Form2
         Me.Label1.Name = "Label1"
         Me.Label1.Size = New System.Drawing.Size(0, 13)
         Me.Label1.TabIndex = 16
+        Me.Label1.Font = New Font("Consolas", 9, FontStyle.Regular)
         '
         'RemoveRow
         '

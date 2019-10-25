@@ -27,23 +27,23 @@
 
     End Sub
     Private Sub ComboBox1_SelectedIndexChanged(sender As Object, e As EventArgs) Handles SelectMatrix.SelectedIndexChanged
-        If WhoSentUs Is Form2.LoadMatrix Or WhoSentUs Is Form2.SaveMatrix Then
-            If SelectMatrix.Text = "Matrix slot 1 " Then
-                UpdateLabel(Form2.MatrixSlot1)
-                WorkingMatrix = Form2.MatrixSlot1
-            ElseIf SelectMatrix.Text = "Matrix slot 2 " Then
-                UpdateLabel(Form2.MatrixSlot2)
-                WorkingMatrix = Form2.MatrixSlot2
-            ElseIf SelectMatrix.Text = "Matrix slot 3 " Then
-                UpdateLabel(Form2.MatrixSlot3)
-                WorkingMatrix = Form2.MatrixSlot3
-            ElseIf SelectMatrix.Text = "Matrix slot 4 " Then
-                UpdateLabel(Form2.MatrixSlot4)
-                WorkingMatrix = Form2.MatrixSlot4
-            ElseIf SelectMatrix.Text = "Matrix slot 5 " Then
-                UpdateLabel(Form2.MatrixSlot5)
-                WorkingMatrix = Form2.MatrixSlot4
-            End If
+        If SelectMatrix.Text = "Matrix slot 1 " Then
+            UpdateLabel(Form2.MatrixSlot1)
+            WorkingMatrix = Form2.MatrixSlot1
+        ElseIf SelectMatrix.Text = "Matrix slot 2 " Then
+            UpdateLabel(Form2.MatrixSlot2)
+            WorkingMatrix = Form2.MatrixSlot2
+        ElseIf SelectMatrix.Text = "Matrix slot 3 " Then
+            UpdateLabel(Form2.MatrixSlot3)
+            WorkingMatrix = Form2.MatrixSlot3
+        ElseIf SelectMatrix.Text = "Matrix slot 4 " Then
+            UpdateLabel(Form2.MatrixSlot4)
+            WorkingMatrix = Form2.MatrixSlot4
+        ElseIf SelectMatrix.Text = "Matrix slot 5 " Then
+            UpdateLabel(Form2.MatrixSlot5)
+            WorkingMatrix = Form2.MatrixSlot4
+        End If
+        If WhoSentUs Is Form2.LoadMatrix Then
             WhatWeAreDoing = "Load"
         ElseIf WhoSentUs Is Form2.SaveMatrix Then
             WhatWeAreDoing = "Save"

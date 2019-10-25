@@ -253,6 +253,10 @@
 
 
     End Function
+
+    Private Sub CopyText(sender As Object, e As EventArgs) Handles Label1.Click
+        Clipboard.SetText(Label1.Text)
+    End Sub
     Private Sub Button4_Click(sender As Object, e As EventArgs) Handles InvertMatrix.Click
         Label1.Visible = False
         Dim TheMatrix(,) As Single = GridToMatrix()
@@ -260,42 +264,42 @@
             If MatrixGrid.DisplayedColumnCount(True) = 2 Then
                 Label1.Text = Nothing
                 Dim InverseMatrix(,) As Single = Invert2xMatrix(TheMatrix)
-                Label1.Text &= "┌                             ┐"
+                Label1.Text &= "┌                ┐"
                 Label1.Text &= vbCrLf
                 For x = 0 To 1
-                    Label1.Text &= "│ "
+                    Label1.Text &= "│"
                     For y = 0 To 1
-                        Label1.Text = Label1.Text & " " & LSet(InverseMatrix(x, y), 9)
+                        Label1.Text = Label1.Text & " " & LSet(Math.Round(InverseMatrix(x, y), 4), 7)
                     Next
-                    Label1.Text = Label1.Text & " │" & vbCrLf
+                    Label1.Text = Label1.Text & "│" & vbCrLf
                 Next
-                Label1.Text &= "└                             ┘"
+                Label1.Text &= "└                ┘"
             ElseIf MatrixGrid.DisplayedColumnCount(True) = 3 Then
                 Label1.Text = Nothing
                 Dim InverseMatrix(,) As Single = Invert3xMatrix(TheMatrix)
-                Label1.Text &= "┌                                       ┐"
+                Label1.Text &= "┌                         ┐"
                 Label1.Text &= vbCrLf
                 For x = 0 To 2
                     Label1.Text &= "│ "
                     For y = 0 To 2
-                        Label1.Text = Label1.Text & " " & LSet(InverseMatrix(x, y), 9)
+                        Label1.Text = Label1.Text & " " & LSet(Math.Round(InverseMatrix(x, y), 4), 7)
                     Next
-                    Label1.Text = Label1.Text & " │" & vbCrLf
+                    Label1.Text = Label1.Text & "│" & vbCrLf
                 Next
-                Label1.Text &= "└                                       ┘"
+                Label1.Text &= "└                         ┘"
             ElseIf MatrixGrid.DisplayedColumnCount(True) = 4 Then
                 Label1.Text = Nothing
                 Dim InverseMatrix(,) As Single = Invert4xMatrix(TheMatrix)
-                Label1.Text &= "┌                                                   ┐"
+                Label1.Text &= "┌                                 ┐"
                 Label1.Text &= vbCrLf
                 For x = 0 To 3
                     Label1.Text &= "│ "
                     For y = 0 To 3
-                        Label1.Text = Label1.Text & " " & LSet(InverseMatrix(x, y), 9)
+                        Label1.Text = Label1.Text & " " & LSet(Math.Round(InverseMatrix(x, y), 4), 7)
                     Next
-                    Label1.Text = Label1.Text & " │" & vbCrLf
+                    Label1.Text = Label1.Text & "│" & vbCrLf
                 Next
-                Label1.Text &= "└                                                   ┘"
+                Label1.Text &= "└                                 ┘"
             End If
         End If
         Label1.Visible = True
