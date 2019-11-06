@@ -45,6 +45,6 @@
         Return Complex
     End Function
     Public Function ModulusArgument() As String
-        Return $"{Modulus()}, θ{Argument()}"
+        Return $"{LSet(Modulus(), 5)}, θ = {LSet(Argument(), 4)}"
     End Function
 End Class

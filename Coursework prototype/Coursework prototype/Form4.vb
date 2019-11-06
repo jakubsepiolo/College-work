@@ -51,7 +51,7 @@
 
             e.Graphics.DrawLine(Pens.Black, Width \ 2, Height \ 2, Xb, yb)
             e.Graphics.DrawArc(Pens.Black, Width \ 2 - Modulus \ 2, Height \ 2 - Modulus \ 2, Modulus, Modulus, 0, A)
-            e.Graphics.DrawString(Points(i).Real & " " & Points(i).Complex & "i", PointFont, Brushes.Black, NumbersToCoordinate(Points(i))(0), NumbersToCoordinate(Points(i))(1))
+            e.Graphics.DrawString(Points(i).Real & " " & Points(i).Complex & "i" & vbCrLf & Points(i).ModulusArgument, PointFont, Brushes.Black, NumbersToCoordinate(Points(i))(0), NumbersToCoordinate(Points(i))(1))
         Next
 
     End Sub
