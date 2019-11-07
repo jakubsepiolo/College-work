@@ -77,6 +77,7 @@ Public Class Form3
     End Sub
 
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles ConfirmButton.Click
+        'setup try catch for file loading
         If WhatWeAreDoing = "Load" Then 'And WorkingMatrix IsNot Nothing Then
             If SelectMatrix.Text = "To/From File" Then
                 Using reader As BinaryReader = New BinaryReader(File.OpenRead(FilePath))

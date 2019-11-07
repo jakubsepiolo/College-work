@@ -1,6 +1,6 @@
 ﻿Public Class Form4
     'no more flickering but need tidy code
-    Private GraphScale As Decimal = 1
+    Private GraphScale As Decimal = 5
     Dim PixelPerPoint As Integer = 15
     Private Points As New List(Of ComplexNumber)
     Dim AxisFont As New Font("Arial", 6, FontStyle.Regular)
