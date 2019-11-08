@@ -3,6 +3,7 @@
     Private GraphScale As Decimal = 5
     Dim PixelPerPoint As Integer = 15
     Private Points As New List(Of ComplexNumber)
+    Private Loci As New List(Of ComplexNumber)
     Dim AxisFont As New Font("Arial", 6, FontStyle.Regular)
     Dim PointFont As New Font("Arial", 12, FontStyle.Regular)
 
@@ -32,6 +33,10 @@
                 e.Graphics.DrawString((((Height \ (PixelPerPoint * 2)) - i) * GraphScale), AxisFont, Brushes.Black, X, -YOffset + PixelPerPoint * i)
                 e.Graphics.DrawString(((-(Width \ (PixelPerPoint * 2)) - 1 + i) * GraphScale), AxisFont, Brushes.Black, XOffset + PixelPerPoint * i, Height \ 2)
             End If
+        Next
+
+        For i = 0 To Loci.Count - 1
+
         Next
 
         For i = 0 To Points.Count - 1
@@ -159,6 +164,24 @@
     End Sub
 
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles LociButton.Click
+        Dim L As Integer = 1
+        Dim M As Integer = 0
+        Dim C As Integer = -56
 
+        Dim Offset As Integer = Width \ 2
+        Dim G As Graphics = CreateGraphics()
+        Dim Multiplier As Integer = 1
+        For i = 0 To Width * Multiplier Step 5
+            Dim a As Single = (((i / Multiplier) - Offset) / PixelPerPoint) ^ 2 * L + M * (((i / Multiplier) - Offset) / PixelPerPoint) + C
+            For j = Height / 2 To -Height / 2 Step -5
+                If a - (j / (PixelPerPoint * (1 / GraphScale))) < C Then
+                    Dim b As Single = Height / 2 - j
+                    Dim y As Single = (i / Multiplier)
+                    G.DrawEllipse(Pens.Blue, y, b, 1, 2)
+                End If
+            Next
+
+
+        Next
     End Sub
 End Class
