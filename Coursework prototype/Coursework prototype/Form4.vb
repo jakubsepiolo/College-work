@@ -1,9 +1,10 @@
-﻿Public Class Form4
+﻿Imports System.Text.RegularExpressions
+Public Class Form4
     'no more flickering but need tidy code
-    Private GraphScale As Decimal = 5
+    Private GraphScale As Decimal = 1
     Dim PixelPerPoint As Integer = 15
     Private Points As New List(Of ComplexNumber)
-    Private Loci As New List(Of ComplexNumber)
+    Private Equations As New List(Of ComplexNumber)
     Dim AxisFont As New Font("Arial", 6, FontStyle.Regular)
     Dim PointFont As New Font("Arial", 12, FontStyle.Regular)
 
@@ -35,7 +36,7 @@
             End If
         Next
 
-        For i = 0 To Loci.Count - 1
+        For i = 0 To Equations.Count - 1
 
         Next
 
@@ -79,7 +80,7 @@
         If Y > Height / 2 Then
             Y = (Y - Height / 2) / PixelPerPoint
             Y = -Y
-        ElseIf X < Height / 2 Then
+        ElseIf Y < Height / 2 Then
             Y = (-Y + Height / 2) / PixelPerPoint
         Else
             Y = 0
@@ -107,6 +108,14 @@
         Return {X, Y}
     End Function
 
+    Private Function StringToEquation(ByVal Text As String) As List(Of String)
+        Dim Coefficents As New List(Of String)
+        Dim RegPattern As New Regex("[+-]?[^-+]+")
+        For Each Match As Match In RegPattern.Matches(Text)
+            Coefficents.Add(Match.Value)
+        Next
+    End Function
+
 
     Private Sub Mouse_Click(ByVal sender As Object, ByVal e As MouseEventArgs) Handles Me.MouseClick
 
@@ -123,6 +132,7 @@
                 If prompt = DialogResult.Yes Then
                     CreateGraphics.Clear(Color.FromKnownColor(KnownColor.Control))
                     Points.Clear()
+                    Equations.Clear()
                     GraphScale = 1
                     Invalidate()
                 End If
@@ -164,24 +174,49 @@
     End Sub
 
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles LociButton.Click
-        Dim L As Integer = 1
-        Dim M As Integer = 0
-        Dim C As Integer = -56
+        Dim Z As Integer = -1
+        Dim L As Integer = 13
+        Dim M As Integer = 7
+        Dim C As Integer = 0
 
         Dim Offset As Integer = Width \ 2
         Dim G As Graphics = CreateGraphics()
-        Dim Multiplier As Integer = 1
-        For i = 0 To Width * Multiplier Step 5
-            Dim a As Single = (((i / Multiplier) - Offset) / PixelPerPoint) ^ 2 * L + M * (((i / Multiplier) - Offset) / PixelPerPoint) + C
-            For j = Height / 2 To -Height / 2 Step -5
-                If a - (j / (PixelPerPoint * (1 / GraphScale))) < C Then
-                    Dim b As Single = Height / 2 - j
-                    Dim y As Single = (i / Multiplier)
-                    G.DrawEllipse(Pens.Blue, y, b, 1, 2)
+        Dim Multiplier As Integer = 20
+
+        For i = 0 To Width Step 3
+            Dim a As Single = ((i - Offset) / PixelPerPoint) ^ 3 * Z + ((i - Offset) / PixelPerPoint) ^ 2 * L + M * ((i - Offset) / PixelPerPoint) + C
+            For j = Height / 2 To -Height / 2 Step -3
+                Dim y As Single = j
+                If y > Height / 2 Then
+                    y = (y - Height / 2) / PixelPerPoint
+                    y = -y
+                ElseIf y < Height / 2 Then
+                    y = (-y + Height / 2) / PixelPerPoint
+                Else
+                    y = 0
+                End If
+                If a - y * GraphScale > 0 Then
+                    Dim aa As Single = j
+                    Dim x As Single = i
+                    G.DrawEllipse(Pens.Blue, x, aa, 1, 2)
                 End If
             Next
 
 
         Next
+        For i = 0 To Width * Multiplier Step 1
+            Dim a As Single = (((i / Multiplier) - Offset) / PixelPerPoint) ^ 3 * Z + (((i / Multiplier) - Offset) / PixelPerPoint) ^ 2 * L + M * (((i / Multiplier) - Offset) / PixelPerPoint) + C
+
+
+
+            Dim aa As Single = (Height / 2) - PixelPerPoint * a * (1 / GraphScale)
+            Dim x As Single = (i / Multiplier)
+            G.DrawEllipse(Pens.Black, x, aa, 1, 2)
+
+
+
+
+        Next
+        StringToEquation("3x^3+7x^2-23x-12")
     End Sub
 End Class
