@@ -48,7 +48,7 @@ Partial Class Form1
         Me.InputComplex1.ForeColor = System.Drawing.Color.Black
         Me.InputComplex1.Location = New System.Drawing.Point(134, 35)
         Me.InputComplex1.Name = "InputComplex1"
-        Me.InputComplex1.Size = New System.Drawing.Size(80, 20)
+        Me.InputComplex1.Size = New System.Drawing.Size(89, 20)
         Me.InputComplex1.TabIndex = 0
         '
         'InputComplex2
@@ -57,7 +57,7 @@ Partial Class Form1
         Me.InputComplex2.ForeColor = System.Drawing.Color.Black
         Me.InputComplex2.Location = New System.Drawing.Point(134, 60)
         Me.InputComplex2.Name = "InputComplex2"
-        Me.InputComplex2.Size = New System.Drawing.Size(80, 20)
+        Me.InputComplex2.Size = New System.Drawing.Size(89, 20)
         Me.InputComplex2.TabIndex = 1
         '
         'OutputComplex
@@ -66,7 +66,7 @@ Partial Class Form1
         Me.OutputComplex.ForeColor = System.Drawing.Color.Black
         Me.OutputComplex.Location = New System.Drawing.Point(134, 101)
         Me.OutputComplex.Name = "OutputComplex"
-        Me.OutputComplex.Size = New System.Drawing.Size(80, 20)
+        Me.OutputComplex.Size = New System.Drawing.Size(89, 20)
         Me.OutputComplex.TabIndex = 3
         '
         'Label1
@@ -115,7 +115,7 @@ Partial Class Form1
         'AddButton
         '
         Me.AddButton.Image = Global.Coursework_prototype.My.Resources.Resources.add_128
-        Me.AddButton.Location = New System.Drawing.Point(229, 29)
+        Me.AddButton.Location = New System.Drawing.Point(238, 29)
         Me.AddButton.Name = "AddButton"
         Me.AddButton.Size = New System.Drawing.Size(20, 19)
         Me.AddButton.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
@@ -145,7 +145,7 @@ Partial Class Form1
         'ProductButton
         '
         Me.ProductButton.Image = Global.Coursework_prototype.My.Resources.Resources.cross_solid
-        Me.ProductButton.Location = New System.Drawing.Point(229, 79)
+        Me.ProductButton.Location = New System.Drawing.Point(238, 79)
         Me.ProductButton.Name = "ProductButton"
         Me.ProductButton.Size = New System.Drawing.Size(20, 19)
         Me.ProductButton.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
@@ -155,7 +155,7 @@ Partial Class Form1
         'SubtractButton
         '
         Me.SubtractButton.Image = Global.Coursework_prototype.My.Resources.Resources.minus_128
-        Me.SubtractButton.Location = New System.Drawing.Point(229, 54)
+        Me.SubtractButton.Location = New System.Drawing.Point(238, 54)
         Me.SubtractButton.Name = "SubtractButton"
         Me.SubtractButton.Size = New System.Drawing.Size(20, 19)
         Me.SubtractButton.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
@@ -165,7 +165,7 @@ Partial Class Form1
         'DivideButton
         '
         Me.DivideButton.Image = Global.Coursework_prototype.My.Resources.Resources.divide_59_884586
-        Me.DivideButton.Location = New System.Drawing.Point(229, 104)
+        Me.DivideButton.Location = New System.Drawing.Point(238, 104)
         Me.DivideButton.Name = "DivideButton"
         Me.DivideButton.Size = New System.Drawing.Size(20, 19)
         Me.DivideButton.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
@@ -177,7 +177,7 @@ Partial Class Form1
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.White
-        Me.ClientSize = New System.Drawing.Size(257, 299)
+        Me.ClientSize = New System.Drawing.Size(261, 299)
         Me.Controls.Add(Me.DivideButton)
         Me.Controls.Add(Me.SubtractButton)
         Me.Controls.Add(Me.ProductButton)

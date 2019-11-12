@@ -142,12 +142,12 @@ Public Class Form1
         Dim Total As ComplexNumber
         Total = NumberOne / NumberTwo
         If Total.Complex > 0 Then
-            OutputComplex.Text = Total.Real & "+" & Total.Complex & "i"
+            OutputComplex.Text = Math.Round(Total.Real, 4) & "+" & Math.Round(Total.Complex, 4) & "i"
         ElseIf Total.Complex = 0 Then
-            OutputComplex.Text = Total.Real
+            OutputComplex.Text = Math.Round(Total.Real, 4)
         Else
 
-            OutputComplex.Text = Total.Real & Total.Complex & "i"
+            OutputComplex.Text = Math.Round(Total.Real, 4) & Math.Round(Total.Complex, 4) & "i"
         End If
 
     End Sub

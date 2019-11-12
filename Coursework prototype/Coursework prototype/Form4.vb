@@ -1,7 +1,7 @@
 ﻿Imports System.Text.RegularExpressions
 Public Class Form4
     'no more flickering but need tidy code
-    Private GraphScale As Decimal = 1
+    Private GraphScale As Decimal = 30
     Dim PixelPerPoint As Integer = 15
     Private Points As New List(Of ComplexNumber)
     Private Equations As New List(Of ComplexNumber)
@@ -174,18 +174,18 @@ Public Class Form4
     End Sub
 
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles LociButton.Click
-        Dim Z As Integer = -1
-        Dim L As Integer = 13
-        Dim M As Integer = 7
-        Dim C As Integer = 0
+        Dim Z As Integer = 3
+        Dim L As Integer = 4
+        Dim M As Integer = 3
+        Dim C As Integer = -99
 
         Dim Offset As Integer = Width \ 2
         Dim G As Graphics = CreateGraphics()
-        Dim Multiplier As Integer = 20
+        Dim Multiplier As Integer = 200
 
-        For i = 0 To Width Step 3
+        For i = 0 To Width Step 1
             Dim a As Single = ((i - Offset) / PixelPerPoint) ^ 3 * Z + ((i - Offset) / PixelPerPoint) ^ 2 * L + M * ((i - Offset) / PixelPerPoint) + C
-            For j = Height / 2 To -Height / 2 Step -3
+            For j = 0 To Height Step 1
                 Dim y As Single = j
                 If y > Height / 2 Then
                     y = (y - Height / 2) / PixelPerPoint
@@ -195,10 +195,10 @@ Public Class Form4
                 Else
                     y = 0
                 End If
-                If a - y * GraphScale > 0 Then
+                If a - y * GraphScale < 0 And a > -126 Then
                     Dim aa As Single = j
                     Dim x As Single = i
-                    G.DrawEllipse(Pens.Blue, x, aa, 1, 2)
+                    G.DrawEllipse(Pens.DarkGray, x, aa, 1, 2)
                 End If
             Next
 

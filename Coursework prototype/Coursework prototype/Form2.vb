@@ -57,11 +57,18 @@
     End Function
     Public Function GridToMatrix() As Single(,)
         Dim TheMatrix(MatrixGrid.DisplayedRowCount(True) - 1, MatrixGrid.DisplayedColumnCount(True) - 1) As Single
-        For i = 0 To MatrixGrid.DisplayedRowCount(True) - 1
-            For j = 0 To MatrixGrid.DisplayedColumnCount(True) - 1
-                TheMatrix(i, j) = MatrixGrid.Rows(i).Cells(j).Value
+        Try
+            For i = 0 To MatrixGrid.DisplayedRowCount(True) - 1
+                For j = 0 To MatrixGrid.DisplayedColumnCount(True) - 1
+                    TheMatrix(i, j) = MatrixGrid.Rows(i).Cells(j).Value
+                Next
             Next
-        Next
+        Catch ex As InvalidCastException
+            MsgBox("Invalid entry in one of the matrix fields (Ensure all inputs are numbers)")
+        Catch ex As OverflowException
+            MsgBox("Invalid entry in one of the matrix fields (One or more numbers too large)")
+        End Try
+
         Return TheMatrix
     End Function
     Private Sub Loaded() Handles Me.Load
