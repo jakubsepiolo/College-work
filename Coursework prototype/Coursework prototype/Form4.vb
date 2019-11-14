@@ -4,7 +4,7 @@ Public Class Form4
     Private GraphScale As Decimal = 30
     Dim PixelPerPoint As Integer = 15
     Private Points As New List(Of ComplexNumber)
-    Private Equations As New List(Of ComplexNumber)
+    Public Inequalities As New List(Of String)
     Dim AxisFont As New Font("Arial", 6, FontStyle.Regular)
     Dim PointFont As New Font("Arial", 12, FontStyle.Regular)
 
@@ -36,11 +36,60 @@ Public Class Form4
             End If
         Next
 
-        For i = 0 To Equations.Count - 1
+        For f = 0 To Inequalities.Count - 1
+            Dim One_A, One_B, One_C, One_D, One_E, Two_A, Two_B, Two_C, Two_D, Two_E As Integer
+            Dim Equation1 As List(Of String)
+            Dim Equation2 As List(Of String)
+            If InStr(Inequalities(f), "=") > 0 Then
+                Equation1 = StringToEquation((Inequalities(f).Substring(0, InStr(Inequalities(f), "=") - 2)))
+            ElseIf InStr(Inequalities(f), ">") > 0 Then
+                Equation1 = StringToEquation((Inequalities(f).Substring(0, InStr(Inequalities(f), ">") - 1)))
+            ElseIf InStr(Inequalities(f), "<") > 0 Then
+                Equation1 = StringToEquation((Inequalities(f).Substring(0, InStr(Inequalities(f), "<") - 1)))
+            End If
+            If InStr(Inequalities(f), "=") > 0 Then
+                Equation2 = StringToEquation((Inequalities(f).Substring(InStr(Inequalities(f), "=") + 1, Inequalities(f).Length - 1)))
+            ElseIf InStr(Inequalities(f), ">") > 0 Then
+                Equation2 = StringToEquation((Inequalities(f).Substring(InStr(Inequalities(f), "=") + 1, Inequalities(f).Length - 1)))
+            ElseIf InStr(Inequalities(f), "<") > 0 Then
+                Equation2 = StringToEquation((Inequalities(f).Substring(InStr(Inequalities(f), "=") + 1, Inequalities(f).Length - 1)))
+            End If
+            One_A = Equation1(0)
+            One_B = Equation1(1)
+            One_C = Equation1(2)
+            One_D = Equation1(3)
+            One_E = Equation1(4)
+            Two_A = Equation2(0)
+            Two_B = Equation2(1)
+            Two_C = Equation2(2)
+            Two_D = Equation2(3)
+            Two_E = Equation2(4)
 
+            Dim Offset As Integer = Width \ 2
+            Dim G As Graphics = CreateGraphics()
+            Dim Multiplier As Integer = 200
+
+            For i = 0 To Width Step 3
+                Dim a As Single = ((i - Offset) / PixelPerPoint) ^ 4 * One_A + ((i - Offset) / PixelPerPoint) ^ 3 * One_B + ((i - Offset) / PixelPerPoint) ^ 2 * One_C + One_D * ((i - Offset) / PixelPerPoint) + One_E
+                For j = 0 To Height Step 3
+                    Dim y As Single = j
+                    If y > Height / 2 Then
+                        y = (y - Height / 2) / PixelPerPoint
+                        y = -y
+                    ElseIf y < Height / 2 Then
+                        y = (-y + Height / 2) / PixelPerPoint
+                    Else
+                        y = 0
+                    End If
+                    If a - y * GraphScale < 0 And a > -126 Then
+                        Dim aa As Single = j
+                        Dim xx As Single = i
+                        G.DrawEllipse(Pens.DarkGray, xx, aa, 1, 2)
+                    End If
+                Next
+            Next
         Next
-
-        For i = 0 To Points.Count - 1
+            For i = 0 To Points.Count - 1
             Dim Xb As Integer = NumbersToCoordinate(Points(i))(0)
             Dim yb As Integer = NumbersToCoordinate(Points(i))(1)
             Dim Number() As Decimal = CoordinatesToNumber(Xb, yb)
@@ -112,8 +161,21 @@ Public Class Form4
         Dim Coefficents As New List(Of String)
         Dim RegPattern As New Regex("[+-]?[^-+]+")
         For Each Match As Match In RegPattern.Matches(Text)
-            Coefficents.Add(Match.Value)
+            If InStr(Match.Value, "x") > 0 Then
+                Coefficents.Add(Match.Value.Substring(0, InStr(Match.Value, "x") - 1))
+            Else
+                Coefficents.Add(Match.Value)
+            End If
+
         Next
+        For i = 0 To Coefficents.Count - 1
+            If InStr(Coefficents(i), "+") <> Nothing Then
+                Coefficents(i) = Coefficents(i).Substring(InStr(Coefficents(i), "+"), Coefficents(i).Length - 1)
+            Else
+                Continue For
+            End If
+        Next
+        Return Coefficents
     End Function
 
 
@@ -132,7 +194,7 @@ Public Class Form4
                 If prompt = DialogResult.Yes Then
                     CreateGraphics.Clear(Color.FromKnownColor(KnownColor.Control))
                     Points.Clear()
-                    Equations.Clear()
+                    Inequalities.Clear()
                     GraphScale = 1
                     Invalidate()
                 End If
@@ -173,50 +235,13 @@ Public Class Form4
 
     End Sub
 
+    Public Sub GraphInequality(Line1 As String, Line2 As String, Inequality As String)
+
+    End Sub
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles LociButton.Click
-        Dim Z As Integer = 3
-        Dim L As Integer = 4
-        Dim M As Integer = 3
-        Dim C As Integer = -99
-
-        Dim Offset As Integer = Width \ 2
-        Dim G As Graphics = CreateGraphics()
-        Dim Multiplier As Integer = 200
-
-        For i = 0 To Width Step 1
-            Dim a As Single = ((i - Offset) / PixelPerPoint) ^ 3 * Z + ((i - Offset) / PixelPerPoint) ^ 2 * L + M * ((i - Offset) / PixelPerPoint) + C
-            For j = 0 To Height Step 1
-                Dim y As Single = j
-                If y > Height / 2 Then
-                    y = (y - Height / 2) / PixelPerPoint
-                    y = -y
-                ElseIf y < Height / 2 Then
-                    y = (-y + Height / 2) / PixelPerPoint
-                Else
-                    y = 0
-                End If
-                If a - y * GraphScale < 0 And a > -126 Then
-                    Dim aa As Single = j
-                    Dim x As Single = i
-                    G.DrawEllipse(Pens.DarkGray, x, aa, 1, 2)
-                End If
-            Next
 
 
-        Next
-        For i = 0 To Width * Multiplier Step 1
-            Dim a As Single = (((i / Multiplier) - Offset) / PixelPerPoint) ^ 3 * Z + (((i / Multiplier) - Offset) / PixelPerPoint) ^ 2 * L + M * (((i / Multiplier) - Offset) / PixelPerPoint) + C
-
-
-
-            Dim aa As Single = (Height / 2) - PixelPerPoint * a * (1 / GraphScale)
-            Dim x As Single = (i / Multiplier)
-            G.DrawEllipse(Pens.Black, x, aa, 1, 2)
-
-
-
-
-        Next
         StringToEquation("3x^3+7x^2-23x-12")
+        Form5.Show()
     End Sub
 End Class
