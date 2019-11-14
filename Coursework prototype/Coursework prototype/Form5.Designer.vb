@@ -50,6 +50,7 @@ Partial Class Form5
         Me.T1.Name = "T1"
         Me.T1.Size = New System.Drawing.Size(29, 20)
         Me.T1.TabIndex = 0
+        Me.T1.Text = "0"
         '
         'T5
         '
@@ -57,6 +58,7 @@ Partial Class Form5
         Me.T5.Name = "T5"
         Me.T5.Size = New System.Drawing.Size(29, 20)
         Me.T5.TabIndex = 4
+        Me.T5.Text = "0"
         '
         'T4
         '
@@ -64,6 +66,7 @@ Partial Class Form5
         Me.T4.Name = "T4"
         Me.T4.Size = New System.Drawing.Size(29, 20)
         Me.T4.TabIndex = 5
+        Me.T4.Text = "0"
         '
         'T3
         '
@@ -71,7 +74,7 @@ Partial Class Form5
         Me.T3.Name = "T3"
         Me.T3.Size = New System.Drawing.Size(29, 20)
         Me.T3.TabIndex = 6
-        Me.T3.Text = " "
+        Me.T3.Text = " 0"
         '
         'T2
         '
@@ -79,6 +82,7 @@ Partial Class Form5
         Me.T2.Name = "T2"
         Me.T2.Size = New System.Drawing.Size(29, 20)
         Me.T2.TabIndex = 7
+        Me.T2.Text = "0"
         '
         'ComboBox1
         '
@@ -88,6 +92,7 @@ Partial Class Form5
         Me.ComboBox1.Name = "ComboBox1"
         Me.ComboBox1.Size = New System.Drawing.Size(29, 21)
         Me.ComboBox1.TabIndex = 13
+        Me.ComboBox1.Text = ">"
         '
         'Label1
         '
@@ -167,6 +172,7 @@ Partial Class Form5
         Me.T7.Name = "T7"
         Me.T7.Size = New System.Drawing.Size(29, 20)
         Me.T7.TabIndex = 22
+        Me.T7.Text = "0"
         '
         'T8
         '
@@ -174,7 +180,7 @@ Partial Class Form5
         Me.T8.Name = "T8"
         Me.T8.Size = New System.Drawing.Size(29, 20)
         Me.T8.TabIndex = 21
-        Me.T8.Text = " "
+        Me.T8.Text = " 0"
         '
         'T9
         '
@@ -182,6 +188,7 @@ Partial Class Form5
         Me.T9.Name = "T9"
         Me.T9.Size = New System.Drawing.Size(29, 20)
         Me.T9.TabIndex = 20
+        Me.T9.Text = "0"
         '
         'T10
         '
@@ -189,6 +196,7 @@ Partial Class Form5
         Me.T10.Name = "T10"
         Me.T10.Size = New System.Drawing.Size(29, 20)
         Me.T10.TabIndex = 19
+        Me.T10.Text = "0"
         '
         'T6
         '
@@ -196,6 +204,7 @@ Partial Class Form5
         Me.T6.Name = "T6"
         Me.T6.Size = New System.Drawing.Size(29, 20)
         Me.T6.TabIndex = 18
+        Me.T6.Text = "0"
         '
         'Button1
         '
