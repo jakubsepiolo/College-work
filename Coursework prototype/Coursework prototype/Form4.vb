@@ -9,6 +9,7 @@ Public Class Form4
     Dim PointFont As New Font("Arial", 12, FontStyle.Regular)
     Dim ShowLabels As CheckBox = New CheckBox() With {.Text = "Display axis labels", .Checked = True}
     Dim ShowLoci As CheckBox = New CheckBox() With {.Text = "Display Loci", .Checked = False}
+    Dim ColorList As New List(Of Color)
 
 
     Private Sub Form4_Paint(ByVal sender As Object, ByVal e As PaintEventArgs) Handles Me.Paint
@@ -84,7 +85,6 @@ Public Class Form4
                     Dim aa As Single = (Height / 2) - PixelPerPoint * a * (1 / GraphScale)
                     Dim bb As Single = (Height / 2) - PixelPerPoint * b * (1 / GraphScale)
                     Dim xx As Single = (i / Multiplier)
-
                     G.DrawEllipse(Pens.Black, xx, aa, 1, 2)
                     G.DrawEllipse(Pens.Green, xx, bb, 1, 2)
 
@@ -250,6 +250,12 @@ Public Class Form4
     Private Sub Form4_Load_1(sender As Object, e As EventArgs) Handles MyBase.Load
         Controls.Add(ShowLabels)
         Controls.Add(ShowLoci)
+        ColorList.Add(Color.Black)
+        ColorList.Add(Color.Green)
+        ColorList.Add(Color.Blue)
+        ColorList.Add(Color.Firebrick)
+        ColorList.Add(Color.Violet)
+        ColorList.Add(Color.Moccasin)
     End Sub
 
     Public Sub GraphInequality(Line1 As String, Line2 As String, Inequality As String)
