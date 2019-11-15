@@ -1,7 +1,7 @@
 ﻿Imports System.Text.RegularExpressions
 Public Class Form4
     'no more flickering but need tidy code
-    Private GraphScale As Decimal = 30
+    Private GraphScale As Decimal = 20
     Dim PixelPerPoint As Integer = 15
     Private Points As New List(Of ComplexNumber)
     Public Inequalities As New List(Of String)
@@ -14,7 +14,7 @@ Public Class Form4
     Private Sub Form4_Paint(ByVal sender As Object, ByVal e As PaintEventArgs) Handles Me.Paint
         ShowLabels.Location = New Point(2, Height - 80)
         ShowLoci.Location = New Point(2, Height - 60)
-
+        LociButton.Location = New Point(Width - 75, Height - 70)
         Dim AxisPen As New Pen(Color.FromArgb(255, 255, 0, 0))
         Dim X As Integer = Width \ 2 + 6
         Dim XOffset As Integer = -7
@@ -30,17 +30,6 @@ Public Class Form4
             loopcount = Width / 7
         End If
 
-
-        For i = 1 To loopcount
-
-            e.Graphics.DrawLine(AxisPen, Width \ 2, YOffset + PixelPerPoint * i, X, YOffset + PixelPerPoint * i)
-            e.Graphics.DrawLine(AxisPen, XOffset + PixelPerPoint * i, Height \ 2 - 5, XOffset + PixelPerPoint * i, Height \ 2)
-
-            If i Mod 2 = 0 And ShowLabels.Checked Then
-                e.Graphics.DrawString((((Height \ (PixelPerPoint * 2)) - i) * GraphScale), AxisFont, Brushes.Black, X, -YOffset + PixelPerPoint * i)
-                e.Graphics.DrawString(((-(Width \ (PixelPerPoint * 2)) - 1 + i) * GraphScale), AxisFont, Brushes.Black, XOffset + PixelPerPoint * i, Height \ 2)
-            End If
-        Next
         If ShowLoci.Checked = True Then
             For f = 0 To Inequalities.Count - 1
                 Dim One_A, One_B, One_C, One_D, One_E, Two_A, Two_B, Two_C, Two_D, Two_E As Integer
@@ -75,29 +64,47 @@ Public Class Form4
                 Dim G As Graphics = CreateGraphics()
                 Dim Multiplier As Integer = 200
 
-                For i = 0 To Width Step 3
+                For i = 0 To Width Step 5
                     Dim a As Single = ((i - Offset) / PixelPerPoint) ^ 4 * One_A + ((i - Offset) / PixelPerPoint) ^ 3 * One_B + ((i - Offset) / PixelPerPoint) ^ 2 * One_C + One_D * ((i - Offset) / PixelPerPoint) + One_E
                     Dim b As Single = ((i - Offset) / PixelPerPoint) ^ 4 * Two_A + ((i - Offset) / PixelPerPoint) ^ 3 * Two_B + ((i - Offset) / PixelPerPoint) ^ 2 * Two_C + Two_D * ((i - Offset) / PixelPerPoint) + Two_E
-
-                    For j = 0 To Height Step 3
-                        Dim y As Single = j
-                        If y > Height / 2 Then
-                            y = (y - Height / 2) / PixelPerPoint
-                            y = -y
-                        ElseIf y < Height / 2 Then
-                            y = (-y + Height / 2) / PixelPerPoint
-                        Else
-                            y = 0
-                        End If
+                    For j = 0 To Height Step 5
                         If a > b Then
                             Dim aa As Single = j
                             Dim xx As Single = i
-                            G.DrawEllipse(Pens.DarkGray, xx, aa, 1, 2)
+                            G.DrawEllipse(Pens.Blue, xx, aa, 1, 1)
                         End If
                     Next
                 Next
+                For i = 0 To Width * Multiplier Step 1
+                    Dim a As Single = (((i / Multiplier) - Offset) / PixelPerPoint) ^ 4 * One_A + (((i / Multiplier) - Offset) / PixelPerPoint) ^ 3 * One_B + (((i / Multiplier) - Offset) / PixelPerPoint) ^ 2 * One_C + One_D * (((i / Multiplier) - Offset) / PixelPerPoint) + One_E
+                    Dim b As Single = (((i / Multiplier) - Offset) / PixelPerPoint) ^ 4 * Two_A + (((i / Multiplier) - Offset) / PixelPerPoint) ^ 3 * Two_B + (((i / Multiplier) - Offset) / PixelPerPoint) ^ 2 * Two_C + Two_D * (((i / Multiplier) - Offset) / PixelPerPoint) + Two_E
+
+
+
+                    Dim aa As Single = (Height / 2) - PixelPerPoint * a * (1 / GraphScale)
+                    Dim bb As Single = (Height / 2) - PixelPerPoint * b * (1 / GraphScale)
+                    Dim xx As Single = (i / Multiplier)
+
+                    G.DrawEllipse(Pens.Black, xx, aa, 1, 2)
+                    G.DrawEllipse(Pens.Green, xx, bb, 1, 2)
+
+
+
+
+                Next
             Next
+
         End If
+        For i = 1 To loopcount
+
+            e.Graphics.DrawLine(AxisPen, Width \ 2, YOffset + PixelPerPoint * i, X, YOffset + PixelPerPoint * i)
+            e.Graphics.DrawLine(AxisPen, XOffset + PixelPerPoint * i, Height \ 2 - 5, XOffset + PixelPerPoint * i, Height \ 2)
+
+            If i Mod 2 = 0 And ShowLabels.Checked Then
+                e.Graphics.DrawString((((Height \ (PixelPerPoint * 2)) - i) * GraphScale), AxisFont, Brushes.Black, X, -YOffset + PixelPerPoint * i)
+                e.Graphics.DrawString(((-(Width \ (PixelPerPoint * 2)) - 1 + i) * GraphScale), AxisFont, Brushes.Black, XOffset + PixelPerPoint * i, Height \ 2)
+            End If
+        Next
         For i = 0 To Points.Count - 1
             Dim Xb As Integer = NumbersToCoordinate(Points(i))(0)
             Dim yb As Integer = NumbersToCoordinate(Points(i))(1)
