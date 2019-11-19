@@ -1,7 +1,7 @@
 ﻿Imports System.Text.RegularExpressions
 Public Class Form4
     'no more flickering but need tidy code
-    Private GraphScale As Decimal = 1
+    Private GraphScale As Decimal = 1   
     Dim PixelPerPoint As Integer = 15
     Private Points As New List(Of ComplexNumber)
     Public Inequalities As New List(Of String)
@@ -14,6 +14,8 @@ Public Class Form4
 
 
     Private Sub Form4_Paint(ByVal sender As Object, ByVal e As PaintEventArgs) Handles Me.Paint
+        e.Graphics.SmoothingMode = e.Graphics.SmoothingMode.AntiAlias
+        e.Graphics.TextRenderingHint = e.Graphics.TextRenderingHint.AntiAlias
         ShowLabels.Location = New Point(2, Height - 80)
         ShowLoci.Location = New Point(2, Height - 60)
         ShowComplexPoints.Location = New Point(2, Height - 100)
@@ -89,8 +91,8 @@ Public Class Form4
                     ElseIf bb < 0 Then
                         bb = -50
                     End If
-                    e.Graphics.DrawEllipse(PenList(f), xx, aa, 1, 2)
-                    e.Graphics.DrawEllipse(PenList(f), xx, bb, 1, 2)
+                    e.Graphics.DrawEllipse(PenList(f + 1), xx, aa, 1, 2)
+                    e.Graphics.DrawEllipse(PenList(PenList.Count - (1 + f)), xx, bb, 1, 2)
                 Next
             Next
         End If
