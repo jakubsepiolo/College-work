@@ -371,7 +371,7 @@
         End Try
     End Sub
 
-    Private Sub FormCloses(sender As Object, e As EventArgs) Handles Me.Closed
+    Private Sub FormClosed(sender As Object, e As EventArgs) Handles Me.Closed
         Form1.Show()
     End Sub
     Public Sub test() Handles SelectMatrix1.MouseHover
