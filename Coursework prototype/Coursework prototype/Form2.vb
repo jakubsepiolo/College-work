@@ -345,15 +345,35 @@
     Private Sub Button8_Click(sender As Object, e As EventArgs) Handles AddMatrix.Click
         Dim FirstMatrix(,) As Single = MatrixFromComboBox(SelectMatrix1)
         Dim SecondMatrix(,) As Single = MatrixFromComboBox(SelectMatrix2)
+        Dim SavedLocation As String
         Try
             If FirstMatrix.GetLength(0) = SecondMatrix.GetLength(0) And FirstMatrix.GetLength(1) = SecondMatrix.GetLength(1) Then
-                MatrixSlot3 = AddMatrices(FirstMatrix, SecondMatrix) 'tempstoring
+                If MatrixSlot1 Is Nothing Then
+                    MatrixSlot1 = AddMatrices(FirstMatrix, SecondMatrix) 'tempstoring
+                    SavedLocation = "Matrix slot 1"
+                ElseIf MatrixSlot2 Is Nothing Then
+                    MatrixSlot2 = AddMatrices(FirstMatrix, SecondMatrix)
+                    SavedLocation = "Matrix slot 2"
+                ElseIf MatrixSlot3 Is Nothing Then
+                    MatrixSlot3 = AddMatrices(FirstMatrix, SecondMatrix)
+                    SavedLocation = "Matrix slot 3"
+                ElseIf MatrixSlot4 Is Nothing Then
+                    MatrixSlot4 = AddMatrices(FirstMatrix, SecondMatrix)
+                    SavedLocation = "Matrix slot 4"
+                ElseIf MatrixSlot5 Is Nothing Then
+                    MatrixSlot5 = AddMatrices(FirstMatrix, SecondMatrix)
+                    SavedLocation = "Matrix slot 5"
+                End If
+                MsgBox($"Saved result in {SavedLocation}")
             End If
         Catch ex As NullReferenceException
             MsgBox("One of the matrix slots has no matrix stored...")
         End Try
     End Sub
 
+    Private Sub FormClosed(sender As Object, e As EventArgs) Handles Me.Closed
+        Form1.Show()
+    End Sub
     Public Sub test() Handles SelectMatrix1.MouseHover
         Dim ToolTip As New ToolTip
         If SelectMatrix1.SelectedItem IsNot Nothing Then
@@ -364,9 +384,28 @@
     Private Sub Button9_Click(sender As Object, e As EventArgs) Handles SubtractMatrix.Click
         Dim FirstMatrix(,) As Single = MatrixFromComboBox(SelectMatrix1)
         Dim SecondMatrix(,) As Single = MatrixFromComboBox(SelectMatrix2)
+        Dim SavedLocation As String
         Try
+
             If FirstMatrix.GetLength(0) = SecondMatrix.GetLength(0) And FirstMatrix.GetLength(1) = SecondMatrix.GetLength(1) Then
-                MatrixSlot3 = SubtractMatrices(FirstMatrix, SecondMatrix) 'tempstoring
+
+                If MatrixSlot1 Is Nothing Then
+                    MatrixSlot1 = SubtractMatrices(FirstMatrix, SecondMatrix)
+                    SavedLocation = "Matrix slot 1"
+                ElseIf MatrixSlot2 Is Nothing Then
+                    MatrixSlot2 = SubtractMatrices(FirstMatrix, SecondMatrix)
+                    SavedLocation = "Matrix slot 2"
+                ElseIf MatrixSlot3 Is Nothing Then
+                    MatrixSlot3 = SubtractMatrices(FirstMatrix, SecondMatrix) 'tempstoring
+                    SavedLocation = "Matrix slot 3"
+                ElseIf MatrixSlot4 Is Nothing Then
+                    MatrixSlot4 = SubtractMatrices(FirstMatrix, SecondMatrix)
+                    SavedLocation = "Matrix slot 4"
+                ElseIf MatrixSlot5 Is Nothing Then
+                    MatrixSlot5 = SubtractMatrices(FirstMatrix, SecondMatrix)
+                    SavedLocation = "Matrix slot 5"
+                End If
+                MsgBox($"Saved result in {SavedLocation}")
             End If
         Catch ex As NullReferenceException
             MsgBox("One of the matrix slots has no matrix stored...")
@@ -376,9 +415,26 @@
     Private Sub MultiplyMatrix_Click(sender As Object, e As EventArgs) Handles MultiplyMatrix.Click
         Dim FirstMatrix(,) As Single = MatrixFromComboBox(SelectMatrix1)
         Dim SecondMatrix(,) As Single = MatrixFromComboBox(SelectMatrix2)
+        Dim SavedLocation As String
         Try
             'If FirstMatrix.GetLength(0) = SecondMatrix.GetLength(0) And FirstMatrix.GetLength(1) = SecondMatrix.GetLength(1) Then
-            MatrixSlot3 = SquareMultiplyMatrices(FirstMatrix, SecondMatrix) 'tempstoring
+            If MatrixSlot1 Is Nothing Then
+                MatrixSlot1 = SquareMultiplyMatrices(FirstMatrix, SecondMatrix)
+                SavedLocation = "Matrix slot 1"
+            ElseIf MatrixSlot2 Is Nothing Then
+                MatrixSlot2 = SquareMultiplyMatrices(FirstMatrix, SecondMatrix)
+                SavedLocation = "Matrix slot 2"
+            ElseIf MatrixSlot3 Is Nothing Then
+                MatrixSlot3 = SquareMultiplyMatrices(FirstMatrix, SecondMatrix) 'tempstoring
+                SavedLocation = "Matrix slot 3"
+            ElseIf MatrixSlot4 Is Nothing Then
+                MatrixSlot4 = SquareMultiplyMatrices(FirstMatrix, SecondMatrix)
+                SavedLocation = "Matrix slot 4"
+            ElseIf MatrixSlot5 Is Nothing Then
+                MatrixSlot5 = SquareMultiplyMatrices(FirstMatrix, SecondMatrix)
+                SavedLocation = "Matrix slot 5"
+            End If
+            MsgBox($"Saved result in {SavedLocation}")
             'End If
         Catch ex As NullReferenceException
             MsgBox("One of the matrix slots has no matrix stored...")

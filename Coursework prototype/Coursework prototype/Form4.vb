@@ -9,7 +9,7 @@ Public Class Form4
     Dim PointFont As New Font("Arial", 12, FontStyle.Regular)
     Dim ShowLabels As CheckBox = New CheckBox() With {.Text = "Display axis labels", .Checked = True}
     Dim ShowLoci As CheckBox = New CheckBox() With {.Text = "Display Loci", .Checked = False}
-    Dim ColorList As New List(Of Color)
+    Dim PenList() As Pen = {Pens.Black, Pens.Blue, Pens.Green, Pens.Firebrick, Pens.Violet, Pens.Moccasin}
 
 
     Private Sub Form4_Paint(ByVal sender As Object, ByVal e As PaintEventArgs) Handles Me.Paint
@@ -33,64 +33,52 @@ Public Class Form4
 
         If ShowLoci.Checked = True Then
             For f = 0 To Inequalities.Count - 1
-                Dim One_A, One_B, One_C, One_D, One_E, Two_A, Two_B, Two_C, Two_D, Two_E As Integer
-                Dim Equation1 As List(Of String)
-                Dim Equation2 As List(Of String)
-                If InStr(Inequalities(f), "=") > 0 Then
-                    Equation1 = StringToEquation((Inequalities(f).Substring(0, InStr(Inequalities(f), "=") - 2)))
-                ElseIf InStr(Inequalities(f), ">") > 0 Then
-                    Equation1 = StringToEquation((Inequalities(f).Substring(0, InStr(Inequalities(f), ">") - 1)))
-                ElseIf InStr(Inequalities(f), "<") > 0 Then
-                    Equation1 = StringToEquation((Inequalities(f).Substring(0, InStr(Inequalities(f), "<") - 1)))
-                End If
-                If InStr(Inequalities(f), "=") > 0 Then
-                    Equation2 = StringToEquation((Inequalities(f).Substring(InStr(Inequalities(f), "="), -InStr(Inequalities(f), "=") + Inequalities(f).Length)))
-                ElseIf InStr(Inequalities(f), ">") > 0 Then
-                    Equation2 = StringToEquation((Inequalities(f).Substring(InStr(Inequalities(f), ">"), -InStr(Inequalities(f), ">") + Inequalities(f).Length)))
-                ElseIf InStr(Inequalities(f), "<") > 0 Then
-                    Equation2 = StringToEquation((Inequalities(f).Substring(InStr(Inequalities(f), "<"), -InStr(Inequalities(f), "<") + Inequalities(f).Length)))
-                End If
-                One_A = Equation1(0)
-                One_B = Equation1(1)
-                One_C = Equation1(2)
-                One_D = Equation1(3)
-                One_E = Equation1(4)
-                Two_A = Equation2(0)
-                Two_B = Equation2(1)
-                Two_C = Equation2(2)
-                Two_D = Equation2(3)
-                Two_E = Equation2(4)
-
+                Dim EquationList As List(Of String)() = InequalityToEquation(Inequalities(f))
                 Dim Offset As Integer = Width \ 2
                 Dim G As Graphics = CreateGraphics()
-                Dim Multiplier As Integer = 200
+                Dim Multiplier As Integer = 10
 
                 For i = 0 To Width Step 5
-                    Dim a As Single = ((i - Offset) / PixelPerPoint) ^ 4 * One_A + ((i - Offset) / PixelPerPoint) ^ 3 * One_B + ((i - Offset) / PixelPerPoint) ^ 2 * One_C + One_D * ((i - Offset) / PixelPerPoint) + One_E
-                    Dim b As Single = ((i - Offset) / PixelPerPoint) ^ 4 * Two_A + ((i - Offset) / PixelPerPoint) ^ 3 * Two_B + ((i - Offset) / PixelPerPoint) ^ 2 * Two_C + Two_D * ((i - Offset) / PixelPerPoint) + Two_E
-                    For j = 0 To Height Step 5
-                        If a > b Then
+                    Dim a As Single
+                    Dim b As Single
+                    Try
+                        a = ((i - Offset) / PixelPerPoint) ^ 4 * EquationList(0)(0) + ((i - Offset) / PixelPerPoint) ^ 3 * EquationList(0)(1) + ((i - Offset) / PixelPerPoint) ^ 2 * EquationList(0)(2) + EquationList(0)(3) * ((i - Offset) / PixelPerPoint) + EquationList(0)(4)
+                        b = ((i - Offset) / PixelPerPoint) ^ 4 * EquationList(1)(0) + ((i - Offset) / PixelPerPoint) ^ 3 * EquationList(1)(1) + ((i - Offset) / PixelPerPoint) ^ 2 * EquationList(1)(2) + EquationList(1)(3) * ((i - Offset) / PixelPerPoint) + EquationList(1)(4)
+                    Catch ex As InvalidCastException
+                        MsgBox($"One or more of your equations was invalid {vbCrLf}{vbCrLf}{ex.Message}{vbCrLf}{vbCrLf}Please input your equations again")
+                        Exit For
+                    End Try
+                    For j = 0 To Height Step 15
+                        If a > b And EquationList(2)(0) = ">" Then
                             Dim aa As Single = j
                             Dim xx As Single = i
-                            G.DrawEllipse(Pens.Blue, xx, aa, 1, 1)
+                            G.DrawEllipse(PenList(f), xx, aa + f * 5, 1, 1)
+                        ElseIf a < b And EquationList(2)(0) = "<" Then
+                            Dim aa As Single = j
+                            Dim xx As Single = i
+                            G.DrawEllipse(PenList(f), xx, aa + f * 5, 1, 1)
+                        ElseIf a = b And EquationList(2)(0) = "=" Then
+                            Dim aa As Single = j
+                            Dim xx As Single = i
+                            G.DrawEllipse(PenList(f), xx, aa + f * 5, 1, 1)
                         End If
                     Next
                 Next
                 For i = 0 To Width * Multiplier Step 1
-                    Dim a As Single = (((i / Multiplier) - Offset) / PixelPerPoint) ^ 4 * One_A + (((i / Multiplier) - Offset) / PixelPerPoint) ^ 3 * One_B + (((i / Multiplier) - Offset) / PixelPerPoint) ^ 2 * One_C + One_D * (((i / Multiplier) - Offset) / PixelPerPoint) + One_E
-                    Dim b As Single = (((i / Multiplier) - Offset) / PixelPerPoint) ^ 4 * Two_A + (((i / Multiplier) - Offset) / PixelPerPoint) ^ 3 * Two_B + (((i / Multiplier) - Offset) / PixelPerPoint) ^ 2 * Two_C + Two_D * (((i / Multiplier) - Offset) / PixelPerPoint) + Two_E
-
-
-
+                    Dim a As Single
+                    Dim b As Single
+                    Try
+                        a = (((i / Multiplier) - Offset) / PixelPerPoint) ^ 4 * EquationList(0)(0) + (((i / Multiplier) - Offset) / PixelPerPoint) ^ 3 * EquationList(0)(1) + (((i / Multiplier) - Offset) / PixelPerPoint) ^ 2 * EquationList(0)(2) + EquationList(0)(3) * (((i / Multiplier) - Offset) / PixelPerPoint) + EquationList(0)(4)
+                        b = (((i / Multiplier) - Offset) / PixelPerPoint) ^ 4 * EquationList(1)(0) + (((i / Multiplier) - Offset) / PixelPerPoint) ^ 3 * EquationList(1)(1) + (((i / Multiplier) - Offset) / PixelPerPoint) ^ 2 * EquationList(1)(2) + EquationList(1)(3) * (((i / Multiplier) - Offset) / PixelPerPoint) + EquationList(1)(4)
+                    Catch ex As InvalidCastException
+                        Inequalities.Clear()
+                        Exit For
+                    End Try
                     Dim aa As Single = (Height / 2) - PixelPerPoint * a * (1 / GraphScale)
                     Dim bb As Single = (Height / 2) - PixelPerPoint * b * (1 / GraphScale)
                     Dim xx As Single = (i / Multiplier)
-                    G.DrawEllipse(Pens.Black, xx, aa, 1, 2)
-                    G.DrawEllipse(Pens.Green, xx, bb, 1, 2)
-
-
-
-
+                    G.DrawEllipse(PenList(f), xx, aa, 1, 2)
+                    G.DrawEllipse(PenList(f), xx, bb, 1, 2)
                 Next
             Next
 
@@ -194,6 +182,29 @@ Public Class Form4
         Return Coefficents
     End Function
 
+    Private Function InequalityToEquation(ByVal Inequality As String) As List(Of String)()
+        Dim Equation1 As New List(Of String)
+        Dim Equation2 As New List(Of String)
+        Dim InequalitySign As New List(Of String)
+        If InStr(Inequality, "=") > 0 Then
+            Equation1 = StringToEquation((Inequality.Substring(0, InStr(Inequality, "=") - 2)))
+            InequalitySign.Add("=")
+        ElseIf InStr(Inequality, ">") > 0 Then
+            Equation1 = StringToEquation((Inequality.Substring(0, InStr(Inequality, ">") - 1)))
+            InequalitySign.Add(">")
+        ElseIf InStr(Inequality, "<") > 0 Then
+            Equation1 = StringToEquation((Inequality.Substring(0, InStr(Inequality, "<") - 1)))
+            InequalitySign.Add("<")
+        End If
+        If InStr(Inequality, "=") > 0 Then
+            Equation2 = StringToEquation((Inequality.Substring(InStr(Inequality, "="), Inequality.Length - InStr(Inequality, "="))))
+        ElseIf InStr(Inequality, ">") > 0 Then
+            Equation2 = StringToEquation((Inequality.Substring(InStr(Inequality, ">"), Inequality.Length - InStr(Inequality, ">"))))
+        ElseIf InStr(Inequality, "<") > 0 Then
+            Equation2 = StringToEquation((Inequality.Substring(InStr(Inequality, "<"), Inequality.Length - InStr(Inequality, "<"))))
+        End If
+        Return {Equation1, Equation2, InequalitySign}
+    End Function
 
     Private Sub Mouse_Click(ByVal sender As Object, ByVal e As MouseEventArgs) Handles Me.MouseClick
 
@@ -250,16 +261,15 @@ Public Class Form4
     Private Sub Form4_Load_1(sender As Object, e As EventArgs) Handles MyBase.Load
         Controls.Add(ShowLabels)
         Controls.Add(ShowLoci)
-        ColorList.Add(Color.Black)
-        ColorList.Add(Color.Green)
-        ColorList.Add(Color.Blue)
-        ColorList.Add(Color.Firebrick)
-        ColorList.Add(Color.Violet)
-        ColorList.Add(Color.Moccasin)
+
     End Sub
 
     Public Sub GraphInequality(Line1 As String, Line2 As String, Inequality As String)
 
+    End Sub
+
+    Private Sub Form4_Close(sender As Object, e As EventArgs) Handles Me.Closed
+        Form1.Show()
     End Sub
 
 

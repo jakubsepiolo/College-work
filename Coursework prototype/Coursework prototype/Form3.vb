@@ -81,16 +81,24 @@ Public Class Form3
         If WhatWeAreDoing = "Load" Then 'And WorkingMatrix IsNot Nothing Then
             If SelectMatrix.Text = "To/From File" Then
                 Using reader As BinaryReader = New BinaryReader(File.OpenRead(FilePath))
-                    Dim x As Integer = reader.ReadInt32
-                    Dim y As Integer = reader.ReadInt32
-                    Dim NewMatrix(x, y) As Single
-                    For i = 0 To x
-                        For j = 0 To y
-                            NewMatrix(i, j) = reader.ReadString
+                    Try
+                        Dim x As Integer = reader.ReadInt32
+                        Dim y As Integer = reader.ReadInt32
+                        Dim NewMatrix(x, y) As Single
+                        For i = 0 To x
+                            For j = 0 To y
+                                NewMatrix(i, j) = reader.ReadString
 
+                            Next
                         Next
-                    Next
-                    WorkingMatrix = NewMatrix
+                        WorkingMatrix = NewMatrix
+                        MsgBox($"Matrix loaded from {SelectMatrix.Text} ")
+                    Catch ex As OutOfMemoryException
+                        MsgBox("Invalid file loaded")
+                        reader.Close()
+                        WorkingMatrix = {{0}}
+                    End Try
+
                 End Using
 
             End If
@@ -117,7 +125,7 @@ Public Class Form3
                     Form2.MatrixGrid.Rows(x).Cells(y).Value = WorkingMatrix(x, y)
                 Next
             Next
-            MsgBox($"Matrix loaded from {SelectMatrix.Text} ")
+
             Close()
 
         ElseIf WhatWeAreDoing = "Save" Then

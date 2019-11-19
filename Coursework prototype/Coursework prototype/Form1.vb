@@ -154,10 +154,12 @@ Public Class Form1
 
     Private Sub MatrixButton(sender As Object, e As EventArgs) Handles OpenMatrix.Click
         Form2.Show()
+        Me.Hide()
     End Sub
 
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
         Form4.Show()
+        Me.Hide()
     End Sub
 
     Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
