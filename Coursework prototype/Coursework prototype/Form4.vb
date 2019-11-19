@@ -37,7 +37,7 @@ Public Class Form4
             For f = 0 To Inequalities.Count - 1
                 Dim EquationList As List(Of String)() = InequalityToEquation(Inequalities(f))
                 Dim Offset As Integer = Width \ 2
-                Dim Multiplier As Integer = 50
+                Dim Multiplier As Integer = 200
 
                 For i = 0 To Width Step 5
                     Dim a As Single
@@ -53,15 +53,15 @@ Public Class Form4
                         If a > b And EquationList(2)(0) = ">" Then
                             Dim aa As Single = j
                             Dim xx As Single = i
-                            e.Graphics.DrawEllipse(PenList(f), xx, aa + f * 2, 1, 1)
+                            e.Graphics.DrawEllipse(PenList(f), xx, aa + f * 3, 1, 1)
                         ElseIf a < b And EquationList(2)(0) = "<" Then
                             Dim aa As Single = j
                             Dim xx As Single = i
-                            e.Graphics.DrawEllipse(PenList(f), xx, aa + f * 2, 1, 1)
+                            e.Graphics.DrawEllipse(PenList(f), xx, aa + f * 3, 1, 1)
                         ElseIf a = b And EquationList(2)(0) = "=" Then
                             Dim aa As Single = j
                             Dim xx As Single = i
-                            e.Graphics.DrawEllipse(PenList(f), xx, aa + f * 2, 1, 1)
+                            e.Graphics.DrawEllipse(PenList(f), xx, aa + f * 3, 1, 1)
                         End If
                     Next
                 Next
