@@ -38,7 +38,7 @@
     End Function
 
     Private Function AddMatrices(Matrix1(,) As Single, Matrix2(,) As Single) As Single(,)
-        Dim TempMatrix(Matrix1.GetLength(1) - 1, Matrix1.GetLength(0) - 1) As Single
+        Dim TempMatrix(Matrix1.GetLength(0) - 1, Matrix1.GetLength(1) - 1) As Single
         For x = 0 To Matrix1.GetLength(0) - 1
             For y = 0 To Matrix1.GetLength(1) - 1
                 TempMatrix(x, y) = Matrix1(x, y) + Matrix2(x, y)
@@ -374,11 +374,32 @@
     Private Sub FormClosed(sender As Object, e As EventArgs) Handles Me.Closed
         Form1.Show()
     End Sub
-    Public Sub test() Handles SelectMatrix1.MouseHover
+    Public Sub test(sender As Object, e As EventArgs) Handles SelectMatrix1.MouseHover, SelectMatrix2.MouseHover
         Dim ToolTip As New ToolTip
+        Dim WorkingMatrix As Single(,)
+        Dim Text As String
         If SelectMatrix1.SelectedItem IsNot Nothing Then
-            ToolTip.SetToolTip(SelectMatrix1, SelectMatrix1.SelectedItem.ToString())
+            If SelectMatrix1.Text = "Matrix slot 1 " Then
+                WorkingMatrix = MatrixSlot1
+            ElseIf SelectMatrix1.Text = "Matrix slot 2 " Then
+                WorkingMatrix = MatrixSlot2
+            ElseIf SelectMatrix1.Text = "Matrix slot 3 " Then
+                WorkingMatrix = MatrixSlot3
+            ElseIf SelectMatrix1.Text = "Matrix slot 4 " Then
+                WorkingMatrix = MatrixSlot4
+            ElseIf SelectMatrix1.Text = "Matrix slot 5 " Then
+                WorkingMatrix = MatrixSlot5
+            End If
         End If
+        If WorkingMatrix IsNot Nothing Then
+            For x = 0 To WorkingMatrix.GetLength(0) - 1
+                For y = 0 To WorkingMatrix.GetLength(1) - 1
+                    Text &= WorkingMatrix(x, y) & " "
+                Next
+                Text &= vbCrLf
+            Next
+        End If
+        ToolTip.SetToolTip(sender, Text)
     End Sub
 
     Private Sub Button9_Click(sender As Object, e As EventArgs) Handles SubtractMatrix.Click

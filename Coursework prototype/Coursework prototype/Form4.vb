@@ -10,7 +10,7 @@ Public Class Form4
     Friend WithEvents ShowLabels As CheckBox = New CheckBox() With {.Text = "Display axis labels", .Checked = True}
     Friend WithEvents ShowLoci As CheckBox = New CheckBox() With {.Text = "Display Loci", .Checked = False}
     Friend WithEvents ShowComplexPoints As CheckBox = New CheckBox() With {.Text = "Display Complex points", .Checked = False}
-    Dim PenList() As Pen = {Pens.Black, Pens.Blue, Pens.Green, Pens.Firebrick, Pens.Violet, Pens.Moccasin}
+    Dim PenList() As Pen = {Pens.Black, Pens.Blue, Pens.Green, Pens.Firebrick, Pens.Violet, Pens.Maroon}
 
 
     Private Sub Form4_Paint(ByVal sender As Object, ByVal e As PaintEventArgs) Handles Me.Paint
@@ -25,6 +25,7 @@ Public Class Form4
         Dim XOffset As Integer = -7
         Dim YOffset As Integer = 3
         Dim loopcount As Integer
+        Dim l As Single = 0.1
 
         e.Graphics.DrawLine(AxisPen, 0, Height \ 2, Width, Height \ 2)
         e.Graphics.DrawLine(AxisPen, Width \ 2, 0, Width \ 2, Height)
@@ -55,15 +56,15 @@ Public Class Form4
                         If a > b And EquationList(2)(0) = ">" Then
                             Dim aa As Single = j
                             Dim xx As Single = i
-                            e.Graphics.DrawEllipse(PenList(f), xx, aa + f * 2, 1, 1)
+                            e.Graphics.DrawEllipse(PenList(f), xx, aa + f * 2, l, l)
                         ElseIf a < b And EquationList(2)(0) = "<" Then
                             Dim aa As Single = j
                             Dim xx As Single = i
-                            e.Graphics.DrawEllipse(PenList(f), xx, aa + f * 2, 1, 1)
+                            e.Graphics.DrawEllipse(PenList(f), xx, aa + f * 2, l, l)
                         ElseIf a = b And EquationList(2)(0) = "=" Then
                             Dim aa As Single = j
                             Dim xx As Single = i
-                            e.Graphics.DrawEllipse(PenList(f), xx, aa + f * 2, 1, 1)
+                            e.Graphics.DrawEllipse(PenList(f), xx, aa + f * 2, l, l)
                         End If
                     Next
                 Next
@@ -91,8 +92,9 @@ Public Class Form4
                     ElseIf bb < 0 Then
                         bb = -50
                     End If
-                    e.Graphics.DrawEllipse(PenList(f + 1), xx, aa, 1, 2)
-                    e.Graphics.DrawEllipse(PenList(PenList.Count - (1 + f)), xx, bb, 1, 2)
+
+                    e.Graphics.DrawEllipse(PenList(f), xx, aa, l, l)
+                    e.Graphics.DrawEllipse(PenList(f), xx, bb, l, l)
                 Next
             Next
         End If
