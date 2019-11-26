@@ -95,6 +95,7 @@
     Private Sub Button2_Click(sender As Object, e As EventArgs) Handles AddColumn.Click
         If MatrixGrid.DisplayedColumnCount(True) < 4 Then
             MatrixGrid.Columns.Add(Str(MatrixGrid.DisplayedColumnCount(True)), " ")
+            MatrixGrid.Columns(MatrixGrid.DisplayedColumnCount(True) - 1).Width = 30
             MatrixGrid.Columns(MatrixGrid.DisplayedColumnCount(True) - 1).SortMode = DataGridViewColumnSortMode.NotSortable
         End If
 
@@ -138,7 +139,7 @@
         End If
         Return ReturnMatrix
     End Function
-    Public Function aaaaaaa(Matrix(,) As Single) As Single
+    Public Function Determinant3x(Matrix(,) As Single) As Single
         Dim Determinant As Single
         For x = 0 To 2
             Dim TempMatrix(,) As Single = CreateTempMatrix(Matrix, x, 1)
@@ -224,37 +225,37 @@
         Dim TempMatrix(2, 2) As Single
         Dim SuperMatrix(3, 3) As Single
         TempMatrix = {{Matrix(1, 1), Matrix(2, 1), Matrix(3, 1)}, {Matrix(1, 2), Matrix(2, 2), Matrix(3, 2)}, {Matrix(1, 3), Matrix(2, 3), Matrix(3, 3)}}
-        SuperMatrix(0, 0) = aaaaaaa(TempMatrix) * (1 / Determinant)
+        SuperMatrix(0, 0) = Determinant3x(TempMatrix) * (1 / Determinant)
         TempMatrix = {{Matrix(0, 1), Matrix(2, 1), Matrix(3, 1)}, {Matrix(0, 2), Matrix(2, 2), Matrix(3, 2)}, {Matrix(0, 3), Matrix(2, 3), Matrix(3, 3)}}
-        SuperMatrix(0, 1) = aaaaaaa(TempMatrix) * (-1 / Determinant)
+        SuperMatrix(0, 1) = Determinant3x(TempMatrix) * (-1 / Determinant)
         TempMatrix = {{Matrix(0, 1), Matrix(1, 1), Matrix(3, 1)}, {Matrix(0, 2), Matrix(1, 2), Matrix(3, 2)}, {Matrix(0, 3), Matrix(1, 3), Matrix(3, 3)}}
-        SuperMatrix(0, 2) = aaaaaaa(TempMatrix) * (1 / Determinant)
+        SuperMatrix(0, 2) = Determinant3x(TempMatrix) * (1 / Determinant)
         TempMatrix = {{Matrix(0, 1), Matrix(1, 1), Matrix(2, 1)}, {Matrix(0, 2), Matrix(1, 2), Matrix(2, 2)}, {Matrix(0, 3), Matrix(1, 3), Matrix(2, 3)}}
-        SuperMatrix(0, 3) = aaaaaaa(TempMatrix) * (-1 / Determinant)
+        SuperMatrix(0, 3) = Determinant3x(TempMatrix) * (-1 / Determinant)
         TempMatrix = {{Matrix(1, 0), Matrix(2, 0), Matrix(3, 0)}, {Matrix(1, 2), Matrix(2, 2), Matrix(3, 2)}, {Matrix(1, 3), Matrix(2, 3), Matrix(3, 3)}}
-        SuperMatrix(1, 0) = aaaaaaa(TempMatrix) * (-1 / Determinant)
+        SuperMatrix(1, 0) = Determinant3x(TempMatrix) * (-1 / Determinant)
         TempMatrix = {{Matrix(0, 0), Matrix(2, 0), Matrix(3, 0)}, {Matrix(0, 2), Matrix(2, 2), Matrix(3, 2)}, {Matrix(0, 3), Matrix(2, 3), Matrix(3, 3)}}
-        SuperMatrix(1, 1) = aaaaaaa(TempMatrix) * (1 / Determinant)
+        SuperMatrix(1, 1) = Determinant3x(TempMatrix) * (1 / Determinant)
         TempMatrix = {{Matrix(0, 0), Matrix(1, 0), Matrix(3, 0)}, {Matrix(0, 2), Matrix(1, 2), Matrix(3, 2)}, {Matrix(0, 3), Matrix(1, 3), Matrix(3, 3)}}
-        SuperMatrix(1, 2) = aaaaaaa(TempMatrix) * (-1 / Determinant)
+        SuperMatrix(1, 2) = Determinant3x(TempMatrix) * (-1 / Determinant)
         TempMatrix = {{Matrix(0, 0), Matrix(1, 0), Matrix(2, 0)}, {Matrix(0, 2), Matrix(1, 2), Matrix(2, 2)}, {Matrix(0, 3), Matrix(1, 3), Matrix(2, 3)}}
-        SuperMatrix(1, 3) = aaaaaaa(TempMatrix) * (1 / Determinant)
+        SuperMatrix(1, 3) = Determinant3x(TempMatrix) * (1 / Determinant)
         TempMatrix = {{Matrix(1, 0), Matrix(2, 0), Matrix(3, 0)}, {Matrix(1, 1), Matrix(2, 1), Matrix(3, 1)}, {Matrix(1, 3), Matrix(2, 3), Matrix(3, 3)}}
-        SuperMatrix(2, 0) = aaaaaaa(TempMatrix) * (1 / Determinant)
+        SuperMatrix(2, 0) = Determinant3x(TempMatrix) * (1 / Determinant)
         TempMatrix = {{Matrix(0, 0), Matrix(2, 0), Matrix(3, 0)}, {Matrix(0, 1), Matrix(2, 1), Matrix(3, 1)}, {Matrix(0, 3), Matrix(2, 3), Matrix(3, 3)}}
-        SuperMatrix(2, 1) = aaaaaaa(TempMatrix) * (-1 / Determinant)
+        SuperMatrix(2, 1) = Determinant3x(TempMatrix) * (-1 / Determinant)
         TempMatrix = {{Matrix(0, 0), Matrix(1, 0), Matrix(3, 0)}, {Matrix(0, 1), Matrix(1, 1), Matrix(3, 1)}, {Matrix(0, 3), Matrix(1, 3), Matrix(3, 3)}}
-        SuperMatrix(2, 2) = aaaaaaa(TempMatrix) * (1 / Determinant)
+        SuperMatrix(2, 2) = Determinant3x(TempMatrix) * (1 / Determinant)
         TempMatrix = {{Matrix(0, 0), Matrix(1, 0), Matrix(2, 0)}, {Matrix(0, 1), Matrix(1, 1), Matrix(2, 1)}, {Matrix(0, 3), Matrix(1, 3), Matrix(2, 3)}}
-        SuperMatrix(2, 3) = aaaaaaa(TempMatrix) * (-1 / Determinant)
+        SuperMatrix(2, 3) = Determinant3x(TempMatrix) * (-1 / Determinant)
         TempMatrix = {{Matrix(1, 0), Matrix(2, 0), Matrix(3, 0)}, {Matrix(1, 1), Matrix(2, 1), Matrix(3, 1)}, {Matrix(1, 2), Matrix(2, 2), Matrix(3, 2)}}
-        SuperMatrix(3, 0) = aaaaaaa(TempMatrix) * (-1 / Determinant)
+        SuperMatrix(3, 0) = Determinant3x(TempMatrix) * (-1 / Determinant)
         TempMatrix = {{Matrix(0, 0), Matrix(2, 0), Matrix(3, 0)}, {Matrix(0, 1), Matrix(2, 1), Matrix(3, 1)}, {Matrix(0, 2), Matrix(2, 2), Matrix(3, 2)}}
-        SuperMatrix(3, 1) = aaaaaaa(TempMatrix) * (1 / Determinant)
+        SuperMatrix(3, 1) = Determinant3x(TempMatrix) * (1 / Determinant)
         TempMatrix = {{Matrix(0, 0), Matrix(1, 0), Matrix(3, 0)}, {Matrix(0, 1), Matrix(1, 1), Matrix(3, 1)}, {Matrix(0, 2), Matrix(1, 2), Matrix(3, 2)}}
-        SuperMatrix(3, 2) = aaaaaaa(TempMatrix) * (-1 / Determinant)
+        SuperMatrix(3, 2) = Determinant3x(TempMatrix) * (-1 / Determinant)
         TempMatrix = {{Matrix(0, 0), Matrix(1, 0), Matrix(2, 0)}, {Matrix(0, 1), Matrix(1, 1), Matrix(2, 1)}, {Matrix(0, 2), Matrix(1, 2), Matrix(2, 2)}}
-        SuperMatrix(3, 3) = aaaaaaa(TempMatrix) * (1 / Determinant)
+        SuperMatrix(3, 3) = Determinant3x(TempMatrix) * (1 / Determinant)
 
         Return SuperMatrix
 
