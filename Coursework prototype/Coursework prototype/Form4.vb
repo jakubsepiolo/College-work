@@ -19,7 +19,7 @@ Public Class Form4
         ShowLabels.Location = New Point(2, Height - 80)
         ShowLoci.Location = New Point(2, Height - 60)
         ShowComplexPoints.Location = New Point(2, Height - 100)
-        LociButton.Location = New Point(Width - 75, Height - 70)
+        LociButton.Location = New Point(Width - 100, Height - 70)
         Dim AxisPen As New Pen(Color.FromArgb(255, 255, 0, 0))
         Dim X As Integer = Width \ 2 + 6
         Dim XOffset As Integer = -7
@@ -109,6 +109,8 @@ Public Class Form4
             End If
         Next
         If ShowComplexPoints.Checked Then
+            e.Graphics.DrawString("Re", AxisFont, Brushes.Black, Width - 30, Height / 2 - 20)
+            e.Graphics.DrawString("Im", AxisFont, Brushes.Black, Width / 2 + 10, 7)
             For i = 0 To Points.Count - 1
                 Dim Xb As Integer = NumbersToCoordinate(Points(i))(0)
                 Dim yb As Integer = NumbersToCoordinate(Points(i))(1)
@@ -123,6 +125,9 @@ Public Class Form4
 
                 e.Graphics.DrawEllipse(Pens.Blue, (Xb - 3), (yb - 4), 5, 5)
                 Dim A As Single = -(Complex.Argument * 180 / 3.14)
+                If Modulus < 1 Then
+                    Modulus = 1
+                End If
                 If Modulus >= 1 Then
                     e.Graphics.DrawLine(Pens.Black, Width \ 2, Height \ 2, Xb, yb)
                     e.Graphics.DrawArc(Pens.Black, Width \ 2 - Modulus \ 2, Height \ 2 - Modulus \ 2, Modulus, Modulus, 0, A)
@@ -306,9 +311,6 @@ Public Class Form4
 
 
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles LociButton.Click
-
-
-        StringToEquation("3x^3+7x^2-23x-12")
         Form5.Show()
     End Sub
 End Class

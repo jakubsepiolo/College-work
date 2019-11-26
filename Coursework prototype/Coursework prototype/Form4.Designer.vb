@@ -27,11 +27,11 @@ Partial Class Form4
         '
         'LociButton
         '
-        Me.LociButton.Location = New System.Drawing.Point(1170, 656)
+        Me.LociButton.Location = New System.Drawing.Point(1145, 656)
         Me.LociButton.Name = "LociButton"
-        Me.LociButton.Size = New System.Drawing.Size(58, 31)
+        Me.LociButton.Size = New System.Drawing.Size(83, 31)
         Me.LociButton.TabIndex = 0
-        Me.LociButton.Text = "Add Loci"
+        Me.LociButton.Text = "Add Inequality"
         Me.LociButton.UseVisualStyleBackColor = True
         '
         'Form4
