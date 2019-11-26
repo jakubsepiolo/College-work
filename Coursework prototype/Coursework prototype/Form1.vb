@@ -178,9 +178,6 @@ Public Class Form1
 
     End Sub
 
-    Private Sub update()
-
-    End Sub
     Private Sub FormShown(sender As Object, e As EventArgs) Handles Me.Shown
         InputComplex1.Text = TextBoxData(0)
         InputComplex2.Text = TextBoxData(1)

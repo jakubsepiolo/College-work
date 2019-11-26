@@ -25,7 +25,7 @@ Public Class Form4
         Dim XOffset As Integer = -7
         Dim YOffset As Integer = 3
         Dim loopcount As Integer
-        Dim l As Single = 5
+        Dim l As Single = 0.1
 
         e.Graphics.DrawLine(AxisPen, 0, Height \ 2, Width, Height \ 2)
         e.Graphics.DrawLine(AxisPen, Width \ 2, 0, Width \ 2, Height)
@@ -49,7 +49,7 @@ Public Class Form4
                         a = (((i - Offset) / PixelPerPoint) * GraphScale) ^ 4 * EquationList(0)(0) + (((i - Offset) / PixelPerPoint) * GraphScale) ^ 3 * EquationList(0)(1) + (((i - Offset) / PixelPerPoint) * GraphScale) ^ 2 * EquationList(0)(2) + EquationList(0)(3) * (((i - Offset) / PixelPerPoint) * GraphScale) + EquationList(0)(4)
                         b = (((i - Offset) / PixelPerPoint) * GraphScale) ^ 4 * EquationList(1)(0) + (((i - Offset) / PixelPerPoint) * GraphScale) ^ 3 * EquationList(1)(1) + (((i - Offset) / PixelPerPoint) * GraphScale) ^ 2 * EquationList(1)(2) + EquationList(1)(3) * (((i - Offset) / PixelPerPoint) * GraphScale) + EquationList(1)(4)
                     Catch ex As InvalidCastException
-                        MsgBox($"One or more of your equations was invalid {vbCrLf}{vbCrLf}{ex.Message}{vbCrLf}{vbCrLf}Please input your equations again")
+                        MsgBox($"One or more of your equations was invalid{vbCrLf}{vbCrLf}{ex.Message}{vbCrLf}{vbCrLf}Please input your equations again")
                         Exit For
                     End Try
                     For j = 0 To Height Step 5
@@ -236,8 +236,6 @@ Public Class Form4
                 If ShowComplexPoints.Checked Then
                     Points.Add(New ComplexNumber(CoordinatesToNumber(e.X, e.Y)(0), CoordinatesToNumber(e.X, e.Y)(1)))
                     Invalidate()
-                ElseIf ShowLoci.Checked Then
-
                 End If
 
 
@@ -245,9 +243,12 @@ Public Class Form4
                 Dim prompt As DialogResult = MessageBox.Show("Are you sure you want to clear the graph?", "Are you sure?", MessageBoxButtons.YesNo)
 
                 If prompt = DialogResult.Yes Then
-                    CreateGraphics.Clear(Color.FromKnownColor(KnownColor.Control))
+                    InitializeComponent()
                     Points.Clear()
                     Inequalities.Clear()
+                    ShowComplexPoints.Checked = False
+                    ShowLoci.Checked = False
+                    ShowLabels.Checked = True
                     GraphScale = 1
                     Invalidate()
                 End If
