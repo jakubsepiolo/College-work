@@ -6,6 +6,7 @@
     Public MatrixSlot4(,) As Single
     Public MatrixSlot5(,) As Single
 
+
     Public Function MatrixFromComboBox(ComboBox As Object) As Single(,)
         If ComboBox.Text = "Matrix slot 1 " Then
             Return MatrixSlot1
@@ -342,6 +343,33 @@
 
     End Sub
 
+
+    Private Sub ShowForm(sender As Object, e As EventArgs) Handles Me.Shown
+        If Form1.RememberMatrix IsNot Nothing Then
+            While MatrixGrid.DisplayedColumnCount(True) <> Form1.RememberMatrix.GetLength(1)
+                If MatrixGrid.DisplayedColumnCount(True) > Form1.RememberMatrix.GetLength(1) Then
+                    MatrixGrid.Columns.RemoveAt(MatrixGrid.DisplayedColumnCount(True) - 1)
+                ElseIf MatrixGrid.DisplayedColumnCount(True) < Form1.RememberMatrix.GetLength(1) Then
+                    MatrixGrid.Columns.Add(Str(MatrixGrid.DisplayedColumnCount(True)), " ")
+                    MatrixGrid.Columns(MatrixGrid.DisplayedColumnCount(True) - 1).SortMode = DataGridViewColumnSortMode.NotSortable
+                End If
+            End While
+
+            While MatrixGrid.DisplayedRowCount(True) <> Form1.RememberMatrix.GetLength(0)
+                If MatrixGrid.DisplayedRowCount(True) > Form1.RememberMatrix.GetLength(0) Then
+                    MatrixGrid.Rows.RemoveAt(MatrixGrid.DisplayedRowCount(True) - 1)
+                ElseIf MatrixGrid.DisplayedRowCount(True) < Form1.RememberMatrix.GetLength(0) Then
+                    MatrixGrid.Rows.Add()
+                End If
+
+            End While
+            For x = 0 To Form1.RememberMatrix.GetLength(0) - 1
+                For y = 0 To Form1.RememberMatrix.GetLength(1) - 1
+                    MatrixGrid.Rows(x).Cells(y).Value = Form1.RememberMatrix(x, y)
+                Next
+            Next
+        End If
+    End Sub
     Private Sub Button8_Click(sender As Object, e As EventArgs) Handles AddMatrix.Click
         Dim FirstMatrix(,) As Single = MatrixFromComboBox(SelectMatrix1)
         Dim SecondMatrix(,) As Single = MatrixFromComboBox(SelectMatrix2)
@@ -372,6 +400,7 @@
     End Sub
 
     Private Sub FormClosed(sender As Object, e As EventArgs) Handles Me.Closed
+        Form1.RememberMatrix = GridToMatrix()
         Form1.Show()
     End Sub
     Public Sub test(sender As Object, e As EventArgs) Handles SelectMatrix1.MouseHover, SelectMatrix2.MouseHover

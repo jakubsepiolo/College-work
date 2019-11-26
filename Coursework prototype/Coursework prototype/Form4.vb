@@ -25,7 +25,7 @@ Public Class Form4
         Dim XOffset As Integer = -7
         Dim YOffset As Integer = 3
         Dim loopcount As Integer
-        Dim l As Single = 0.1
+        Dim l As Single = 5
 
         e.Graphics.DrawLine(AxisPen, 0, Height \ 2, Width, Height \ 2)
         e.Graphics.DrawLine(AxisPen, Width \ 2, 0, Width \ 2, Height)
@@ -68,7 +68,7 @@ Public Class Form4
                         End If
                     Next
                 Next
-                For i = 0 To Width * Multiplier Step 1
+                    For i = 0 To Width * Multiplier Step 1
                     Dim a As Single
                     Dim b As Single
                     Try
@@ -93,8 +93,8 @@ Public Class Form4
                         bb = -50
                     End If
 
-                    e.Graphics.DrawEllipse(PenList(f), xx, aa, l, l)
-                    e.Graphics.DrawEllipse(PenList(f), xx, bb, l, l)
+                    e.Graphics.DrawEllipse(PenList(f), xx, aa, 1, 1)
+                    e.Graphics.DrawEllipse(PenList(f), xx, bb, 1, 1)
                 Next
             Next
         End If
@@ -134,6 +134,7 @@ Public Class Form4
 
 
     End Sub
+
 
     Private Sub Resized(ByVal sender As Object, ByVal e As EventArgs) Handles Me.Resize
         Invalidate()
@@ -235,7 +236,10 @@ Public Class Form4
                 If ShowComplexPoints.Checked Then
                     Points.Add(New ComplexNumber(CoordinatesToNumber(e.X, e.Y)(0), CoordinatesToNumber(e.X, e.Y)(1)))
                     Invalidate()
+                ElseIf ShowLoci.Checked Then
+
                 End If
+
 
             Case MouseButtons.Right
                 Dim prompt As DialogResult = MessageBox.Show("Are you sure you want to clear the graph?", "Are you sure?", MessageBoxButtons.YesNo)
@@ -297,6 +301,7 @@ Public Class Form4
     Private Sub Form4_Close(sender As Object, e As EventArgs) Handles Me.Closed
         Form1.Show()
     End Sub
+
 
 
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles LociButton.Click

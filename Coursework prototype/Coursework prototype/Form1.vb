@@ -3,6 +3,8 @@ Imports System.Text.RegularExpressions
 Public Class Form1
     'todo: make input of "3+i" detect complex part as 1 (no need for 3+1i to be input)
     '      stuff to do with matricies
+    Public TextBoxData(2) As String
+    Public RememberMatrix(,) As Single
     Public Function StringToComplexNumber(ByVal Text As String) As ComplexNumber 'function that searches through input string and breaks number into real and complex parts
         Dim IsNegativeComplex As Boolean = False
         Dim IsNegativeReal As Boolean = False
@@ -152,6 +154,16 @@ Public Class Form1
 
     End Sub
 
+    Private Sub InputComplex2_TextChanged(sender As Object, e As EventArgs) Handles InputComplex1.TextChanged
+        TextBoxData(0) = InputComplex1.Text
+    End Sub
+    Private Sub InputComplex1_TextChanged(sender As Object, e As EventArgs) Handles InputComplex2.TextChanged
+        TextBoxData(1) = InputComplex1.Text
+    End Sub
+    Private Sub OutputComplex_TextChanged(sender As Object, e As EventArgs) Handles OutputComplex.TextChanged
+        TextBoxData(2) = InputComplex1.Text
+    End Sub
+
     Private Sub MatrixButton(sender As Object, e As EventArgs) Handles OpenMatrix.Click
         Form2.Show()
         Me.Hide()
@@ -164,6 +176,15 @@ Public Class Form1
 
     Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
+    End Sub
+
+    Private Sub update()
+
+    End Sub
+    Private Sub FormShown(sender As Object, e As EventArgs) Handles Me.Shown
+        InputComplex1.Text = TextBoxData(0)
+        InputComplex2.Text = TextBoxData(1)
+        OutputComplex.Text = TextBoxData(2)
     End Sub
 
 
