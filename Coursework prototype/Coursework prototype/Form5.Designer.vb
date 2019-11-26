@@ -22,6 +22,7 @@ Partial Class Form5
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(Form5))
         Me.T1 = New System.Windows.Forms.TextBox()
         Me.T5 = New System.Windows.Forms.TextBox()
         Me.T4 = New System.Windows.Forms.TextBox()
@@ -240,8 +241,9 @@ Partial Class Form5
         Me.Controls.Add(Me.T4)
         Me.Controls.Add(Me.T5)
         Me.Controls.Add(Me.T1)
+        Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.Name = "Form5"
-        Me.Text = "Form5"
+        Me.Text = "Input an inequality"
         Me.ResumeLayout(False)
         Me.PerformLayout()
 

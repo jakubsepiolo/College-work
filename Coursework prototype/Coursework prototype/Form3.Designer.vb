@@ -65,7 +65,7 @@ Partial Class Form3
         Me.Controls.Add(Me.SelectMatrix)
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.Name = "Form3"
-        Me.Text = "Form3"
+        Me.Text = "Save/Load"
         Me.ResumeLayout(False)
         Me.PerformLayout()
 

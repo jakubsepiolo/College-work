@@ -193,7 +193,7 @@ Partial Class Form1
         Me.Controls.Add(Me.InputComplex1)
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.Name = "Form1"
-        Me.Text = "Form1"
+        Me.Text = "Complex Numbers"
         CType(Me.AddButton, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.ProductButton, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.SubtractButton, System.ComponentModel.ISupportInitialize).EndInit()

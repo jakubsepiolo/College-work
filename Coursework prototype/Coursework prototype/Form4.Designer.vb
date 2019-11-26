@@ -22,6 +22,7 @@ Partial Class Form4
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(Form4))
         Me.LociButton = New System.Windows.Forms.Button()
         Me.SuspendLayout()
         '
@@ -40,8 +41,9 @@ Partial Class Form4
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(1230, 688)
         Me.Controls.Add(Me.LociButton)
+        Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.Name = "Form4"
-        Me.Text = "Form4"
+        Me.Text = "Graph"
         Me.ResumeLayout(False)
 
     End Sub

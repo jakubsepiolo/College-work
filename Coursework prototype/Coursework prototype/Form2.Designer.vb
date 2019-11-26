@@ -99,11 +99,11 @@ Partial Class Form2
         'Label1
         '
         Me.Label1.AutoSize = True
+        Me.Label1.Font = New System.Drawing.Font("Consolas", 9.0!)
         Me.Label1.Location = New System.Drawing.Point(529, 196)
         Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(0, 13)
+        Me.Label1.Size = New System.Drawing.Size(0, 14)
         Me.Label1.TabIndex = 16
-        Me.Label1.Font = New Font("Consolas", 9, FontStyle.Regular)
         '
         'RemoveRow
         '
@@ -229,7 +229,7 @@ Partial Class Form2
         Me.Controls.Add(Me.MatrixGrid)
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.Name = "Form2"
-        Me.Text = "Form2"
+        Me.Text = "Matrices"
         CType(Me.MatrixGrid, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
