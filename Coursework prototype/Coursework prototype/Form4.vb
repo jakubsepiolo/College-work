@@ -53,18 +53,18 @@ Public Class Form4
                         Exit For
                     End Try
                     For j = 0 To Height Step 5
-                        If a > b And EquationList(2)(0) = ">" Then
+                        If a > b And EquationList(2)(0) = ">" And (Height / 2) - PixelPerPoint * a * (1 / GraphScale) < j And (Height / 2) - PixelPerPoint * b * (1 / GraphScale) > j Then
                             Dim aa As Single = j
                             Dim xx As Single = i
                             e.Graphics.DrawEllipse(PenList(f), xx, aa + f * 2, l, l)
-                        ElseIf a < b And EquationList(2)(0) = "<" Then
+                        ElseIf a < b And EquationList(2)(0) = "<" And (Height / 2) - PixelPerPoint * b * (1 / GraphScale) < j And (Height / 2) - PixelPerPoint * a * (1 / GraphScale) > j Then
                             Dim aa As Single = j
                             Dim xx As Single = i
                             e.Graphics.DrawEllipse(PenList(f), xx, aa + f * 2, l, l)
                         ElseIf a = b And EquationList(2)(0) = "=" Then
                             Dim aa As Single = j
                             Dim xx As Single = i
-                            e.Graphics.DrawEllipse(PenList(f), xx, aa + f * 2, l, l)
+                            e.Graphics.DrawEllipse(PenList(f), xx, aa + f * 2, 10, 10)
                         End If
                     Next
                 Next
